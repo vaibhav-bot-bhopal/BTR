@@ -261,7 +261,7 @@ class NewsController extends Controller
         $dataen = newsEnglish::orderBy('id', 'desc')->paginate(3);
         $datahi = newsHindi::orderBy('id', 'desc')->paginate(3);
 
-        return view('news.newses', compact('dataen', 'datahi'));
+        return view('news.news', compact('dataen', 'datahi'));
     }
 
     // Display Single News in Detail

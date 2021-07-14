@@ -1365,7 +1365,7 @@ text-align:right;
 .main-menu .navigation li a {
 	color: #ffffff;
 	display: block;
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: 600;
 	line-height: 30px;
 	opacity: 1;
@@ -2065,7 +2065,7 @@ text-align:right;
 }
 
 .thm-btn {
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: 600;
 	text-transform: uppercase;
 	font-family: 'Montserrat', sans-serif;

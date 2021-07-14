@@ -37,6 +37,8 @@
         'management-objectives'  =>  'Management Objectives',
         'training'  =>  'Training and Awareness',
         'donation'  =>  'Donation',
+        'news'  => 'News',
+        'news-detail'  => 'News Detail',
         'contact'  =>  'Contact Us',
         'gallery'  =>  'Gallery',
     ];

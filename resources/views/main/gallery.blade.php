@@ -30,23 +30,34 @@
     <!-- Work Section -->
     <section id="work" class="padding">
         <div class="container">
-            <div class="row container-grid nf-col-3">
-                @foreach($images as $image)
+            <div class="row container-grid nf-col-3 mb-4">
+                @forelse($photos as $photo)
                     <div class="nf-item branding coffee spacing">
                         <div >
-                            <a href="{{ asset('public/assets/images/btr_actual_image').'/'.$image }}" target="_blank">
-                                <img alt="gallery-image" src="{{ asset('public/assets/images/btr_actual_image').'/'.$image }}" class="item-container" height="230">
+                            <a href="{{ asset('public/storage/gallery/'.$photo->filename) }}" target="_blank">
+                                <img alt="gallery-image" src="{{ asset('public/storage/gallery/'.$photo->filename) }}" class="item-container" height="230">
                             </a>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    @if (session('locale') == 'en')
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <h2 class="text-center" style="font-weight: 600;">No Gallery Found !!</h2>
+                        </div>
+                    @endif
+
+                    @if (session('locale') == 'hi')
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <h2 class="text-center" style="font-weight: 600;">कोई गैलरी नहीं मिली !!</h2>
+                        </div>
+                    @endif
+
+                @endforelse
             </div>
 
             <!-- Pagination Section Start Here -->
-            <div class="text-center" style="padding-top:90px;">
-                <a style="background-color: #FFFFFF; color:#000000; font-size:17px; font-weight:bold" class="btn-text green-bg {{ 'gallery' == Request::path() ? 'active' : '' }}" href="{{ url('gallery') }}"> 1</a>
-                <a class="btn-text green-bg {{ 'gallery/2' == Request::path() ? 'active' : '' }}" href="{{ url('gallery/2') }}"> 2</a>
-                <a class="btn-text green-bg {{ 'gallery/3' == Request::path() ? 'active' : '' }}" href="{{ url('gallery/3') }}">3</a>
+            <div class="d-flex justify-content-center">
+                {!! $photos->links() !!}
             </div>
             <!-- Pagination Section End Here -->
         </div>

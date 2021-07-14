@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Gallery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -14,8 +15,8 @@ class GalleryController extends Controller
     // View Gallery
     public function gallery()
     {
-        $photos = Gallery::orderBy('original_name', 'DESC')->paginate(20);
-        return view('home.gallery', compact('photos'));
+        $photos = Gallery::orderBy('original_filename', 'DESC')->paginate(18);
+        return view('main.gallery', compact('photos'));
     }
 
     // Dropzone
@@ -28,7 +29,7 @@ class GalleryController extends Controller
 
     public function index()
     {
-        $photos = Gallery::orderBy('original_name', 'DESC')->paginate(6);
+        $photos = Gallery::orderBy('original_filename', 'DESC')->paginate(6);
         return view('admin.gallery.view-gallery', compact('photos'));
     }
 
@@ -52,17 +53,17 @@ class GalleryController extends Controller
         for ($i = 0; $i < count($photos); $i++) {
             $photo = $photos[$i];
             $name = sha1(date('YmdHis') . Str::random(30));
-            $save_name = $name . '.' . $photo->getClientOriginalExtension();
             $fileSizeInByte = File::size($photo);
-            // $resize_name = $name . Str::random(2) . '.' . $photo->getClientOriginalExtension();
 
-            $path = $photo->move($this->photos_path, $save_name);
+            if ($request->hasFile('file')) {
+                $save_name = $name . '.' . $photo->getClientOriginalExtension();
+                $photo->storeAs('public/gallery', $save_name);
+            }
 
             $upload = new Gallery();
-            $upload->original_name = basename($photo->getClientOriginalName());
+            $upload->original_filename = basename($photo->getClientOriginalName());
             $upload->filename = $save_name;
             $upload->file_size = $fileSizeInByte;
-            $upload->file_path = $path;
             $upload->save();
         }
 
@@ -96,6 +97,9 @@ class GalleryController extends Controller
         }
 
         if (session('locale') == 'en') {
+            DB::statement("SET @count := 0;");
+            DB::statement("UPDATE galleries SET galleries.id = @count:= @count + 1;");
+            DB::statement("ALTER TABLE galleries AUTO_INCREMENT = 1;");
             return redirect()->route('images-show')->with('error', 'Image Deleted Successfully.');
         }
 

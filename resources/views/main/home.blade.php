@@ -35,9 +35,9 @@
                         data-responsive_offset="on">
 
                             <div class="banner-text text-center">
-                                <h3><span style="color:#ffcc00">Welcome to </span>Bandhavgarh Tiger Reserve</h3>
-                                <h4><p>Celebrating 50 Years of successful Conservation of its Jungles and Wildlife.</p></h4>
-                                <a class="btn-text green-bg" href="{{ route('btr.about-introduction') }}"> Know more about Bandhavgarh</a>
+                                <h3><span style="color:#ffcc00">{{ trans('home.welcome') }}</span>{{ trans('home.btr') }}</h3>
+                                <h4><p>{{ trans('home.slider-p1') }}</p></h4>
+                                <a class="btn-text green-bg" href="{{ route('btr.about-introduction') }}">{{ trans('home.know') }}</a>
                             </div>
                         </div>
                     </li>
@@ -67,9 +67,9 @@
                         data-splitout="none"
                         data-responsive_offset="on">
                             <div class="banner-text text-center">
-                                <h3><span style="color:#ffcc00">Welcome to </span>Bandhavgarh Tiger Reserve</h3>
-                                <h4><p>The land whose Legends and History are as diverse and interesting as its Flora & Fauna.</p></h4>
-                                <a class="btn-text green-bg" href="{{ route('btr.about-introduction') }}"> Know more about Bandhavgarh</a>
+                                <h3><span style="color:#ffcc00">{{ trans('home.welcome') }}</span>{{ trans('home.btr') }}</h3>
+                                <h4><p>{{ trans('home.slider-p2') }}</p></h4>
+                                <a class="btn-text green-bg" href="{{ route('btr.about-introduction') }}">{{ trans('home.know') }}</a>
                             </div>
                         </div>
                     </li>
@@ -99,9 +99,9 @@
                         data-splitout="none"
                         data-responsive_offset="on">
                             <div class="banner-text text-center">
-                                <h3><span style="color:#ffcc00">Welcome to </span>Bandhavgarh Tiger Reserve</h3>
-                                <h4><p>A heaven for Wildlife Lovers with its lush green Flora and spellbinding variety of Fauna.</p></h4>
-                                <a class="btn-text green-bg" href="{{ route('btr.about-introduction') }}"> Know more about Bandhavgarh</a>
+                                <h3><span style="color:#ffcc00">{{ trans('home.welcome') }}</span>{{ trans('home.btr') }}</h3>
+                                <h4><p>{{ trans('home.slider-p3') }}</p></h4>
+                                <a class="btn-text green-bg" href="{{ route('btr.about-introduction') }}">{{ trans('home.know') }}</a>
                             </div>
                         </div>
                     </li>
@@ -119,11 +119,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 col-lg-5 about-left">
-                    <h4 class="italic">ABOUT THE </h4>
-                    <h2 style="color:#ffcc00">Bandhavgarh <span>Tiger Reserve</span></h2>
+                    <h4 class="italic">{{ trans('home.about-the') }}</h4>
+                    <h2 style="color:#ffcc00">{{ trans('home.bandhav') }}<span>{{ trans('home.tiger') }}</span></h2>
                     <p class=" text-justify">
-                        Bandhavgarh Tiger Reserve which was notified as National Park in 1968 derives its name from the Legends of Ramayana. It is believed that the Fort inside the park was built by Lord Rama and given to his brother Lakshman and hence the name Bandhavgarh (Bandhav – Brother and Garh – Fort). The forests of Bandhavgarh are where the world famous White Tigers were initially discovered and the origin of all the white tigers in the world can be traced to these forests. Being among the Parks with highest densities of Tiger, the Reserve is an ideal place to see the wild animals in their full grandeur.
-                        <a href="{{ route('btr.about-introduction') }}" style="font-weight: 600;"> know more</a>
+                        {{ trans('home.about-p1') }}
+                        <a href="{{ route('btr.about-introduction') }}" style="font-weight: 600;">{{ trans('home.know-more') }}</a>
                     </p>
                 </div>
 
@@ -144,7 +144,7 @@
         <div class="container">
             <div class="row pb-30 text-center ">
                 <div class="col-sm-12 mb-20">
-                    <h2><span>What Makes</span> BTR Unique?</h2>
+                    <h2><span>{{ trans('home.what-makes') }}</span>{{ trans('home.btr-unique') }}</h2>
                     <span class="b-line"></span>
                 </div>
             </div>
@@ -158,12 +158,12 @@
 
                         <div class="about__block-box resposive-use">
                             <div class="service_details">
-                                <h3>Forest</h3>
+                                <h3>{{ trans('home.forest') }}</h3>
                             </div>
 
                             <div class="service_content">
                                 <p class="text-justify">
-                                    The lush green Jungle of Bandhavgarh consisting of Sal and Mixed Deciduous forests along with green grassy meadows and many areas filled with Bamboos have a mesmerizing effect on the Tourists who visitthe Reserve.
+                                    {{ trans('home.forest-p') }}
                                 </p>
                             </div>
                         </div>
@@ -178,12 +178,12 @@
 
                         <div class="about__block-box">
                             <div class="service_details">
-                                <h3>Wildlife</h3>
+                                <h3>{{ trans('home.wildlife') }}</h3>
                             </div>
 
                             <div class="service_content">
                                 <p class="text-justify">
-                                    Bandhavgarh with one of the highest densities of Tigers and endowed with animals like Leopard, Wild Dogs, Sloth Bear, Wild Boars, Indian Bison, Spotted Deer, Sambar, Chausingha, Chinkara, Ratel etc. along with several species of Birds and Butterflies is a Paradise for Wildlife Lovers.
+                                    {{ trans('home.wildlife-p') }}
                                 </p>
                             </div>
                         </div>
@@ -198,12 +198,12 @@
 
                         <div class="about__block-box">
                             <div class="service_details">
-                                <h3>History</h3>
+                                <h3>{{ trans('home.history') }}</h3>
                             </div>
 
                             <div class="service_content">
                                 <p class="text-justify">
-                                    With a Fort which is associated to the Legends of “Ramayana” and is also part of the rich past of Maharajas of Rewa, Bandhavgarh’s history is as interesting and diverse as the numerous Temples and sites of archaeological importance found in and around the Reserve.
+                                    {{ trans('home.history-p') }}
                                 </p>
                             </div>
                         </div>
@@ -219,7 +219,7 @@
         <div class="container">
             <div class="row pb-30 text-center">
                 <div class="col-sm-12 mb-20">
-                    <h2><span>Quick&nbsp;</span>Info</h2>
+                    <h2><span>{{ trans('home.quick') }}&nbsp;</span>{{ trans('home.info') }}</h2>
                     <span class="b-line"></span>
                 </div>
             </div>
@@ -231,9 +231,9 @@
                     </div>
 
                     <div class="right-txt float-right">
-                        <h3>Plan Your visit</h3>
+                        <h3>{{ trans('home.plan-your-visit') }}</h3>
                         <p class="text-justify">
-                            With high density of Tigers, Bandhavgarh is one of the most sought-after destinations for Tourists wishing to see Tiger in the wild. Planning your tour and booking safaris well in advance is recommended.
+                            {{ trans('home.plan-your-visit-p') }}
                         </p>
                     </div>
                 </div>
@@ -244,9 +244,9 @@
                     </div>
 
                     <div class="right-txt float-right">
-                        <h3>How to Reach</h3>
+                        <h3>{{ trans('home.how-to-reach') }}</h3>
                         <p class="text-justify">
-                            Tala village is the centre point for all tourism infrastructure and activities. It is well connected by road to near-by rail heads Umaria (32 Kms), Katni (97 Kms), Shahdol(97 kms) and Jabalpur(170 kms). Jabalpur(170 Kms) and Khajuraho(240 kms) are the nearest Airports.
+                            {{ trans('home.how-to-reach-p') }}
                         </p>
                     </div>
                 </div>
@@ -257,9 +257,9 @@
                     </div>
 
                     <div class="right-txt float-right">
-                        <h3>What to see</h3>
+                        <h3>{{ trans('home.what-to-see') }}</h3>
                         <p class="text-justify">
-                            Safaris to the core zones are must for all wildlife lovers, with Tala zone being the most preferred. Magadhi zone also has good sightings while Khitauli is fast catching up with the other two. Visitors with cultural and archealogical inclination can visit Sheesh Shaiya and other spots inside the park.
+                            {{ trans('home.what-to-see-p') }}
                         </p>
                     </div>
                 </div>
@@ -270,9 +270,9 @@
                     </div>
 
                     <div class="right-txt float-right">
-                        <h3>Excursions</h3>
+                        <h3>{{ trans('home.excursions') }}</h3>
                         <p class="text-justify">
-                            Wildlife safaris by the registered Gypsies are conducted in Morning and Evening for all the Zones. Safari bookingsare done online while limited safarisare booked at the Tourist Counter for “Walk-ins”. Other excursions like Elephant Joy Rides, Safari in Canters can be booked from the counter.
+                            {{ trans('home.excursions-p') }}
                         </p>
                     </div>
                 </div>
@@ -282,9 +282,9 @@
                         <i ><img src="{{asset('public/assets/images/info_icon/Stay.png')}}" width="60" height="60"></i>
                     </div>
                     <div class="right-txt float-right">
-                        <h3>	Stay</h3>
+                        <h3>{{ trans('home.stay') }}</h3>
                         <p class="text-justify">
-                            Various kinds of accommodations are available for Tourists in Tala which are provided by the Forest Department and Private parties. Forest Rest House (4 rooms), Family Suites (4 Suites) and Log Huts (5 rooms) are provided by the Department which have to be booked prior to the visit.
+                            {{ trans('home.stay-p') }}
                         </p>
                     </div>
                 </div>
@@ -295,10 +295,10 @@
                     </div>
 
                     <div class="right-txt float-right">
-                        <h3> Contact</h3>
+                        <h3>{{ trans('home.contact') }}</h3>
                         <p style="text-transform: none;">
-                            Phone: 07653 –222214 , 222724 &nbsp;
-                            Mail: dirbandhavgarhNP@mpforest.org <br/>fdbnp.umr@mp.gov.in
+                            {{ trans('home.contact-phone') }} 07653 –222214 , 222724 &nbsp;
+                            {{ trans('home.contact-mail') }} dirbandhavgarhNP@mpforest.org <br/>fdbnp.umr@mp.gov.in
                         </p>
                     </div>
                 </div>
@@ -313,37 +313,88 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-xs-12 mb-xs-30 mb-sm-60">
-                    <div class="row pb-30">
+                    <div class="row pb-30 text-center">
                         <div class="col-sm-12 mb-20">
-                            <h2><span>Latest</span> News</h2>
-                            <span class="b-line l-left"></span>
+                            <h2><span>{{ trans('home.latest') }}</span>{{ trans('home.news') }}</h2>
+                            <span class="b-line"></span>
                         </div>
                     </div>
 
-                    <div class="row">
-                        @foreach ($dataen as $item)
-                            <div class="col-md-6 col-lg-4 mb-xs-30">
-                                <div class="blog-post">
-                                    <div class="post-media">
-                                        <img src="{{ asset('public/storage/eng_news/'.$item->news_image) }}" alt="" /><span class="event-calender blog-date">{{ $item->created_at->format('d') }} <span>{{ $item->created_at->format('M') }}</span> </span>
-                                    </div>
-                                    <div class="post-meta">
-                                        <span>by <a href="javascript:avoid(0);">Admin</a>
-                                    </div>
-                                    <div class="post-header">
-                                        <h4><a href="#">{!! Str::limit($item->news_title, 40, '...') !!}</a></h4>
-                                    </div>
-                                    <div class="post-entry">
-                                        <p class="text-justify">
-                                            {!! Str::limit($item->news_discription, 150, '...') !!}
-                                        </p>
-                                    </div>
-                                    <div class="post-more-link pull-left">
-                                        <a href="#" class="btn btn-md btn-color-line ">Read More</a>
+                    @if (session('locale') == 'en')
+                        <div class="row">
+                            @forelse ($dataen as $item)
+                                <div class="col-md-6 col-lg-4 mb-xs-30">
+                                    <div class="blog-post">
+                                        <div class="post-media">
+                                            <img src="{{ asset('public/storage/eng_news/'.$item->news_image) }}" alt="" height="250px"/>
+                                        </div>
+                                        <div class="post-meta">
+                                            <span>by <a href="javascript:avoid(0);">Admin</a>
+                                        </div>
+                                        <div class="post-header">
+                                            <h4><a href="#">{!! Str::limit($item->news_title, 40, '...') !!}</a></h4>
+                                        </div>
+                                        <div class="post-entry">
+                                            <p class="text-justify">
+                                                {!! Str::limit($item->news_discription, 150, '...') !!}
+                                            </p>
+                                        </div>
+                                        <div class="post-more-link pull-left">
+                                            <a href="{{ route('btr.news-details', $item->news_slug) }}" class="btn btn-md btn-color-line ">Read More</a>
+                                        </div>
                                     </div>
                                 </div>
+                            @empty
+                                <div class="col-lg-12 col-md-12 pb-4">
+                                        <div class="p-2 text-center">
+                                            <h2>No News Found !!</h2>
+                                        </div><!-- single-post -->
+                                </div><!-- col-lg-4 col-md-6 -->
+                            @endforelse
+                        </div>
+                    @endif
+
+                    @if (session('locale') == 'hi')
+                        <div class="row">
+                            @forelse ($datahi as $item)
+                                <div class="col-md-6 col-lg-4 mb-xs-30">
+                                    <div class="blog-post">
+                                        <div class="post-media">
+                                            <img src="{{ asset('public/storage/hin_news/'.$item->news_image) }}" alt="" height="250px"/>
+                                        </div>
+                                        <div class="post-meta">
+                                            <span>व्यवस्थापक <a href="javascript:avoid(0);">द्वारा</a>
+                                        </div>
+                                        <div class="post-header">
+                                            <h4><a href="#">{!! Str::limit($item->news_title, 40, '...') !!}</a></h4>
+                                        </div>
+                                        <div class="post-entry">
+                                            <p class="text-justify">
+                                                {!! Str::limit($item->news_discription, 150, '...') !!}
+                                            </p>
+                                        </div>
+                                        <div class="post-more-link pull-left">
+                                            <a href="{{ route('btr.news-details', $item->news_slug) }}" class="btn btn-md btn-color-line ">अधिक पढ़ें</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @empty
+                                <div class="col-lg-12 col-md-12 pb-4">
+                                        <div class="p-2 text-center">
+                                            <h2>कोई समाचार नहीं मिला !!</h2>
+                                        </div><!-- single-post -->
+                                </div><!-- col-lg-4 col-md-6 -->
+                            @endforelse
+                        </div>
+                    @endif
+
+
+                    <div class="row mt-5">
+                        <div class="col-12">
+                            <div class="post-more-link text-center">
+                                <a href="{{ route('btr.newses') }}" class="btn btn-md btn-color-line ">{{ trans('home.view-all') }}</a>
                             </div>
-                        @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
@@ -356,7 +407,7 @@
         <div class="container">
             <div class="row pb-30 text-center">
                 <div class="col-sm-12 mb-20">
-                    <h2><span>Our</span> Gallery</h2>
+                    <h2><span>{{ trans('home.our') }}</span>{{ trans('home.gallery') }}</h2>
                     <span class="b-line"></span>
                 </div>
             </div>
@@ -397,7 +448,7 @@
 
         </div>
 
-        <div class="text-center" ><a class="btn-text green-bg" href="{{ route('btr.gallery') }}"> See More</a></div>
+        <div class="text-center" ><a class="btn-text green-bg" href="{{ route('btr.gallery') }}">{{ trans('home.see-more') }}</a></div>
     </section>
     <!--End Work-->
 @endsection

@@ -37,6 +37,8 @@
         'management-objectives'  =>  'प्रबंधन के उद्देश्य',
         'training'  =>  'प्रशिक्षण और जागरूकता',
         'donation'  =>  'दान',
+        'news'  => 'समाचार',
+        'news-detail'  => 'समाचार विवरण',
         'contact'  =>  'संपर्क करें',
         'gallery'  =>  'गैलरी',
     ];

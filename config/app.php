@@ -228,6 +228,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        'HumanReadable' => App\Http\Controllers\GalleryController::class,
+
     ],
 
 ];

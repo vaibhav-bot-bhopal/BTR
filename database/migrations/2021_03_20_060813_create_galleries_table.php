@@ -17,7 +17,7 @@ class CreateGalleriesTable extends Migration
             $table->id();
             $table->string('original_filename');
             $table->string('filename');
-            $table->float('file_size');
+            $table->bigInteger('file_size');
             $table->timestamps();
         });
     }

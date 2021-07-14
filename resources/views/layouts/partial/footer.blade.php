@@ -5,73 +5,73 @@
             <div class="row">
                 <div class="col-md-6 col-lg-3">
                     <div class="footer_box__block">
-                        <h4>About Us</h4>
+                        <h4>{{ trans('footer.about') }}</h4>
                         <p class="text-justify">
-                            Bandhavgarh Tiger Reserve Located In The Eastern Satpura Hill Range Of Umaria And Katni Districts.
+                            {{ trans('footer.about-p1') }}
                         </p>
                         <p class="text-justify">
-                            This Fort Was Built And Given To Brother Lakshman By Lord Rama, To Keep A Watch On Lanka And Hence It Acquired <a href="{{ route('btr.about-introduction') }}" style="color: #ffcc00!important; font-weight: 600;">Know more</a>
+                            {{ trans('footer.about-p2') }} <br/>
+                            <a href="{{ route('btr.about-introduction') }}" style="color: #ffcc00!important; font-weight: 600;">{{ trans('footer.know-more') }}</a>
                         </p>
                     </div>
                 </div>
 
                 <div class="col-md-6 col-lg-3">
                     <div class="footer_box__block">
-                        <h4>Important for Tourist</h4>
+                        <h4>{{ trans('footer.important') }}</h4>
                         <ul>
                             <li>
-                                <a href="{{ route('btr.how-to-reach') }}">How to Reach</a>
+                                <a href="{{ route('btr.how-to-reach') }}">{{ trans('footer.how-to-reach') }}</a>
                             </li>
 
                             <li>
-                                <a href="{{ route('btr.best-time-to-visit') }}">Best Time to Visit</a>
+                                <a href="{{ route('btr.best-time-to-visit') }}">{{ trans('footer.best-time-to-visit') }}</a>
                             </li>
 
                             <li>
-                                <a href="{{ route('btr.stay') }}">Where to Stay</a>
+                                <a href="{{ route('btr.stay') }}">{{ trans('footer.where-to-stay') }}</a>
                             </li>
 
                             <li>
-                                <a href="{{ route('btr.safari-zones') }}">Safari Zones</a>
+                                <a href="{{ route('btr.safari-zones') }}">{{ trans('footer.safari-zones') }}</a>
                             </li>
 
                             <li>
-                                <a href="{{ route('btr.point-of-interests') }}">Point of Interests</a>
+                                <a href="{{ route('btr.point-of-interests') }}">{{ trans('footer.point-of-interests') }}</a>
                             </li>
 
                             <li>
-                                <a href="{{ route('btr.dos') }}">Do(s) and Don't(s)</a>
-                            </li>
+                                <a href="{{ route('btr.dos') }}">{{ trans('footer.dos') }}</a>                            </li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="col-md-6 col-lg-3">
                     <div class="footer_box__block">
-                        <h4>Useful Links</h4>
+                        <h4>{{ trans('footer.useful-links') }}</h4>
                         <ul>
                             <li>
-                                <a href="http://www.mpforest.gov.in" target="_blank">1)	MP Forest Department</a>
+                                <a href="http://www.mpforest.gov.in" target="_blank">{{ trans('footer.mfd') }}</a>
                             </li>
 
                             <li>
-                                <a href="http://www.mptigerfoundation.org" target="_blank">2)	MP Tiger Foundation</a>
+                                <a href="http://www.mptigerfoundation.org" target="_blank">{{ trans('footer.mtf') }}</a>
                             </li>
 
                             <li>
-                                <a href="http://projecttiger.nic.in/" target="_blank">3)	NTCA</a>
+                                <a href="http://projecttiger.nic.in/" target="_blank">{{ trans('footer.ntca') }}</a>
                             </li>
 
                             <li>
-                                <a href="http://www.wii.gov.in/" target="_blank">4)	WII</a>
+                                <a href="http://www.wii.gov.in/" target="_blank">{{ trans('footer.wii') }}</a>
                             </li>
 
                             <li>
-                                <a href="https://forest.mponline.gov.in/" target="_blank" >5)	SAFARI BOOKING</a>
+                                <a href="https://forest.mponline.gov.in/" target="_blank" >{{ trans('footer.safari-booking') }}</a>
                             </li>
 
                             <li>
-                                <a href="https://mptiger.mponline.gov.in/Portal/Services/MPTiger/GeneralDonation/DonationType.aspx" target="_blank">6)	DONATE</a>
+                                <a href="https://mptiger.mponline.gov.in/Portal/Services/MPTiger/GeneralDonation/DonationType.aspx" target="_blank">{{ trans('footer.donate') }}</a>
                             </li>
                         </ul>
                     </div>
@@ -79,11 +79,11 @@
 
                 <div class="col-md-6 col-lg-3">
                     <div class="footer_box__block address-box">
-                        <h4>Contact info</h4>
+                        <h4>{{ trans('footer.contact') }}</h4>
                         <ul>
                             <li>
                                 <i class="fa fa-phone"></i>
-                                <p>Call Us - (07653) 222 214, 222724</p>
+                                <p>{{ trans('footer.call-us') }} - (07653) 222 214, 222724</p>
                             </li>
 
                             <li>
@@ -96,7 +96,7 @@
                             <li>
                                 <i class="fa fa-map-marker"></i>
                                 <p>
-                                    Field Director Office Bandhavgarh Tiger Reserve Umaria MP. - 484661
+                                    {{ trans('footer.field-director') }}
                                 </p>
                             </li>
 
@@ -107,12 +107,12 @@
 
             <div class="copyright_block ptb-20 mt-20">
                 <div class="text-center">
-                    <a href="{{ route('btr.index') }}" target="_blank" class="cpy-box"> BANDHAVGARH TIGER RESERVE </a>
-                    &copy;&nbspAll Rights Reserved
+                    <a href="{{ route('btr.index') }}" target="_blank" class="cpy-box">{{ trans('footer.btr') }}</a>
+                    &copy;&nbsp {{ trans('footer.copyright') }}
                 </div>
 
                 <div class="text-center">
-                    Developed by - <a href="https://blueoceantech.in/" target="_blank" class="cmp-box">Blue Ocean Tech Solutions Pvt. Ltd.</a>
+                    {{ trans('footer.developed') }}<a href="https://blueoceantech.in/" target="_blank" class="cmp-box">{{ trans('footer.bot') }}</a>
                 </div>
             </div>
         </div>

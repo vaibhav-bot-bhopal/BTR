@@ -29,9 +29,7 @@ Route::get('language/{lang}', function ($lang) {
 })->middleware('language');
 
 Route::get('/', [MainController::class, 'index'])->name('btr.index')->middleware('language');
-Route::get('/gallery', [MainController::class, 'gallery'])->name('btr.gallery')->middleware('language');
-Route::get('/gallery/2', [MainController::class, 'gallery2'])->name('btr.gallery-2')->middleware('language');
-Route::get('/gallery/3', [MainController::class, 'gallery3'])->name('btr.gallery-3')->middleware('language');
+Route::get('/gallery', [GalleryController::class, 'gallery'])->name('btr.gallery')->middleware('language');
 
 Route::prefix('about')->group(function () {
     Route::get('/introduction', [AboutController::class, 'introduction'])->name('btr.about-introduction')->middleware('language');
@@ -70,6 +68,11 @@ Route::prefix('management')->group(function () {
     Route::get('/objectives', [ManagementController::class, 'objectives'])->name('btr.objectives')->middleware('language');
     Route::get('/training', [ManagementController::class, 'training'])->name('btr.training')->middleware('language');
     Route::get('/contact', [ManagementController::class, 'contact'])->name('btr.contact')->middleware('language');
+});
+
+Route::prefix('news')->group(function () {
+    Route::get('/newses', [NewsController::class, 'newses'])->name('btr.newses')->middleware('language');
+    Route::get('/news-details/{slug}', [NewsController::class, 'news_details'])->name('btr.news-details')->middleware('language');
 });
 
 Auth::routes();
