@@ -2,6 +2,14 @@
 
 @section('title', 'Bandhavgarh Tiger Reserve')
 
+@push('css')
+    <style>
+        .client-avtar {
+            border: 0px solid #6cbe03!important;
+        }
+    </style>
+@endpush
+
 @section('content')
     <!-- Main Banner -->
     <div class="main-banner banner_up">
@@ -215,7 +223,7 @@
     <!-- Want to learn End-->
 
     <!-- Service Section -->
-    <section class="our-services gray-bg" id="our-service">
+    <section class="our-services gray-bg" id="our-service" style="padding: 80px 0 40px;">
         <div class="container">
             <div class="row pb-30 text-center">
                 <div class="col-sm-12 mb-20">
@@ -308,14 +316,81 @@
     </section>
     <!-- End Service Section -->
 
+    <!-- Tender Section -->
+    <div id="testimonial-section" class="faq padding pt-xs-40">
+        <div class="container">
+            <div class="row text-center pb-30">
+                <div class="col-sm-12">
+                    <div class="heading-box ">
+                        <h2>{{__('home.tender-heading-1')}}<span>{{__('home.tender-heading-2')}}</span></h2>
+                        <span class="b-line"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-60">
+                @forelse ($tenders as $tender)
+                    <div class="col-md-12 col-lg-4 mb-80">
+                        <div class="about-block gray-bg padding-40 clearfix">
+                            <div class="client-avtar">
+                                @if ($tender->file_extension)
+                                    @if ($tender->file_extension == 'doc' || $tender->file_extension == 'docx')
+                                        <img src="{{asset('public/assets/images/doc-icon/word.png')}}" class="img-responsive rounded" alt="doc-image">
+                                    @endif
+
+                                    @if ($tender->file_extension == 'xls' || $tender->file_extension == 'xlsx')
+                                        <img src="{{asset('public/assets/images/doc-icon/excel.png')}}" class="img-responsive rounded" alt="doc-image">
+                                    @endif
+
+                                    @if ($tender->file_extension == 'pdf')
+                                        <img src="{{asset('public/assets/images/doc-icon/pdf.png')}}" class="img-responsive rounded" alt="doc-image">
+                                    @endif
+                                @endif
+                            </div>
+                            <div class="text-box">
+                                <div class="box-title">
+                                    <h4>{{$tender->title}}</h4>
+                                </div>
+
+                                <div class="text-content">
+                                    <p>
+                                        {!! Str::limit($tender->description, 200, '...') !!}
+                                    </p>
+                                </div>
+
+                                <a href="public/storage/tender-documents/{{ $tender->filename }}" download="{{$tender->original_filename}}" class="btn btn-primary" style="background-color: #6cbe03; color: #ffffff; border: 2px solid #6cbe03">{{__('home.btn-download')}}</a>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <div class="col-lg-12 col-md-12 pb-4 mt-0">
+                        <div class="p-2 text-center">
+                            <h2>{{__('home.tender-not-found')}}</h2>
+                        </div><!-- single-post -->
+                    </div><!-- col-lg-4 col-md-6 -->
+                @endforelse
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="post-more-link text-center">
+                        <a href="{{ route('btr.tenders') }}" class="btn btn-md btn-color-line ">{{ trans('home.view-all-tender') }}</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Collape Section End Here -->
+        </div>
+    </div>
+    <!-- Tender Section -->
+
     <!-- Blog Section -->
-    <section id="blog" class="wow fadeIn ptb-80 gray-bg" style="padding-top: 0px!important;">
+    <section id="blog" class="wow fadeIn ptb-80 gray-bg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-xs-12 mb-xs-30 mb-sm-60">
                     <div class="row pb-30 text-center">
                         <div class="col-sm-12 mb-20">
-                            <h2><span>{{ trans('home.latest') }}</span>{{ trans('home.news') }}</h2>
+                            <h2><span>{{ trans('home.latest') }} </span>{{ trans('home.news') }}</h2>
                             <span class="b-line"></span>
                         </div>
                     </div>
@@ -347,7 +422,7 @@
                             @empty
                                 <div class="col-lg-12 col-md-12 pb-4">
                                         <div class="p-2 text-center">
-                                            <h2>No News Found !!</h2>
+                                            <h2>{{__('home.news-not-found')}}</h2>
                                         </div><!-- single-post -->
                                 </div><!-- col-lg-4 col-md-6 -->
                             @endforelse
@@ -381,13 +456,12 @@
                             @empty
                                 <div class="col-lg-12 col-md-12 pb-4">
                                         <div class="p-2 text-center">
-                                            <h2>कोई समाचार नहीं मिला !!</h2>
+                                            <h2>{{__('home.news-not-found')}}</h2>
                                         </div><!-- single-post -->
                                 </div><!-- col-lg-4 col-md-6 -->
                             @endforelse
                         </div>
                     @endif
-
 
                     <div class="row mt-5">
                         <div class="col-12">
@@ -407,7 +481,7 @@
         <div class="container">
             <div class="row pb-30 text-center">
                 <div class="col-sm-12 mb-20">
-                    <h2><span>{{ trans('home.our') }}</span>{{ trans('home.gallery') }}</h2>
+                    <h2><span>{{ trans('home.our') }} </span>{{ trans('home.gallery') }}</h2>
                     <span class="b-line"></span>
                 </div>
             </div>

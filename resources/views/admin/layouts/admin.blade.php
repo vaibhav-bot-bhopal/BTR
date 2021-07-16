@@ -187,7 +187,7 @@
                                 <li class="nav-item">
                                     <a href="{{ url('admin/news') }}" class="nav-link {{ 'admin/news' == request()->path() ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>न्यूज़ <span class="right badge badge-danger">Hindi</span></p>
+                                        <p>न्यूज़ <span class="right badge badge-danger">हिंदी</span></p>
                                     </a>
                                 </li>
                             @endif
@@ -223,7 +223,7 @@
                                 <li class="nav-item">
                                     <a href="{{ url('admin/images') }}" class="nav-link {{ 'admin/images' == request()->path() ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>अपलोड गैलरी <span class="right badge badge-warning">Hindi</span></p>
+                                        <p>अपलोड गैलरी <span class="right badge badge-warning">हिंदी</span></p>
                                     </a>
                                 </li>
                             @endif
@@ -241,7 +241,25 @@
                                 <li class="nav-item">
                                     <a href="{{ url('admin/images-show') }}" class="nav-link {{ 'admin/images-show' == request()->path() ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>व्यू गैलरी <span class="right badge badge-info">Hindi</span></p>
+                                        <p>व्यू गैलरी <span class="right badge badge-info">हिंदी</span></p>
+                                    </a>
+                                </li>
+                            @endif
+
+                            @if (session('locale') == 'en')
+                                <li class="nav-item">
+                                    <a href="{{url('admin/tender')}}" class="nav-link {{ 'admin/tender' == request()->path() ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Upload Tender <span class="right badge badge-success">English</span></p>
+                                    </a>
+                                </li>
+                            @endif
+
+                            @if (session('locale') == 'hi')
+                                <li class="nav-item">
+                                    <a href="{{url('admin/tender')}}" class="nav-link {{ 'admin/tender' == request()->path() ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>निविदा अपलोड करें <span class="right badge badge-success">हिंदी</span></p>
                                     </a>
                                 </li>
                             @endif

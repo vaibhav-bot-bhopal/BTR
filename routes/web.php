@@ -7,6 +7,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\ManagementController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\SuperAdminController;
+use App\Http\Controllers\TenderController;
 use App\Http\Controllers\TouristController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -30,6 +31,11 @@ Route::get('language/{lang}', function ($lang) {
 
 Route::get('/', [MainController::class, 'index'])->name('btr.index')->middleware('language');
 Route::get('/gallery', [GalleryController::class, 'gallery'])->name('btr.gallery')->middleware('language');
+
+
+Route::prefix('tender')->group(function () {
+    Route::get('/tenders', [TenderController::class, 'tenders'])->name('btr.tenders')->middleware('language');
+});
 
 Route::prefix('about')->group(function () {
     Route::get('/introduction', [AboutController::class, 'introduction'])->name('btr.about-introduction')->middleware('language');
@@ -106,4 +112,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'isAdmin', 'prevent-
     Route::post('images-save', [GalleryController::class, 'store'])->name('images-save');
     Route::delete('images-delete/{id}', [GalleryController::class, 'destroy'])->name('images-delete');
     Route::get('images-show', [GalleryController::class, 'index'])->name('images-show');
+
+    // For Tender Quotation
+    Route::get('tender', [TenderController::class, 'show'])->name('btr.tender.show');
+    Route::post('tender-create', [TenderController::class, 'create'])->name('btr.tender.create');
+    Route::get('/tender-edit/{id}', [TenderController::class, 'edit'])->name('btr.tender.edit');
+    Route::post('/tender-update/{id}', [TenderController::class, 'update'])->name('btr.tender.update');
+    Route::delete('/tender-del/{id}', [TenderController::class, 'delete'])->name('btr.tender.delete');
+    // Route::get('download/{filename}', [TenderController::class, 'download'])->name('btr.tender.download');
 });

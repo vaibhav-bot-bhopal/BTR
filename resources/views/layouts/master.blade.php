@@ -30,6 +30,7 @@
 		<link href="{{asset('public/assets/css/owl.carousel.css')}}" rel="stylesheet" type="text/css">
 		<link href="{{asset('public/assets/css/owl.transitions.css')}}" rel="stylesheet" type="text/css">
 		<link href="{{asset('public/assets/css/style.css')}}" rel="stylesheet">
+        @stack('css')
 	</head>
 
 

@@ -10,7 +10,7 @@ class newsHindi extends Model
 {
     use HasFactory;
 
-    // protected $table = 'news_hindis';
+    protected $table = 'news_hindis';
 
     use Sluggable;
 

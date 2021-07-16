@@ -141,43 +141,43 @@ return [
 
     'custom' => [
         'n_title' => [
-            'required' => 'The news title is required !!',
+            'required' => 'समाचार शीर्षक आवश्यक है !!',
         ],
         'n_date' => [
-            'required' => 'The news date is required !!',
+            'required' => 'समाचार तारीख आवश्यक है !!',
         ],
         'n_disc' => [
-            'required' => 'The news description is required !!',
+            'required' => 'समाचार विवरण आवश्यक है !!',
         ],
         'n_file' => [
-            'required' => 'The news feature image is required !!',
+            'required' => 'समाचार फीचर छवि आवश्यक है !!',
         ],
         'title' => [
-            'required' => 'The event title is required !!',
+            'required' => 'इवेंट का शीर्षक आवश्यक है !!',
         ],
         'edate' => [
-            'required' => 'The event date is required !!',
+            'required' => 'इवेंट की तारीख आवश्यक है !!',
         ],
         'etime' => [
-            'required' => 'The event time is required !!',
+            'required' => 'इवेंट का समय आवश्यक है !!',
         ],
         'place' => [
-            'required' => 'The event place is required !!',
+            'required' => 'इवेंट का स्थान आवश्यक है !!',
         ],
         'e_disc' => [
-            'required' => 'The event description is required !!',
+            'required' => 'इवेंट का विवरण आवश्यक है !!',
         ],
         'image' => [
-            'required' => 'The event feature image is required !!',
+            'required' => 'ईवेंट फ़ीचर छवि आवश्यक है !!',
         ],
         'ten_title' => [
-            'required' => 'The tender title is required !!',
+            'required' => 'निविदा शीर्षक आवश्यक है !!',
         ],
         'ten_desc' => [
-            'required' => 'The tender description is required !!',
+            'required' => 'निविदा विवरण आवश्यक है !!',
         ],
         'ten_file' => [
-            'required' => 'The tender document file is required !!',
+            'required' => 'निविदा दस्तावेज़ फ़ाइल आवश्यक है !!',
         ],
     ],
 

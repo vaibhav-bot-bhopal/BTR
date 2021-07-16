@@ -206,7 +206,7 @@ class NewsController extends Controller
     {
         // Delete News For English Language
         if (session('locale') == 'en') {
-            $data = newsEnglish::where('id', $id)->first();
+            $data = newsEnglish::where('id', $id)->firstOrFail();
 
             if (!$data) {
                 return redirect()->back()->with('error', 'Articles not found.');

@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 
-class newsEnglish extends Model
+class Tender extends Model
 {
     use HasFactory;
 
-    protected $table = 'news_englishes';
+    protected $table = 'tenders';
 
     use Sluggable;
 
@@ -22,7 +22,7 @@ class newsEnglish extends Model
     public function sluggable(): array
     {
         return [
-            'news_slug' => [
+            'slug' => [
                 'source' => 'n_title'
             ]
         ];
