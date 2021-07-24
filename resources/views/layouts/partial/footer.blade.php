@@ -107,8 +107,9 @@
 
             <div class="copyright_block ptb-20 mt-20">
                 <div class="text-center">
+                    Copyright &copy;&nbsp;{{date('Y')}}
                     <a href="{{ route('btr.index') }}" target="_blank" class="cpy-box">{{ trans('footer.btr') }}</a>
-                    &copy;&nbsp {{ trans('footer.copyright') }}
+                    {{ trans('footer.copyright') }}
                 </div>
 
                 <div class="text-center">

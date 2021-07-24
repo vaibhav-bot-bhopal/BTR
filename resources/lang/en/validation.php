@@ -150,7 +150,9 @@ return [
             'required' => 'The news description is required !!',
         ],
         'n_file' => [
-            'required' => 'The news feature image is required !!',
+            'image' => 'The news feature field must be an image.',
+            'required' => 'The news feature image field is required !!',
+            'mimes' => 'The news feature image field supported file of type: :values.',
         ],
         'title' => [
             'required' => 'The event title is required !!',
@@ -178,6 +180,18 @@ return [
         ],
         'ten_file' => [
             'required' => 'The tender document file is required !!',
+        ],
+        'name' => [
+            'required' => 'The Name Field is Required !!',
+        ],
+        'email' => [
+            'required' => 'The Email Field is Required !!',
+        ],
+        'old_password' => [
+            'required' => 'The Old Password Field is Required !!',
+        ],
+        'password' => [
+            'required' => 'The Password Field is Required !!',
         ],
     ],
 

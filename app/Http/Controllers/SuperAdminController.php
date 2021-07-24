@@ -10,14 +10,19 @@ class SuperAdminController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = User::where('role_as', 'admin')->get();
         return view('superadmin.user.dashboard')->with('users', $users);
     }
 
     public function editUserRole($id)
     {
         $user_roles = User::find($id);
-        return view('superadmin.user.edit')->with('user_roles', $user_roles);
+
+        if ($user_roles) {
+            return view('superadmin.user.edit')->with('user_roles', $user_roles);
+        } else {
+            return redirect()->back()->with('error', 'Admin not found.');
+        }
     }
 
     public function updateUserRole(Request $request, $id)

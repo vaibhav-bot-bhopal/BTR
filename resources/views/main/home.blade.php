@@ -4,6 +4,11 @@
 
 @push('css')
     <style>
+        .btn-color-line:hover {
+            background: #6cbe03;
+            color: #fff;
+        }
+
         .client-avtar {
             border: 0px solid #6cbe03!important;
         }

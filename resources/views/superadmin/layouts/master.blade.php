@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('public/assets/images/favicon.png')}}">
     <link rel="apple-touch-icon" href="{{asset('public/assets/images/favicon.png')}}">
-    <title>Bandhavgarh Tiger Reserve | SuperAdmin</title>
+    <title>Bandhavgarh Tiger Reserve | Super Admin Dashboard</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -85,7 +85,7 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a href="{{url('superadmin/dashboard')}}" class="brand-link">
+        <a href="{{route('superadmin.dashboard')}}" class="brand-link">
             <img src="{{ asset('public/assets/images/bandhavgarh_logo.png') }}" alt="BTR-Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
             <span class="brand-text font-weight-light" style="font-size: 16px;">{{ trans('navbar.btr') }}</span>
         </a>
@@ -96,28 +96,51 @@
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
+                    <li class="nav-header">ADMIN'S LIST</li>
                     <li class="nav-item has-treeview menu-open">
-                    <a href="#" class="nav-link active">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ url('superadmin/dashboard') }}" class="nav-link {{ 'superadmin/dashboard' == request()->path() ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-user-cog"></i>
+                                    <p>Admin Details</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-header">SUPER ADMIN SYSTEM</li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-user-cog"></i>
+                            <p>
+                                Super Admin Settings
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{url('superadmin/profile')}}" class="nav-link {{ 'superadmin/profile' == request()->path() ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>User Profile</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{url('superadmin/changePassword')}}" class="nav-link {{ 'superadmin/changePassword' == request()->path() ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Change Password</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link">
+                        <i class="nav-icon fas fa-sign-out-alt"></i>
                         <p>
-                        Dashboard
-                        <i class="right fas fa-angle-left"></i>
+                            Logout
                         </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                        <a href="{{ url('superadmin/dashboard') }}" class="nav-link {{ 'superadmin/dashboard' == request()->path() ? 'active' : '' }}">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>User Details</p>
                         </a>
-                        </li>
-                        {{-- <li class="nav-item">
-                        <a href="{{ url('admin/hi') }}" class="nav-link {{ 'admin/hi' == request()->path() ? 'active' : '' }}">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>डेशबोर्ड <span class="right badge badge-success">Hindi</span></p>
-                        </a>
-                        </li> --}}
-                    </ul>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
                     </li>
                 </ul>
             </nav>
@@ -136,8 +159,9 @@
 
     <!-- /.content-wrapper -->
     <footer class="main-footer">
-        <strong><a href="{{url('superadmin/dashboard')}}">{{ trans('navbar.btr') }}</a>.</strong>
-        ©&nbsp;All Rights Reserved
+        Copyright ©&nbsp; {{date('Y')}}
+        <strong><a href="{{route('superadmin.dashboard')}}">{{ trans('navbar.btr') }}</a>.</strong>
+        &nbsp;{{ trans('footer.copyright') }}
     </footer>
 
 </div>
@@ -239,6 +263,10 @@
 
 @if(session('success'))
     <script>toastr.success("{!! session('success') !!}")</script>
+@endif
+
+@if(session('error'))
+    <script>toastr.error("{!! session('error') !!}")</script>
 @endif
 
 @stack('js')

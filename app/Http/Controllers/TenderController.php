@@ -89,7 +89,6 @@ class TenderController extends Controller
         $validator = Validator::make($req->all(), [
             'ten_title' => 'required|max:255',
             'ten_desc' => 'required',
-            'ten_file' => 'mimes:pdf,doc,docx,xls,xlsx|max:4096',
         ]);
 
         if ($validator->fails()) {

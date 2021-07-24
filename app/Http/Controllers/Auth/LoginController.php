@@ -39,7 +39,7 @@ class LoginController extends Controller
 
         //Admin Login
         if (Auth::user()->role_as == 'admin') {
-            return 'admin/news';
+            return 'admin/dashboard';
         }
     }
 

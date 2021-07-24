@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 16, 2021 at 02:58 PM
+-- Generation Time: Jul 17, 2021 at 02:01 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.14
 
@@ -282,8 +282,8 @@ CREATE TABLE `tenders` (
 
 INSERT INTO `tenders` (`id`, `title`, `slug`, `description`, `original_filename`, `filename`, `file_size`, `file_extension`, `created_at`, `updated_at`) VALUES
 (9, 'Test Tender', 'test-tender-3', '<p>This is my first tender.</p>', 'WTS-Documentation.pdf', 'f049236e673cddabf9e0ad7cf99116062435ff3c.pdf', 935461, 'pdf', '2021-07-16 06:45:54', '2021-07-16 06:54:26'),
-(10, 'Test Tender', 'test-tender', '<p>This is my second tender.</p>', 'BTR Hindi.docx', '526fa164dfa0b0aa197a24bf8a2278570ecc1cc2.docx', 147287, 'docx', '2021-07-16 06:52:07', '2021-07-16 06:52:07'),
-(11, 'Test Tender', 'test-tender-4', '<p>This is my test tender.</p>', 'December Quiz Certificate Database.xlsx', '44b6b36bc2b1d7743ab500ece30e7b495c9a6b96.xlsx', 27893, 'xlsx', '2021-07-16 07:27:00', '2021-07-16 07:27:00');
+(10, 'Test Tender', 'test-tender-7', '<p>This is my second tender.</p>', 'BTR Hindi.docx', '526fa164dfa0b0aa197a24bf8a2278570ecc1cc2.docx', 147287, 'docx', '2021-07-16 06:52:07', '2021-07-17 00:43:31'),
+(12, 'Test Tender', 'test-tender-6', '<p>This is my first tender.</p>', 'WTS-Documentation.pdf', '29efb0efadd69f214e839b37f5efa82d217b91bb.pdf', 935461, 'pdf', '2021-07-17 00:38:49', '2021-07-17 00:42:52');
 
 -- --------------------------------------------------------
 
@@ -309,7 +309,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role_as`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Admin BTR', 'admin@btr.com', NULL, '$2y$10$nLYWj8UvXqmmTWQ6VARXde34wS9U/LBw5UeimqpUDYzKrXxs7jMZ.', 'admin', 0, NULL, '2021-05-28 04:47:48', '2021-05-30 23:51:43'),
+(1, 'Admin BTR', 'admin@btr.com', NULL, '$2y$10$VVyGDUAPBLUrIKgDsvz6AeHDhp/tiI9vugO8u4VIeqGixWOVc/M5i', 'admin', 0, NULL, '2021-05-28 04:47:48', '2021-07-17 03:36:37'),
 (2, 'SU Admin', 'suadmin@btr.com', NULL, '$2y$10$i7/FBj0C48G5w0UaEUJ6a.yUglVcCl5WIQ5mocxF4qZAV.59A/NDC', 'superadmin', 0, NULL, '2021-05-29 00:39:55', '2021-05-30 23:51:51');
 
 --
@@ -433,7 +433,7 @@ ALTER TABLE `news_hindis`
 -- AUTO_INCREMENT for table `tenders`
 --
 ALTER TABLE `tenders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `users`
