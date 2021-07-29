@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 17, 2021 at 02:01 PM
+-- Generation Time: Jul 29, 2021 at 01:40 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.14
 
@@ -193,7 +193,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (6, '2021_03_16_093402_create_news_englishes_table', 1),
 (7, '2021_03_16_093608_create_news_hindis_table', 1),
 (8, '2021_03_20_060813_create_galleries_table', 1),
-(10, '2021_07_15_054832_create_tenders_table', 2);
+(10, '2021_07_15_054832_create_tenders_table', 2),
+(11, '2021_07_29_063621_create_trackers_table', 3);
 
 -- --------------------------------------------------------
 
@@ -218,7 +219,7 @@ CREATE TABLE `news_englishes` (
 --
 
 INSERT INTO `news_englishes` (`id`, `news_title`, `news_slug`, `news_date`, `news_discription`, `news_image`, `m_news_image`, `created_at`, `updated_at`) VALUES
-(4, 'Lorem Ipsum is simply dummy text', 'lorem-ipsum-is-simply-dummy-text', '2021-06-03', '<p>Lorem Ipsum is simply dummy text&nbsp;Lorem Ipsum is simply dummy text&nbsp;Lorem Ipsum is simply dummy text&nbsp;Lorem Ipsum is simply dummy text&nbsp;Lorem Ipsum is simply dummy text&nbsp;Lorem Ipsum is simply dummy text .</p>', '1622637511nature.jpg', '', '2021-06-02 07:08:31', '2021-06-02 07:08:31');
+(4, 'Lorem Ipsum is simply dummy text', 'lorem-ipsum-is-simply-dummy-text-2', '2021-06-03', '<p>Lorem Ipsum is simply dummy text&nbsp;Lorem Ipsum is simply dummy text&nbsp;Lorem Ipsum is simply dummy text&nbsp;Lorem Ipsum is simply dummy text&nbsp;Lorem Ipsum is simply dummy text&nbsp;Lorem Ipsum is simply dummy text .</p>', '1622637511nature.jpg', '', '2021-06-02 07:08:31', '2021-07-22 04:30:42');
 
 -- --------------------------------------------------------
 
@@ -288,6 +289,35 @@ INSERT INTO `tenders` (`id`, `title`, `slug`, `description`, `original_filename`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `trackers`
+--
+
+CREATE TABLE `trackers` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `ip` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date` date NOT NULL,
+  `hits` int(11) NOT NULL,
+  `visit_date` date NOT NULL,
+  `visit_time` time NOT NULL,
+  `browser` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `trackers`
+--
+
+INSERT INTO `trackers` (`id`, `ip`, `date`, `hits`, `visit_date`, `visit_time`, `browser`, `created_at`, `updated_at`) VALUES
+(1, '::1', '2021-07-29', 34, '2021-07-29', '17:06:48', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36', '2021-07-29 05:23:31', '2021-07-29 11:36:48'),
+(2, '127.0.0.1', '2021-07-29', 4, '2021-07-29', '17:03:44', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/90.0', '2021-07-29 05:23:54', '2021-07-29 11:33:44'),
+(3, '192.168.1.19', '2021-07-29', 9, '2021-07-29', '17:04:11', 'Mozilla/5.0 (Linux; Android 9; Redmi 6 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.115 Mobile Safari/537.36', '2021-07-29 05:24:19', '2021-07-29 11:34:11'),
+(4, '192.168.1.19', '2021-07-29', 9, '2021-07-29', '17:03:52', 'Mozilla/5.0 (Android 9; Mobile; rv:90.0) Gecko/90.0 Firefox/90.0', '2021-07-29 05:24:45', '2021-07-29 11:33:52'),
+(5, '::1', '2021-07-29', 1, '2021-07-29', '16:56:09', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36 Edg/92.0.902.55', '2021-07-29 11:26:09', '2021-07-29 11:26:09');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -309,8 +339,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role_as`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Admin BTR', 'admin@btr.com', NULL, '$2y$10$VVyGDUAPBLUrIKgDsvz6AeHDhp/tiI9vugO8u4VIeqGixWOVc/M5i', 'admin', 0, NULL, '2021-05-28 04:47:48', '2021-07-17 03:36:37'),
-(2, 'SU Admin', 'suadmin@btr.com', NULL, '$2y$10$i7/FBj0C48G5w0UaEUJ6a.yUglVcCl5WIQ5mocxF4qZAV.59A/NDC', 'superadmin', 0, NULL, '2021-05-29 00:39:55', '2021-05-30 23:51:51');
+(1, 'Admin BTR', 'admin@btr.com', NULL, '$2y$10$GHXTLFQmyE4zJClN8b9oteyjFqznoN/0X/PLsP5HMDN2EOj/bMPPq', 'admin', 0, NULL, '2021-05-28 04:47:48', '2021-07-21 06:18:31'),
+(2, 'SU Admin', 'super@btr.com', NULL, '$2y$10$bX71Jk.WppLopntgYbR7HuqHrxXcAiQT6Ba0rEVFFK46dvzp1NLx.', 'superadmin', 0, NULL, '2021-05-29 00:39:55', '2021-07-19 03:46:51');
 
 --
 -- Indexes for dumped tables
@@ -377,6 +407,12 @@ ALTER TABLE `tenders`
   ADD UNIQUE KEY `tenders_slug_unique` (`slug`);
 
 --
+-- Indexes for table `trackers`
+--
+ALTER TABLE `trackers`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -415,13 +451,13 @@ ALTER TABLE `galleries`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `news_englishes`
 --
 ALTER TABLE `news_englishes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `news_hindis`
@@ -434,6 +470,12 @@ ALTER TABLE `news_hindis`
 --
 ALTER TABLE `tenders`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `trackers`
+--
+ALTER TABLE `trackers`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`

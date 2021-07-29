@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\newsEnglish;
 use App\Models\newsHindi;
 use App\Models\Tender;
+use App\Models\Tracker;
 use Illuminate\Http\Request;
 
 class MainController extends Controller

@@ -115,6 +115,12 @@
                 <div class="text-center">
                     {{ trans('footer.developed') }}<a href="https://blueoceantech.in/" target="_blank" class="cmp-box">{{ trans('footer.bot') }}</a>
                 </div>
+
+                <div class="text-center" style="font-weight: 500; font-size: 14px; letter-spacing: 0.8px;">
+                    <i class="fa fa-bar-chart"></i>
+                    {{ trans('footer.visitors') }}
+                    {{ $trackers->count() }}
+                </div>
             </div>
         </div>
     </div>

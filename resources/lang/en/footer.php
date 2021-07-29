@@ -24,5 +24,6 @@ return [
     'btr'   => 'BANDHAVGARH TIGER RESERVE.',
     'copyright' =>  'All Rights Reserved',
     'developed' =>  'Developed by - ',
-    'bot'   =>  'Blue Ocean Tech Solutions Pvt. Ltd.'
+    'bot'   =>  'Blue Ocean Tech Solutions Pvt. Ltd.',
+    'visitors' => 'Total Number of Visitors : ',
 ];
