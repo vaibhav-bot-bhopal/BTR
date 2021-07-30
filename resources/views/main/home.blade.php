@@ -334,38 +334,41 @@
             </div>
             <div class="row mt-60">
                 @forelse ($tenders as $tender)
-                    <div class="col-md-12 col-lg-4 mb-80">
-                        <div class="about-block gray-bg padding-40 clearfix">
-                            <div class="client-avtar">
-                                @if ($tender->file_extension)
-                                    @if ($tender->file_extension == 'doc' || $tender->file_extension == 'docx')
-                                        <img src="{{asset('public/assets/images/doc-icon/word.png')}}" class="img-responsive rounded" alt="doc-image">
-                                    @endif
+                    @if ($tender->last_date <= Carbon\Carbon::now()->toDateTimeString())
+                    @else
+                        <div class="col-md-12 col-lg-4 mb-80">
+                            <div class="about-block gray-bg padding-40 clearfix">
+                                <div class="client-avtar">
+                                    @if ($tender->file_extension)
+                                        @if ($tender->file_extension == 'doc' || $tender->file_extension == 'docx')
+                                            <img src="{{asset('public/assets/images/doc-icon/word.png')}}" class="img-responsive rounded" alt="doc-image">
+                                        @endif
 
-                                    @if ($tender->file_extension == 'xls' || $tender->file_extension == 'xlsx')
-                                        <img src="{{asset('public/assets/images/doc-icon/excel.png')}}" class="img-responsive rounded" alt="doc-image">
-                                    @endif
+                                        @if ($tender->file_extension == 'xls' || $tender->file_extension == 'xlsx')
+                                            <img src="{{asset('public/assets/images/doc-icon/excel.png')}}" class="img-responsive rounded" alt="doc-image">
+                                        @endif
 
-                                    @if ($tender->file_extension == 'pdf')
-                                        <img src="{{asset('public/assets/images/doc-icon/pdf.png')}}" class="img-responsive rounded" alt="doc-image">
+                                        @if ($tender->file_extension == 'pdf')
+                                            <img src="{{asset('public/assets/images/doc-icon/pdf.png')}}" class="img-responsive rounded" alt="doc-image">
+                                        @endif
                                     @endif
-                                @endif
-                            </div>
-                            <div class="text-box">
-                                <div class="box-title">
-                                    <h4>{{$tender->title}}</h4>
                                 </div>
+                                <div class="text-box">
+                                    <div class="box-title">
+                                        <h4>{{$tender->title}}</h4>
+                                    </div>
 
-                                <div class="text-content">
-                                    <p>
-                                        {!! Str::limit($tender->description, 200, '...') !!}
-                                    </p>
+                                    <div class="text-content">
+                                        <p>
+                                            {!! Str::limit($tender->description, 200, '...') !!}
+                                        </p>
+                                    </div>
+
+                                    <a href="public/storage/tender-documents/{{ $tender->filename }}" download="{{$tender->original_filename}}" class="btn btn-primary" style="background-color: #6cbe03; color: #ffffff; border: 2px solid #6cbe03">{{__('home.btn-download')}}</a>
                                 </div>
-
-                                <a href="public/storage/tender-documents/{{ $tender->filename }}" download="{{$tender->original_filename}}" class="btn btn-primary" style="background-color: #6cbe03; color: #ffffff; border: 2px solid #6cbe03">{{__('home.btn-download')}}</a>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 @empty
                     <div class="col-lg-12 col-md-12 pb-4 mt-0">
                         <div class="p-2 text-center">

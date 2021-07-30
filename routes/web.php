@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\BioController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ManagementController;
@@ -135,8 +136,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'isAdmin', 'prevent-
     // For Tender Quotation
     Route::get('tender', [TenderController::class, 'show'])->name('btr.tender.show');
     Route::post('tender-create', [TenderController::class, 'create'])->name('btr.tender.create');
-    Route::get('/tender-edit/{id}', [TenderController::class, 'edit'])->name('btr.tender.edit');
-    Route::post('/tender-update/{id}', [TenderController::class, 'update'])->name('btr.tender.update');
-    Route::delete('/tender-del/{id}', [TenderController::class, 'delete'])->name('btr.tender.delete');
+    Route::get('tender-edit/{id}', [TenderController::class, 'edit'])->name('btr.tender.edit');
+    Route::post('tender-update/{id}', [TenderController::class, 'update'])->name('btr.tender.update');
+    Route::delete('tender-del/{id}', [TenderController::class, 'delete'])->name('btr.tender.delete');
+
+    // For Documents
+    Route::get('document', [DocumentController::class, 'show'])->name('btr.docs.show');
+    Route::post('document-create', [DocumentController::class, 'create'])->name('btr.docs.create');
+    Route::get('document-edit/{id}', [DocumentController::class, 'edit'])->name('btr.docs.edit');
+    Route::post('document-update/{id}', [DocumentController::class, 'update'])->name('btr.docs.update');
+    Route::delete('document-del/{id}', [DocumentController::class, 'delete'])->name('btr.docs.delete');
     // Route::get('download/{filename}', [TenderController::class, 'download'])->name('btr.tender.download');
 });

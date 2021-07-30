@@ -7,7 +7,6 @@ use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -32,6 +31,7 @@ class TenderController extends Controller
         $req->validate([
             'ten_title' => 'required|max:255',
             'ten_desc' => 'required',
+            'ldate' => 'required',
             'ten_file' => 'required|mimes:pdf,doc,docx,xls,xlsx|max:4096',
         ]);
 
@@ -49,6 +49,7 @@ class TenderController extends Controller
         $tender->title = $req->ten_title;
         $tender->slug = SlugService::createSlug(Tender::class, 'slug', $req->ten_title);
         $tender->description = $req->ten_desc;
+        $tender->last_date = $req->ldate;
         $tender->original_filename = basename($file->getClientOriginalName());
         $tender->filename = $new_file;
         $tender->file_size = $fileSizeInByte;
@@ -99,6 +100,7 @@ class TenderController extends Controller
             $tender->title = $req->ten_title;
             $tender->slug = SlugService::createSlug(Tender::class, 'slug', $req->ten_title);
             $tender->description = $req->ten_desc;
+            $tender->last_date = $req->ldate;
             $tender->update();
 
             if (session('locale') == 'en') {

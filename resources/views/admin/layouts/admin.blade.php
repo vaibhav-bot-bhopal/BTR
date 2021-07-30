@@ -186,7 +186,7 @@
                                 <li class="nav-item">
                                     <a href="{{ url('admin/dashboard') }}" class="nav-link {{ 'admin/dashboard' == request()->path() ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-tachometer-alt"></i>
-                                        <p>Dashboard <span class="right badge badge-info">English</span></p>
+                                        <p>Dashboard <span class="right badge rounded-pill badge-info pt-1 pb-1 pl-2 pr-2">English</span></p>
                                     </a>
                                 </li>
                             @endif
@@ -195,7 +195,7 @@
                                 <li class="nav-item">
                                     <a href="{{ url('admin/dashboard') }}" class="nav-link {{ 'admin/dashboard' == request()->path() ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-tachometer-alt"></i>
-                                        <p>डैशबोर्ड <span class="right badge badge-info">हिंदी</span></p>
+                                        <p>डैशबोर्ड <span class="right badge rounded-pill badge-info pt-1 pb-1 pl-2 pr-2">हिंदी</span></p>
                                     </a>
                                 </li>
                             @endif
@@ -204,7 +204,7 @@
                                 <li class="nav-item">
                                     <a href="{{ url('admin/news') }}" class="nav-link {{ 'admin/news' == request()->path() ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-newspaper"></i>
-                                        <p>News <span class="right badge badge-danger">English</span></p>
+                                        <p>News <span class="right badge rounded-pill badge-danger pt-1 pb-1 pl-2 pr-2">English</span></p>
                                     </a>
                                 </li>
                             @endif
@@ -213,7 +213,7 @@
                                 <li class="nav-item">
                                     <a href="{{ url('admin/news') }}" class="nav-link {{ 'admin/news' == request()->path() ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-newspaper"></i>
-                                        <p>न्यूज़ <span class="right badge badge-danger">हिंदी</span></p>
+                                        <p>न्यूज़ <span class="right badge rounded-pill badge-danger pt-1 pb-1 pl-2 pr-2">हिंदी</span></p>
                                     </a>
                                 </li>
                             @endif
@@ -240,7 +240,7 @@
                                 <li class="nav-item">
                                     <a href="{{ url('admin/images') }}" class="nav-link {{ 'admin/images' == request()->path() ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-upload"></i>
-                                        <p>Upload Gallery <span class="right badge badge-warning">English</span></p>
+                                        <p>Upload Gallery <span class="right badge rounded-pill badge-warning pt-1 pb-1 pl-2 pr-2">English</span></p>
                                     </a>
                                 </li>
                             @endif
@@ -249,7 +249,7 @@
                                 <li class="nav-item">
                                     <a href="{{ url('admin/images') }}" class="nav-link {{ 'admin/images' == request()->path() ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-upload"></i>
-                                        <p>अपलोड गैलरी <span class="right badge badge-warning">हिंदी</span></p>
+                                        <p>अपलोड गैलरी <span class="right badge rounded-pill badge-warning pt-1 pb-1 pl-2 pr-2">हिंदी</span></p>
                                     </a>
                                 </li>
                             @endif
@@ -258,7 +258,7 @@
                                 <li class="nav-item">
                                     <a href="{{ url('admin/images-show') }}" class="nav-link {{ 'admin/images-show' == request()->path() ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-eye"></i>
-                                        <p>View Gallery <span class="right badge badge-light">English</span></p>
+                                        <p>View Gallery <span class="right badge rounded-pill badge-light pt-1 pb-1 pl-2 pr-2">English</span></p>
                                     </a>
                                 </li>
                             @endif
@@ -267,7 +267,7 @@
                                 <li class="nav-item">
                                     <a href="{{ url('admin/images-show') }}" class="nav-link {{ 'admin/images-show' == request()->path() ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-eye"></i>
-                                        <p>व्यू गैलरी <span class="right badge badge-light">हिंदी</span></p>
+                                        <p>व्यू गैलरी <span class="right badge rounded-pill badge-light pt-1 pb-1 pl-2 pr-2">हिंदी</span></p>
                                     </a>
                                 </li>
                             @endif
@@ -276,7 +276,7 @@
                                 <li class="nav-item">
                                     <a href="{{url('admin/tender')}}" class="nav-link {{ 'admin/tender' == request()->path() ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-file-upload"></i>
-                                        <p>Upload Tender <span class="right badge badge-success">English</span></p>
+                                        <p>Upload Tender <span class="right badge rounded-pill badge-success pt-1 pb-1 pl-2 pr-2">English</span></p>
                                     </a>
                                 </li>
                             @endif
@@ -285,7 +285,25 @@
                                 <li class="nav-item">
                                     <a href="{{url('admin/tender')}}" class="nav-link {{ 'admin/tender' == request()->path() ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-file-upload"></i>
-                                        <p>निविदा अपलोड करें <span class="right badge badge-success">हिंदी</span></p>
+                                        <p>निविदा अपलोड करें <span class="right badge rounded-pill badge-success pt-1 pb-1 pl-2 pr-2">हिंदी</span></p>
+                                    </a>
+                                </li>
+                            @endif
+
+                            @if (session('locale') == 'en')
+                                <li class="nav-item">
+                                    <a href="{{url('admin/document')}}" class="nav-link {{ 'admin/document' == request()->path() ? 'active' : '' }}">
+                                        <i class="nav-icon fas fa-cloud-upload-alt"></i>
+                                        <p>Upload Docs <span class="right badge rounded-pill badge-secondary pt-1 pb-1 pl-2 pr-2">English</span></p>
+                                    </a>
+                                </li>
+                            @endif
+
+                            @if (session('locale') == 'hi')
+                                <li class="nav-item">
+                                    <a href="{{url('admin/document')}}" class="nav-link {{ 'admin/document' == request()->path() ? 'active' : '' }}">
+                                        <i class="nav-icon fas fa-cloud-upload-alt"></i>
+                                        <p>दस्तावेज़ अपलोड करें <span class="right badge rounded-pill badge-secondary pt-1 pb-1 pl-2 pr-2">हिंदी</span></p>
                                     </a>
                                 </li>
                             @endif

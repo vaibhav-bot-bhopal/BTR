@@ -31,7 +31,7 @@
                     <div class="col-md-12">
                         <div class="card card-dark">
                             <div class="card-header">
-                                <h5 class="card-title">News, Tender & Gallery Information</h5>
+                                <h5 class="card-title">News, Tender, Documents & Gallery Information</h5>
 
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -42,7 +42,7 @@
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-lg-4 col-6">
+                                    <div class="col-lg-3 col-6">
                                         <!-- small box -->
                                         <div class="small-box bg-warning">
                                             <div class="inner">
@@ -58,7 +58,7 @@
                                     </div>
                                     <!-- ./col -->
 
-                                    <div class="col-lg-4 col-6">
+                                    <div class="col-lg-3 col-6">
                                         <!-- small box -->
                                         <div class="small-box bg-success">
                                             <div class="inner">
@@ -73,7 +73,24 @@
                                         </div>
                                     </div>
                                     <!-- ./col -->
-                                    <div class="col-lg-4 col-6">
+
+                                    <div class="col-lg-3 col-6">
+                                        <!-- small box -->
+                                        <div class="small-box bg-info">
+                                            <div class="inner">
+                                            <h3>{{ $docs_count }}</h3>
+
+                                            <p>Total Documents</p>
+                                            </div>
+                                            <div class="icon">
+                                            <i class="ion ion-bag"></i>
+                                            </div>
+                                            <a href="{{ route('btr.docs.show') }}" class="small-box-footer">View Total Documents <i class="fas fa-arrow-circle-right"></i></a>
+                                        </div>
+                                    </div>
+                                    <!-- ./col -->
+
+                                    <div class="col-lg-3 col-6">
                                         <!-- small box -->
                                         <div class="small-box bg-danger">
                                             <div class="inner">
@@ -129,7 +146,7 @@
                     <div class="col-md-12">
                         <div class="card card-dark">
                             <div class="card-header">
-                                <h5 class="card-title">न्यूज़, निविदा और गैलरी इन्फॉर्मेशन</h5>
+                                <h5 class="card-title">न्यूज़, निविदा, दस्तावेज़ और गैलरी इन्फॉर्मेशन</h5>
 
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -140,13 +157,13 @@
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-lg-4 col-6">
+                                    <div class="col-lg-3 col-6">
                                         <!-- small box -->
                                         <div class="small-box bg-warning">
                                             <div class="inner">
                                             <h3>{{ $news_count }}</h3>
 
-                                            <p>टोटल न्यूज़</p>
+                                            <p>कुल न्यूज़</p>
                                             </div>
                                             <div class="icon">
                                             <i class="ion ion-stats-bars"></i>
@@ -156,13 +173,13 @@
                                     </div>
                                     <!-- ./col -->
 
-                                    <div class="col-lg-4 col-6">
+                                    <div class="col-lg-3 col-6">
                                         <!-- small box -->
                                         <div class="small-box bg-success">
                                             <div class="inner">
                                             <h3>{{ $tender_count }}</h3>
 
-                                            <p>टोटल निविदा</p>
+                                            <p>कुल निविदा</p>
                                             </div>
                                             <div class="icon">
                                             <i class="ion ion-bag"></i>
@@ -172,13 +189,29 @@
                                     </div>
                                     <!-- ./col -->
 
-                                    <div class="col-lg-4 col-6">
+                                    <div class="col-lg-3 col-6">
+                                        <!-- small box -->
+                                        <div class="small-box bg-info">
+                                            <div class="inner">
+                                            <h3>{{ $docs_count }}</h3>
+
+                                            <p>कुल दस्तावेज़</p>
+                                            </div>
+                                            <div class="icon">
+                                            <i class="ion ion-bag"></i>
+                                            </div>
+                                            <a href="{{ route('btr.docs.show') }}" class="small-box-footer">View Total Documents <i class="fas fa-arrow-circle-right"></i></a>
+                                        </div>
+                                    </div>
+                                    <!-- ./col -->
+
+                                    <div class="col-lg-3 col-6">
                                         <!-- small box -->
                                         <div class="small-box bg-danger">
                                             <div class="inner">
                                             <h3>{{ $gallery_count }}</h3>
 
-                                            <p>टोटल गैलरीज</p>
+                                            <p>कुल गैलरीज</p>
                                             </div>
                                             <div class="icon">
                                             <i class="ion ion-bag"></i>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 29, 2021 at 01:40 PM
+-- Generation Time: Jul 30, 2021 at 02:38 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.14
 
@@ -20,6 +20,32 @@ SET time_zone = "+00:00";
 --
 -- Database: `blueolz8_btr`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `documents`
+--
+
+CREATE TABLE `documents` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `original_filename` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `filename` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `file_size` bigint(20) NOT NULL,
+  `file_extension` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `documents`
+--
+
+INSERT INTO `documents` (`id`, `title`, `slug`, `image`, `original_filename`, `filename`, `file_size`, `file_extension`, `created_at`, `updated_at`) VALUES
+(2, 'This is test document', 'this-is-test-document-2', '1627647207angular.jpg', 'Harshita_Singh_Bais.pdf', 'ff64d93917f973145865aac0c3668890eb6283b7.pdf', 554747, 'pdf', '2021-07-30 12:13:27', '2021-07-30 12:28:21');
 
 -- --------------------------------------------------------
 
@@ -194,7 +220,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (7, '2021_03_16_093608_create_news_hindis_table', 1),
 (8, '2021_03_20_060813_create_galleries_table', 1),
 (10, '2021_07_15_054832_create_tenders_table', 2),
-(11, '2021_07_29_063621_create_trackers_table', 3);
+(11, '2021_07_29_063621_create_trackers_table', 3),
+(12, '2021_07_30_153218_create_documents_table', 4);
 
 -- --------------------------------------------------------
 
@@ -269,6 +296,7 @@ CREATE TABLE `tenders` (
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_date` timestamp NULL DEFAULT NULL,
   `original_filename` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `filename` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `file_size` bigint(20) NOT NULL,
@@ -281,10 +309,10 @@ CREATE TABLE `tenders` (
 -- Dumping data for table `tenders`
 --
 
-INSERT INTO `tenders` (`id`, `title`, `slug`, `description`, `original_filename`, `filename`, `file_size`, `file_extension`, `created_at`, `updated_at`) VALUES
-(9, 'Test Tender', 'test-tender-3', '<p>This is my first tender.</p>', 'WTS-Documentation.pdf', 'f049236e673cddabf9e0ad7cf99116062435ff3c.pdf', 935461, 'pdf', '2021-07-16 06:45:54', '2021-07-16 06:54:26'),
-(10, 'Test Tender', 'test-tender-7', '<p>This is my second tender.</p>', 'BTR Hindi.docx', '526fa164dfa0b0aa197a24bf8a2278570ecc1cc2.docx', 147287, 'docx', '2021-07-16 06:52:07', '2021-07-17 00:43:31'),
-(12, 'Test Tender', 'test-tender-6', '<p>This is my first tender.</p>', 'WTS-Documentation.pdf', '29efb0efadd69f214e839b37f5efa82d217b91bb.pdf', 935461, 'pdf', '2021-07-17 00:38:49', '2021-07-17 00:42:52');
+INSERT INTO `tenders` (`id`, `title`, `slug`, `description`, `last_date`, `original_filename`, `filename`, `file_size`, `file_extension`, `created_at`, `updated_at`) VALUES
+(9, 'Test Tender', 'test-tender', '<p>This is my first tender.</p>', '2021-07-30 18:30:00', 'WTS-Documentation.pdf', 'f049236e673cddabf9e0ad7cf99116062435ff3c.pdf', 935461, 'pdf', '2021-07-16 06:45:54', '2021-07-30 09:23:18'),
+(10, 'Test Tender', 'test-tender-15', '<p>This is my second tender.</p>', '2021-07-30 18:30:00', 'BTR Hindi.docx', '526fa164dfa0b0aa197a24bf8a2278570ecc1cc2.docx', 147287, 'docx', '2021-07-16 06:52:07', '2021-07-30 09:23:25'),
+(12, 'Test Tender', 'test-tender-14', '<p>This is my first tender.</p>', '2021-07-30 18:30:00', 'WTS-Documentation.pdf', '29efb0efadd69f214e839b37f5efa82d217b91bb.pdf', 935461, 'pdf', '2021-07-17 00:38:49', '2021-07-30 09:22:31');
 
 -- --------------------------------------------------------
 
@@ -309,11 +337,12 @@ CREATE TABLE `trackers` (
 --
 
 INSERT INTO `trackers` (`id`, `ip`, `date`, `hits`, `visit_date`, `visit_time`, `browser`, `created_at`, `updated_at`) VALUES
-(1, '::1', '2021-07-29', 34, '2021-07-29', '17:06:48', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36', '2021-07-29 05:23:31', '2021-07-29 11:36:48'),
+(1, '::1', '2021-07-29', 35, '2021-07-29', '17:26:46', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36', '2021-07-29 05:23:31', '2021-07-29 11:56:46'),
 (2, '127.0.0.1', '2021-07-29', 4, '2021-07-29', '17:03:44', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/90.0', '2021-07-29 05:23:54', '2021-07-29 11:33:44'),
-(3, '192.168.1.19', '2021-07-29', 9, '2021-07-29', '17:04:11', 'Mozilla/5.0 (Linux; Android 9; Redmi 6 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.115 Mobile Safari/537.36', '2021-07-29 05:24:19', '2021-07-29 11:34:11'),
+(3, '192.168.1.19', '2021-07-29', 12, '2021-07-29', '17:42:11', 'Mozilla/5.0 (Linux; Android 9; Redmi 6 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.115 Mobile Safari/537.36', '2021-07-29 05:24:19', '2021-07-29 12:12:11'),
 (4, '192.168.1.19', '2021-07-29', 9, '2021-07-29', '17:03:52', 'Mozilla/5.0 (Android 9; Mobile; rv:90.0) Gecko/90.0 Firefox/90.0', '2021-07-29 05:24:45', '2021-07-29 11:33:52'),
-(5, '::1', '2021-07-29', 1, '2021-07-29', '16:56:09', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36 Edg/92.0.902.55', '2021-07-29 11:26:09', '2021-07-29 11:26:09');
+(5, '::1', '2021-07-29', 1, '2021-07-29', '16:56:09', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36 Edg/92.0.902.55', '2021-07-29 11:26:09', '2021-07-29 11:26:09'),
+(6, '::1', '2021-07-30', 89, '2021-07-30', '14:53:33', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36', '2021-07-30 05:34:53', '2021-07-30 09:23:33');
 
 -- --------------------------------------------------------
 
@@ -345,6 +374,13 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `ro
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `documents`
+--
+ALTER TABLE `documents`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `documents_slug_unique` (`slug`);
 
 --
 -- Indexes for table `event_englishes`
@@ -424,6 +460,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `documents`
+--
+ALTER TABLE `documents`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `event_englishes`
 --
 ALTER TABLE `event_englishes`
@@ -451,7 +493,7 @@ ALTER TABLE `galleries`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `news_englishes`
@@ -475,7 +517,7 @@ ALTER TABLE `tenders`
 -- AUTO_INCREMENT for table `trackers`
 --
 ALTER TABLE `trackers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`

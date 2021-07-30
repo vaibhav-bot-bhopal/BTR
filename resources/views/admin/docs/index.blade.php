@@ -16,12 +16,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Upload Tender</h1>
+                        <h1 class="m-0">Upload Others Documnets</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Upload Tender</li>
+                            <li class="breadcrumb-item active">Upload Others Documnets</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -35,36 +35,28 @@
                 <div class="row">
                     <div class="col-lg-8 col-md-8 offset-lg-2 offset-md-2">
                         <div id="myAlert"></div>
-                        <form action="{{ url('admin/tender-create') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ url('admin/document-create') }}" method="post" enctype="multipart/form-data">
                         @csrf
                             <div class="form-group">
                                 <label for="ten_title">Title</label>
-                                <input type="text" class="form-control" id="ten_title" name="ten_title" value="{{old('n_title')}}" >
-                                @error('ten_title')
+                                <input type="text" class="form-control" id="docs_title" name="docs_title" value="{{old('docs_title')}}" >
+                                @error('docs_title')
                                     <span class="error">{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="form-group">
-                                <label for="ten_desc">Description</label>
-                                <textarea class="ckeditor form-control" rows="5" id="ten_desc" name="ten_desc">{{old('n_desc')}}</textarea>
-                                @error('ten_desc')
+                                <label for="docs_image">Feature Image</label>
+                                <input type="file" class="form-control-file border" name="docs_image">
+                                @error('docs_image')
                                     <span class="error">{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="form-group">
-                                <label for="ldata">Select Tender Last Date</label>
-                                <input type="datetime-local" class="form-control" id="ldate" name="ldate" value="{{old('ldate')}}" >
-                                @error('ldate')
-                                    <span class="error">{{ $message }}</span>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label for="ten_file">Upload File</label>
-                                <input type="file" class="form-control-file border" name="ten_file">
-                                @error('ten_file')
+                                <label for="docs_file">Upload Document</label>
+                                <input type="file" class="form-control-file border" name="docs_file">
+                                @error('docs_file')
                                     <span class="error">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -81,8 +73,7 @@
                             <tr>
                             <th class="text-center">SNo.</th>
                             <th class="text-center">Title</th>
-                            <th class="text-center">Description</th>
-                            <th class="text-center">Last Date</th>
+                            <th class="text-center">Image</th>
                             <th class="text-center">Document Type</th>
                             <th class="text-center">File Size</th>
                             <th class="text-center">Edit</th>
@@ -96,16 +87,13 @@
                                 <tr>
                                     <td class="text-center">{{$id}}</td>
                                     <td width="15%" class="text-center">{{$data->title}}</td>
-                                    <td class="text-justify">{!! Str::limit($data->description, 200, '...') !!}</td>
-                                    <td>{{ date('d-M-Y',strtotime($data->last_date)) }}</td>
+                                    <td class="text-center">
+                                        <img src="{{asset('public/storage/document/images/'.$data->image)}}" width="150" height="100" class="img-responsive rounded" alt="doc-image">
+                                    </td>
                                     <td class="text-center">
                                         @if ($data->file_extension)
                                             @if ($data->file_extension == 'doc' || $data->file_extension == 'docx')
                                                 <img src="{{asset('public/assets/images/doc-icon/word.png')}}" width="24" height="24" class="img-responsive rounded" alt="doc-image">
-                                            @endif
-
-                                            @if ($data->file_extension == 'xls' || $data->file_extension == 'xlsx')
-                                                <img src="{{asset('public/assets/images/doc-icon/excel.png')}}" width="24" height="24" class="img-responsive rounded" alt="doc-image">
                                             @endif
 
                                             @if ($data->file_extension == 'pdf')
@@ -118,26 +106,20 @@
                                             <span class="badge badge-primary" style="font-size: 14px;">{{ HumanReadable::bytesToHuman($data->file_size) }}</span>
                                         @endif
 
-                                        @if ($data->file_extension == 'xls' || $data->file_extension == 'xlsx')
-                                            <span class="badge badge-success" style="font-size: 14px;">{{ HumanReadable::bytesToHuman($data->file_size) }}</span>
-                                        @endif
-
                                         @if ($data->file_extension == 'pdf')
                                             <span class="badge badge-danger" style="font-size: 14px;">{{ HumanReadable::bytesToHuman($data->file_size) }}</span>
                                         @endif
                                     </td>
-                                    <td class="text-center"><a href="{{ url('admin/tender-edit') }}/{{$data->id}}" class="btn btn-sm btn-primary"><i class="far fa-edit" style="margin-right: 5px;"></i>Edit</a></td>
+                                    <td class="text-center"><a href="{{ url('admin/document-edit') }}/{{$data->id}}" class="btn btn-sm btn-primary"><i class="far fa-edit" style="margin-right: 5px;"></i>Edit</a></td>
                                     <td class="text-center">
                                         <button type="button" class="btn btn-sm btn-danger" onclick="deleteTender({{ $data->id }})"><i class="fa fa-trash-alt" style="margin-right: 5px;"></i>Delete</button>
-                                        <form id="delete-form-{{ $data->id }}" action="{{ route('btr.tender.delete', $data->id) }}" method="POST" style="display: none;">
+                                        <form id="delete-form-{{ $data->id }}" action="{{ route('btr.docs.delete', $data->id) }}" method="POST" style="display: none;">
                                             @csrf
                                             @method('DELETE')
                                         </form>
                                     </td>
                                     <td class="text-center">
-                                        {{-- <a href="{{asset('public/storage/tender-documents/'.$data->filename)}}" class="btn btn-success" download="{{$data->filename}}" target="_blank">Download</a> --}}
-                                        {{-- <a href="{!! route('btr.tender.download', $data->filename) !!}" class="btn btn-success">Download</a> --}}
-                                        <a href="../public/storage/tender-documents/{{ $data->filename }}" class="btn btn-sm btn-success" download="{{$data->filename}}" target="_blank"><i class="fa fa-download" style="margin-right: 5px;"></i>Download</a>
+                                        <a href="../public/storage/document/docs/{{ $data->filename }}" class="btn btn-sm btn-success" download="{{$data->original_filename}}" target="_blank"><i class="fa fa-download" style="margin-right: 5px;"></i>Download</a>
                                     </td>
                                 </tr>
                             @php
@@ -145,7 +127,7 @@
                             @endphp
                             @empty
                                 <tr>
-                                    <td class="text-center p-5" colspan="9"><h5 class="font-weight-bold">Tender was not found in our records !!</h5></td>
+                                    <td class="text-center p-5" colspan="9"><h5 class="font-weight-bold">Document was not found in our records !!</h5></td>
                                 </tr>
                             @endforelse
                         </table>
@@ -167,7 +149,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        Are you sure, you want to delete this tender ?
+                        Are you sure, you want to delete this document ?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">No, Cancel</button>
@@ -184,12 +166,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">निविदा अपलोड करें</h1>
+                        <h1 class="m-0">अन्य दस्तावेज अपलोड करें</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">होम</a></li>
-                            <li class="breadcrumb-item active">निविदा अपलोड करें</li>
+                            <li class="breadcrumb-item active">अन्य दस्तावेज अपलोड करें</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -203,36 +185,28 @@
                 <div class="row">
                     <div class="col-lg-8 col-md-8 offset-lg-2 offset-md-2">
                         <div id="myAlert"></div>
-                        <form action="{{ url('admin/tender-create') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ url('admin/document-create') }}" method="post" enctype="multipart/form-data">
                         @csrf
                             <div class="form-group">
                                 <label for="ten_title">शीर्षक</label>
-                                <input type="text" class="form-control" id="ten_title" name="ten_title" value="{{old('n_title')}}" >
-                                @error('ten_title')
+                                <input type="text" class="form-control" id="docs_title" name="docs_title" value="{{old('docs_title')}}" >
+                                @error('docs_title')
                                     <span class="error">{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="form-group">
-                                <label for="ten_desc">विवरण</label>
-                                <textarea class="ckeditor form-control" rows="5" id="ten_desc" name="ten_desc">{{old('n_desc')}}</textarea>
-                                @error('ten_desc')
+                                <label for="docs_image">फ़ीचर इमेज</label>
+                                <input type="file" class="form-control-file border" name="docs_image">
+                                @error('docs_image')
                                     <span class="error">{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="form-group">
-                                <label for="ldata">निविदा अंतिम तिथि का चयन करें</label>
-                                <input type="datetime-local" class="form-control" id="ldate" name="ldate" value="{{old('ldate')}}" >
-                                @error('ldate')
-                                    <span class="error">{{ $message }}</span>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label for="ten_file">फ़ाइल अपलोड करें</label>
-                                <input type="file" class="form-control-file border" name="ten_file">
-                                @error('ten_file')
+                                <label for="docs_file">दस्तावेज़ अपलोड करें</label>
+                                <input type="file" class="form-control-file border" name="docs_file">
+                                @error('docs_file')
                                     <span class="error">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -249,8 +223,7 @@
                             <tr>
                                 <th class="text-center">क्रमांक</th>
                                 <th class="text-center">शीर्षक</th>
-                                <th class="text-center">विवरण</th>
-                                <th class="text-center">अंतिम तिथी</th>
+                                <th class="text-center">इमेज</th>
                                 <th class="text-center">दस्तावेज़ का प्रकार</th>
                                 <th class="text-center">फाइल का आकार</th>
                                 <th class="text-center">एडिट</th>
@@ -264,16 +237,13 @@
                                 <tr>
                                     <td class="text-center">{{$id}}</td>
                                     <td width="15%" class="text-center">{{$data->title}}</td>
-                                    <td class="text-justify">{!! Str::limit($data->description, 300, '...') !!}</td>
-                                    <td>{{ date('d-M-Y',strtotime($data->last_date)) }}</td>
+                                    <td class="text-center">
+                                        <img src="{{asset('public/storage/document/images/'.$data->image)}}" width="150" height="100" class="img-responsive rounded" alt="doc-image">
+                                    </td>
                                     <td class="text-center">
                                         @if ($data->file_extension)
                                             @if ($data->file_extension == 'doc' || $data->file_extension == 'docx')
                                                 <img src="{{asset('public/assets/images/doc-icon/word.png')}}" width="24" height="24" class="img-responsive rounded" alt="doc-image">
-                                            @endif
-
-                                            @if ($data->file_extension == 'xls' || $data->file_extension == 'xlsx')
-                                                <img src="{{asset('public/assets/images/doc-icon/excel.png')}}" width="24" height="24" class="img-responsive rounded" alt="doc-image">
                                             @endif
 
                                             @if ($data->file_extension == 'pdf')
@@ -286,28 +256,22 @@
                                             <span class="badge badge-primary">{{ HumanReadable::bytesToHuman($data->file_size) }}</span>
                                         @endif
 
-                                        @if ($data->file_extension == 'xls' || $data->file_extension == 'xlsx')
-                                            <span class="badge badge-success">{{ HumanReadable::bytesToHuman($data->file_size) }}</span>
-                                        @endif
-
                                         @if ($data->file_extension == 'pdf')
                                             <span class="badge badge-danger">{{ HumanReadable::bytesToHuman($data->file_size) }}</span>
                                         @endif
                                     </td>
                                     <td class="text-center">
-                                        <a href="{{ url('admin/tender-edit') }}/{{$data->id}}" class="btn btn-sm btn-primary">Edit</a>
+                                        <a href="{{ url('admin/document-edit') }}/{{$data->id}}" class="btn btn-sm btn-primary"><i class="far fa-edit" style="margin-right: 5px;"></i>Edit</a>
                                     </td>
                                     <td class="text-center">
-                                        <button type="button" class="btn btn-sm btn-danger" onclick="deleteTender({{ $data->id }})">Delete</button>
-                                        <form id="delete-form-{{ $data->id }}" action="{{ route('btr.tender.delete', $data->id) }}" method="POST" style="display: none;">
+                                        <button type="button" class="btn btn-sm btn-danger" onclick="deleteTender({{ $data->id }})"><i class="fa fa-trash-alt" style="margin-right: 5px;"></i>Delete</button>
+                                        <form id="delete-form-{{ $data->id }}" action="{{ route('btr.docs.delete', $data->id) }}" method="POST" style="display: none;">
                                             @csrf
                                             @method('DELETE')
                                         </form>
                                     </td>
                                     <td class="text-center">
-                                        {{-- <a href="{{asset('public/storage/tender-documents/'.$data->filename)}}" class="btn btn-success" download="{{$data->filename}}" target="_blank">Download</a> --}}
-                                        {{-- <a href="{!! route('btr.tender.download', $data->filename) !!}" class="btn btn-success">Download</a> --}}
-                                        <a href="../public/storage/tender-documents/{{ $data->filename }}" class="btn btn-sm btn-success" download="{{$data->filename}}" target="_blank"><i class="fa fa-download" style="margin-right: 5px;"></i>Download</a>
+                                        <a href="../public/storage/document/docs/{{ $data->filename }}" class="btn btn-sm btn-success" download="{{$data->original_filename}}" target="_blank"><i class="fa fa-download" style="margin-right: 5px;"></i>Download</a>
                                     </td>
                                 </tr>
                             @php
@@ -315,7 +279,7 @@
                             @endphp
                             @empty
                                 <tr>
-                                    <td class="text-center p-5" colspan="9"><h5 class="font-weight-bold">हमारे रिकॉर्ड में टेंडर नहीं मिला !!</h5></td>
+                                    <td class="text-center p-5" colspan="9"><h5 class="font-weight-bold">हमारे रिकॉर्ड में दस्तावेज़ नहीं मिला !!</h5></td>
                                 </tr>
                             @endforelse
                         </table>
@@ -338,7 +302,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        क्या आप इस निविदा को हटाना चाहते हैं?
+                        क्या आप इस दस्तावेज को हटाना चाहते हैं?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">नहीं, रद्द करें</button>

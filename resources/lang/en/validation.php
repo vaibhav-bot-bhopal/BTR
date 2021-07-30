@@ -178,8 +178,20 @@ return [
         'ten_desc' => [
             'required' => 'The tender description is required !!',
         ],
+        'ldate' => [
+            'required' => 'The tender last date is required !!',
+        ],
         'ten_file' => [
             'required' => 'The tender document file is required !!',
+        ],
+        'docs_title' => [
+            'required' => 'The document title is required !!',
+        ],
+        'docs_image' => [
+            'required' => 'The feature image is required !!',
+        ],
+        'docs_file' => [
+            'required' => 'The document file is required !!',
         ],
         'name' => [
             'required' => 'The Name Field is Required !!',

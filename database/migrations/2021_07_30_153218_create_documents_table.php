@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTendersTable extends Migration
+class CreateDocumentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateTendersTable extends Migration
      */
     public function up()
     {
-        Schema::create('tenders', function (Blueprint $table) {
+        Schema::create('documents', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->string('slug')->unique();
-            $table->text('description');
-            $table->timestamps('last_date');
+            $table->string('image');
             $table->string('original_filename');
             $table->string('filename');
             $table->bigInteger('file_size');
@@ -34,6 +33,6 @@ class CreateTendersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tenders');
+        Schema::dropIfExists('documents');
     }
 }
