@@ -61,14 +61,18 @@
                                         <label for="inputName">Name</label>
                                         <input type="text" class="form-control {{($errors->any() && $errors->first('name')) ? 'is-invalid' : ''}}" id="name" name="name" value="{{ Auth::user()->name }}" placeholder="Enter Your Name">
                                         @if ($errors->any())
-                                            <p class="text-danger">{{$errors->first('name')}}</p>
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{$errors->first('name')}}</strong>
+                                            </span>
                                         @endif
                                     </div>
                                     <div class="form-group">
                                         <label for="inputEmail">Email Address</label>
                                         <input type="email" class="form-control {{($errors->any() && $errors->first('email')) ? 'is-invalid' : ''}}" id="email" name="email" value="{{ Auth::user()->email }}" placeholder="Enter Your Email">
                                         @if ($errors->any())
-                                            <p class="text-danger">{{$errors->first('email')}}</p>
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{$errors->first('email')}}</strong>
+                                            </span>
                                         @endif
                                     </div>
 
@@ -141,19 +145,19 @@
                                         <label for="inputName">नाम</label>
                                         <input type="text" class="form-control {{($errors->any() && $errors->first('name')) ? 'is-invalid' : ''}}" id="name" name="name" value="{{ Auth::user()->name }}" placeholder="अपना नाम दर्ज करें">
                                         @if ($errors->any())
-                                            <p class="text-danger">{{$errors->first('name')}}</p>
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{$errors->first('name')}}</strong>
+                                            </span>
                                         @endif
                                     </div>
                                     <div class="form-group">
                                         <label for="inputEmail">ईमेल एड्रेस</label>
                                         <input type="email" class="form-control {{($errors->any() && $errors->first('email')) ? 'is-invalid' : ''}}" id="email" name="email" value="{{ Auth::user()->email }}" placeholder="अपना ईमेल दर्ज करें">
                                         @if ($errors->any())
-                                            <p class="text-danger">{{$errors->first('email')}}</p>
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{$errors->first('email')}}</strong>
+                                            </span>
                                         @endif
-                                    </div>
-                                    <label for="inputImage" class="col-sm-2 col-form-label" hidden>Old Profile Image</label>
-                                    <div class="col-sm-10">
-                                        <input type="hidden" id="himage" name="himage" value="{{ Auth::user()->image }}">
                                     </div>
 
                                     <div class="form-group">

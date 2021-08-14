@@ -7,6 +7,11 @@
         .client-avtar {
             border: 0px solid #6cbe03!important;
         }
+
+        #toast-container .toast-error {
+            background-color: #dc3545;
+            opacity: 1;
+        }
     </style>
 @endpush
 
@@ -78,7 +83,7 @@
                                         </p>
                                     </div>
 
-                                    <a href="../public/storage/tender-documents/{{ $tender->filename }}" download="{{$tender->original_filename}}" class="btn btn-primary" style="background-color: #6cbe03; color: #ffffff; border: 2px solid #6cbe03">{{__('home.btn-download')}}</a>
+                                    <a href="{{ route('btr.tender.download', $tender->filename) }}" class="btn btn-success" style="background-color: #6cbe03; color: #ffffff; border: 2px solid #6cbe03"><i class="fa fa-download" style="margin-right: 4px;"></i>{{__('home.btn-download')}}</a>
                                 </div>
                             </div>
                         </div>

@@ -150,9 +150,13 @@ return [
             'required' => 'The news description is required !!',
         ],
         'n_file' => [
-            'image' => 'The news feature field must be an image.',
+            'image' => 'The news feature field must be an image !!',
             'required' => 'The news feature image field is required !!',
-            'mimes' => 'The news feature image field supported file of type: :values.',
+            'mimes' => 'Supported image types: :values.',
+        ],
+        'n_file_m.*' => [
+            'image' => 'The other images field must be an image !!',
+            'mimes' => 'Supported image types: :values.',
         ],
         'title' => [
             'required' => 'The event title is required !!',
@@ -183,28 +187,40 @@ return [
         ],
         'ten_file' => [
             'required' => 'The tender document file is required !!',
+            'mimes' => 'The document must be a file of type: :values.',
         ],
         'docs_title' => [
             'required' => 'The document title is required !!',
         ],
         'docs_image' => [
+            'image' => 'The feature image field must be an image !!',
             'required' => 'The feature image is required !!',
+            'mimes' => 'Supported Image Types: :values.',
         ],
         'docs_file' => [
             'required' => 'The document file is required !!',
+            'mimes' => 'The document must be a file of type: :values.',
         ],
         'name' => [
-            'required' => 'The Name Field is Required !!',
+            'required' => 'The name field is required !!',
         ],
         'email' => [
-            'required' => 'The Email Field is Required !!',
+            'required' => 'The email field is required !!',
+        ],
+        'roles' => [
+            'required' => 'The roles field is required !!',
         ],
         'old_password' => [
-            'required' => 'The Old Password Field is Required !!',
+            'required' => 'The old password field is required !!',
         ],
         'password' => [
-            'required' => 'The Password Field is Required !!',
+            'required' => 'The password field is required !!',
+            'confirmed' => "The password confirmation does not match !!",
         ],
+    ],
+
+    'min' => [
+        'string' => 'The password must be at least :min characters !!',
     ],
 
     /*

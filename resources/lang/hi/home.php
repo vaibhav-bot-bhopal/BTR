@@ -44,6 +44,10 @@ return [
     'tender-heading-1' => 'निविदा ',
     'tender-heading-2' => 'कोटेशन',
     'btn-download' => 'डाउनलोड',
+    'docs-heading-1' => 'अन्य ',
+    'docs-heading-2' => 'दस्तावेज़',
     'view-all-tender'  =>  'सभी निविदाएं देखें',
     'tender-not-found' => 'कोई निविदा नहीं मिली !!',
+    'view-all-docs'  =>  'सभी दस्तावेज़ देखें',
+    'docs-not-found' => 'कोई दस्तावेज़ नहीं मिला !!',
 ];

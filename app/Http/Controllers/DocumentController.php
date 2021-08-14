@@ -158,4 +158,22 @@ class DocumentController extends Controller
             }
         }
     }
+
+    public function download($filename)
+    {
+        $file_path = public_path('storage/document/docs/') . $filename;
+        if (file_exists($file_path)) {
+            // Send Download
+            return response()->download($file_path, $filename);
+        } else {
+            // Error
+            if (session('locale') == 'en') {
+                return redirect()->back()->with('error', 'Requested file does not exist on our server !!');
+            }
+
+            if (session('locale') == 'hi') {
+                return redirect()->back()->with('error', 'अनुरोधित फ़ाइल हमारे सर्वर पर मौजूद नहीं है !!');
+            }
+        }
+    }
 }

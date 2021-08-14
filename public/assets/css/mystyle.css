@@ -89,3 +89,22 @@ a {
     font-size: 13px;
     font-weight: 500;
 }
+
+.invalid-feedback {
+    font-size: 85%;
+}
+
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active,
+.sidebar-light-primary .nav-sidebar > .nav-item > .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #343a40;
+}
+
+.icheck-primary
+    > input:first-child:checked
+    + input[type="hidden"]
+    + label::before,
+.icheck-primary > input:first-child:checked + label::before {
+    background-color: #0088cc;
+    border-color: #0088cc;
+}

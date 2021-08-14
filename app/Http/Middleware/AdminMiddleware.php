@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AdminMiddleware
 {
@@ -16,8 +17,6 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-
-
         if (Auth::user()->role_as == 'admin') {
             if (Auth::check() && Auth::user()->status) {
                 $deactive = Auth::user()->status == '1';

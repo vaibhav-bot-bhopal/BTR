@@ -137,19 +137,23 @@ class TenderController extends Controller
         }
     }
 
-    // public function download($filename)
-    // {
-    //     $file_path = public_path('/storage/tender-documents') . $filename;
-    //     if (file_exists($file_path)) {
-    //         // Send Download
-    //         return Response::download($file_path, $filename, [
-    //             'Content-Length: ' . filesize($file_path)
-    //         ]);
-    //     } else {
-    //         // Error
-    //         return redirect()->back()->with('error', 'Requested file does not exist on our server !!');
-    //     }
-    // }
+    public function download($filename)
+    {
+        $file_path = public_path('storage/tender-documents/') . $filename;
+        if (file_exists($file_path)) {
+            // Send Download
+            return response()->download($file_path, $filename);
+        } else {
+            // Error
+            if (session('locale') == 'en') {
+                return redirect()->back()->with('error', 'Requested file does not exist on our server !!');
+            }
+
+            if (session('locale') == 'hi') {
+                return redirect()->back()->with('error', 'अनुरोधित फ़ाइल हमारे सर्वर पर मौजूद नहीं है !!');
+            }
+        }
+    }
 
     public static function bytesToHuman($bytes)
     {

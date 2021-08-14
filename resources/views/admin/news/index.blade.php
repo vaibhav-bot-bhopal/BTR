@@ -1,11 +1,7 @@
 @extends('admin.layouts.admin')
 
 @push('css')
-    <style>
-        .error{
-            color:red;
-        }
-    </style>
+
 @endpush
 
 @section('content')
@@ -39,39 +35,52 @@
                         @csrf
                             <div class="form-group">
                                 <label for="n_title">News Title</label>
-                                <input type="text" class="form-control" id="n_title" name="n_title" value="{{old('n_title')}}" >
+                                <input type="text" class="form-control @error('n_title') is-invalid @enderror" id="n_title" name="n_title" value="{{old('n_title')}}" placeholder="Enter News Title">
                                 @error('n_title')
-                                    <span class="error">{{ $message }}</span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
 
                             <div class="form-group">
                                 <label for="n_data">News Date</label>
-                                <input type="date" class="form-control" id="n_date" name="n_date" value="{{old('n_date')}}" >
+                                <input type="date" class="form-control @error('n_date') is-invalid @enderror" id="n_date" name="n_date" value="{{old('n_date')}}" >
                                 @error('n_date')
-                                    <span class="error">{{ $message }}</span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
 
                             <div class="form-group">
                                 <label for="n_disc">News Description</label>
-                                <textarea class="ckeditor form-control" rows="5" id="n_disc" name="n_disc">{{old('n_disc')}}</textarea>
+                                <textarea class="ckeditor form-control @error('n_disc') is-invalid @enderror" rows="5" id="n_disc" name="n_disc">{{old('n_disc')}}</textarea>
                                 @error('n_disc')
-                                    <span class="error">{{ $message }}</span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
 
                             <div class="form-group">
                             <label> Main Images </label>
-                                <input type="file" class="form-control-file border" name="n_file">
+                                <input type="file" class="form-control-file border @error('n_file') is-invalid @enderror" name="n_file">
                                 @error('n_file')
-                                    <span class="error">{{ $message }}</span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
 
                             <div class="form-group">
                             <label> Other Images </label>
-                                <input type="file" class="form-control-file border" name="n_file_m[]" multiple>
+                                <input type="file" class="form-control-file border @error('n_file_m.*') is-invalid @enderror" name="n_file_m[]" multiple>
+                                @error('n_file_m.*')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
 
                             <button type="submit" class="btn btn-primary">Submit</button>
@@ -181,39 +190,52 @@
                         @csrf
                             <div class="form-group">
                                 <label for="n_title">न्यूज़ शीर्षक</label>
-                                <input type="text" class="form-control" id="n_title" name="n_title" value="{{old('n_title')}}" >
+                                <input type="text" class="form-control @error('n_title') is-invalid @enderror" id="n_title" name="n_title" value="{{old('n_title')}}" >
                                 @error('n_title')
-                                    <span class="error">{{ $message }}</span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
 
                             <div class="form-group">
                                 <label for="n_data">न्यूज़ तारीख</label>
-                                <input type="date" class="form-control" id="n_date" name="n_date" value="{{old('n_date')}}" >
+                                <input type="date" class="form-control @error('n_date') is-invalid @enderror" id="n_date" name="n_date" value="{{old('n_date')}}" >
                                 @error('n_date')
-                                    <span class="error">{{ $message }}</span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
 
                             <div class="form-group">
                                 <label for="n_disc">न्यूज़ विवरण</label>
-                                <textarea class="ckeditor form-control" rows="5" id="n_disc" name="n_disc">{{old('n_disc')}}</textarea>
+                                <textarea class="ckeditor form-control @error('n_disc') is-invalid @enderror" rows="5" id="n_disc" name="n_disc">{{old('n_disc')}}</textarea>
                                 @error('n_disc')
-                                    <span class="error">{{ $message }}</span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
 
                             <div class="form-group">
                             <label> मुख्य इमेज </label>
-                                <input type="file" class="form-control-file border" name="n_file">
+                                <input type="file" class="form-control-file border @error('n_file') is-invalid @enderror" name="n_file">
                                 @error('n_file')
-                                    <span class="error">{{ $message }}</span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
 
                             <div class="form-group">
                             <label> अन्य इमेज </label>
-                                <input type="file" class="form-control-file border" name="n_file_m[]" multiple>
+                                <input type="file" class="form-control-file border @error('n_file_m.*') is-invalid @enderror" name="n_file_m[]" multiple>
+                                @error('n_file_m.*')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
 
                             <button type="submit" class="btn btn-primary">सबमिट</button>

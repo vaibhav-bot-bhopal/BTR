@@ -34,10 +34,15 @@ Route::get('language/{lang}', function ($lang) {
 
 Route::get('/', [MainController::class, 'index'])->name('btr.index')->middleware('language');
 Route::get('/gallery', [GalleryController::class, 'gallery'])->name('btr.gallery')->middleware('language');
-
+Route::get('/tender-download/{filename}', [TenderController::class, 'download'])->name('btr.tender.download');
+Route::get('/docs-download/{filename}', [DocumentController::class, 'download'])->name('btr.docs.download');
 
 Route::prefix('tender')->group(function () {
     Route::get('/tenders', [TenderController::class, 'tenders'])->name('btr.tenders')->middleware('language');
+});
+
+Route::prefix('document')->group(function () {
+    Route::get('/documents', [DocumentController::class, 'docs'])->name('btr.docs')->middleware('language');
 });
 
 Route::prefix('about')->group(function () {
@@ -146,5 +151,4 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'isAdmin', 'prevent-
     Route::get('document-edit/{id}', [DocumentController::class, 'edit'])->name('btr.docs.edit');
     Route::post('document-update/{id}', [DocumentController::class, 'update'])->name('btr.docs.update');
     Route::delete('document-del/{id}', [DocumentController::class, 'delete'])->name('btr.docs.delete');
-    // Route::get('download/{filename}', [TenderController::class, 'download'])->name('btr.tender.download');
 });

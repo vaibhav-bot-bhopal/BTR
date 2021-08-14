@@ -1,11 +1,7 @@
 @extends('admin.layouts.admin')
 
 @push('css')
-    <style>
-        .error{
-            color:red;
-        }
-    </style>
+
 @endpush
 
 @section('content')
@@ -39,25 +35,31 @@
                         @csrf
                             <div class="form-group">
                                 <label for="ten_title">Title</label>
-                                <input type="text" class="form-control" id="docs_title" name="docs_title" value="{{old('docs_title')}}" >
+                                <input type="text" class="form-control @error('docs_title') is-invalid @enderror" id="docs_title" name="docs_title" value="{{old('docs_title')}}" placeholder="Enter Document Title">
                                 @error('docs_title')
-                                    <span class="error">{{ $message }}</span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
 
                             <div class="form-group">
                                 <label for="docs_image">Feature Image</label>
-                                <input type="file" class="form-control-file border" name="docs_image">
+                                <input type="file" class="form-control-file border @error('docs_image') is-invalid @enderror" name="docs_image">
                                 @error('docs_image')
-                                    <span class="error">{{ $message }}</span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
 
                             <div class="form-group">
                                 <label for="docs_file">Upload Document</label>
-                                <input type="file" class="form-control-file border" name="docs_file">
+                                <input type="file" class="form-control-file border @error('docs_file') is-invalid @enderror" name="docs_file">
                                 @error('docs_file')
-                                    <span class="error">{{ $message }}</span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
 
@@ -119,7 +121,7 @@
                                         </form>
                                     </td>
                                     <td class="text-center">
-                                        <a href="../public/storage/document/docs/{{ $data->filename }}" class="btn btn-sm btn-success" download="{{$data->original_filename}}" target="_blank"><i class="fa fa-download" style="margin-right: 5px;"></i>Download</a>
+                                        <a href="{{ route('btr.docs.download', $data->filename) }}" class="btn btn-sm btn-success"><i class="fa fa-download" style="margin-right: 4px;"></i>Download</a>
                                     </td>
                                 </tr>
                             @php
@@ -189,25 +191,31 @@
                         @csrf
                             <div class="form-group">
                                 <label for="ten_title">शीर्षक</label>
-                                <input type="text" class="form-control" id="docs_title" name="docs_title" value="{{old('docs_title')}}" >
+                                <input type="text" class="form-control @error('docs_title') is-invalid @enderror" id="docs_title" name="docs_title" value="{{old('docs_title')}}" placeholder="दस्तावेज़ शीर्षक दर्ज करें">
                                 @error('docs_title')
-                                    <span class="error">{{ $message }}</span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
 
                             <div class="form-group">
                                 <label for="docs_image">फ़ीचर इमेज</label>
-                                <input type="file" class="form-control-file border" name="docs_image">
+                                <input type="file" class="form-control-file border @error('docs_image') is-invalid @enderror" name="docs_image">
                                 @error('docs_image')
-                                    <span class="error">{{ $message }}</span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
 
                             <div class="form-group">
                                 <label for="docs_file">दस्तावेज़ अपलोड करें</label>
-                                <input type="file" class="form-control-file border" name="docs_file">
+                                <input type="file" class="form-control-file borde @error('docs_file') is-invalid @enderror" name="docs_file">
                                 @error('docs_file')
-                                    <span class="error">{{ $message }}</span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
 

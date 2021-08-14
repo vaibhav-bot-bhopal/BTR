@@ -40,7 +40,7 @@ class NewsController extends Controller
                 'n_date' => 'required|date',
                 'n_disc' => 'required',
                 'n_file' => 'image|required|mimes:jpeg,bmp,png,jpg',
-                'n_file_m' => 'image|mimes:jpeg,bmp,png,jpg',
+                'n_file_m.*' => 'image|mimes:jpeg,bmp,png,jpg',
             ]);
 
             $mfiles = $req->file('n_file_m');
@@ -80,7 +80,7 @@ class NewsController extends Controller
                 'n_date' => 'required|date',
                 'n_disc' => 'required',
                 'n_file' => 'image|required|mimes:jpeg,bmp,png,jpg',
-                'n_file_m' => 'image|mimes:jpeg,bmp,png,jpg',
+                'n_file_m.*' => 'image|mimes:jpeg,bmp,png,jpg',
             ]);
 
             $mfiles = $req->file('n_file_m');

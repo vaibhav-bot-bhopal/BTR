@@ -16,8 +16,6 @@ class SuperadminMiddleware
      */
     public function handle($request, Closure $next)
     {
-
-
         if (Auth::user()->role_as == 'superadmin') {
             if (Auth::check() && Auth::user()->status) {
                 $deactive = Auth::user()->status == '1';

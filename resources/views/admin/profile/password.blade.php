@@ -63,7 +63,9 @@
                                         <label for="old_passwprd">Old Password</label>
                                         <input type="password" class="form-control {{($errors->any() && $errors->first('old_password')) ? 'is-invalid' : ''}}" id="old_password" name="old_password" placeholder="Enter Your Old Password">
                                         @if ($errors->any())
-                                            <p class="text-danger">{{$errors->first('old_password')}}</p>
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{$errors->first('old_password')}}</strong>
+                                            </span>
                                         @endif
                                     </div>
 
@@ -71,7 +73,9 @@
                                         <label for="password">New Password</label>
                                         <input type="password" class="form-control {{($errors->any() && $errors->first('password')) ? 'is-invalid' : ''}}" id="password" name="password" placeholder="Enter Your New Password">
                                         @if ($errors->any())
-                                            <p class="text-danger">{{$errors->first('password')}}</p>
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{$errors->first('password')}}</strong>
+                                            </span>
                                         @endif
                                     </div>
 
@@ -79,7 +83,9 @@
                                         <label for="password_confirmation">Confirm Password</label>
                                         <input type="password" class="form-control {{($errors->any() && $errors->first('confirm_password')) ? 'is-invalid' : ''}}" id="password_confirmation" name="password_confirmation" placeholder="Enter Your Confirm Password">
                                         @if ($errors->any())
-                                            <p class="text-danger">{{$errors->first('password_confirmation')}}</p>
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{$errors->first('password_confirmation')}}</strong>
+                                            </span>
                                         @endif
                                     </div>
 
@@ -152,7 +158,9 @@
                                         <label for="old_passwprd">पुराना पासवर्ड</label>
                                         <input type="password" class="form-control {{($errors->any() && $errors->first('old_password')) ? 'is-invalid' : ''}}" id="old_password" name="old_password" placeholder="अपना पुराना पासवर्ड डालें">
                                         @if ($errors->any())
-                                            <p class="text-danger">{{$errors->first('old_password')}}</p>
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{$errors->first('old_password')}}</strong>
+                                            </span>
                                         @endif
                                     </div>
 
@@ -160,7 +168,9 @@
                                         <label for="password">नया पासवर्ड</label>
                                         <input type="password" class="form-control {{($errors->any() && $errors->first('password')) ? 'is-invalid' : ''}}" id="password" name="password" placeholder="अपना नया पासवर्ड दर्ज करें">
                                         @if ($errors->any())
-                                            <p class="text-danger">{{$errors->first('password')}}</p>
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{$errors->first('password')}}</strong>
+                                            </span>
                                         @endif
                                     </div>
 
@@ -168,7 +178,9 @@
                                         <label for="password_confirmation">कन्फर्म पासवर्ड</label>
                                         <input type="password" class="form-control {{($errors->any() && $errors->first('confirm_password')) ? 'is-invalid' : ''}}" id="password_confirmation" name="password_confirmation" placeholder="अपना कन्फर्म पासवर्ड दर्ज करें">
                                         @if ($errors->any())
-                                            <p class="text-danger">{{$errors->first('password_confirmation')}}</p>
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{$errors->first('password_confirmation')}}</strong>
+                                            </span>
                                         @endif
                                     </div>
 

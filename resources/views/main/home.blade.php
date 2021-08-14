@@ -12,6 +12,11 @@
         .client-avtar {
             border: 0px solid #6cbe03!important;
         }
+
+        #toast-container .toast-error {
+            background-color: #dc3545;
+            opacity: 1;
+        }
     </style>
 @endpush
 
@@ -364,7 +369,7 @@
                                         </p>
                                     </div>
 
-                                    <a href="public/storage/tender-documents/{{ $tender->filename }}" download="{{$tender->original_filename}}" class="btn btn-primary" style="background-color: #6cbe03; color: #ffffff; border: 2px solid #6cbe03">{{__('home.btn-download')}}</a>
+                                    <a href="{{ route('btr.tender.download', $tender->filename) }}" class="btn btn-success" style="background-color: #6cbe03; color: #ffffff; border: 2px solid #6cbe03"><i class="fa fa-download" style="margin-right: 4px;"></i>{{__('home.btn-download')}}</a>
                                 </div>
                             </div>
                         </div>
@@ -533,4 +538,67 @@
         <div class="text-center" ><a class="btn-text green-bg" href="{{ route('btr.gallery') }}">{{ trans('home.see-more') }}</a></div>
     </section>
     <!--End Work-->
+
+    <!-- Documents Section -->
+    <div id="blog" class="wow fadeIn ptb-80 gray-bg">
+        <div class="container">
+            <div class="row text-center pb-30">
+                <div class="col-sm-12">
+                    <div class="heading-box ">
+                        <h2>{{__('home.docs-heading-1')}}<span>{{__('home.docs-heading-2')}}</span></h2>
+                        <span class="b-line"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-60">
+                @forelse ($docs as $doc)
+                    <div class="col-md-12 col-lg-4 mb-80">
+                        <div class="about-block gray-bg padding-40 clearfix">
+                            <div class="client-avtar">
+                                @if ($doc->file_extension)
+                                    @if ($doc->file_extension == 'doc' || $doc->file_extension == 'docx')
+                                        <img src="{{asset('public/assets/images/doc-icon/word.png')}}" class="img-responsive rounded" alt="doc-image">
+                                    @endif
+
+                                    @if ($doc->file_extension == 'pdf')
+                                        <img src="{{asset('public/assets/images/doc-icon/pdf.png')}}" class="img-responsive rounded" alt="doc-image">
+                                    @endif
+                                @endif
+                            </div>
+                            <div class="text-box">
+                                <div class="box-title">
+                                    <h4>{{$doc->title}}</h4>
+                                </div>
+
+                                <div class="text-content">
+                                    <p>
+                                        {!! Str::limit($doc->description, 200, '...') !!}
+                                    </p>
+                                </div>
+
+                                <a href="{{ route('btr.docs.download', $doc->filename) }}" class="btn btn-success" style="background-color: #6cbe03; color: #ffffff; border: 2px solid #6cbe03"><i class="fa fa-download" style="margin-right: 4px;"></i>{{__('home.btn-download')}}</a>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <div class="col-lg-12 col-md-12 pb-4 mt-0">
+                        <div class="p-2 text-center">
+                            <h2>{{__('home.docs-not-found')}}</h2>
+                        </div><!-- single-post -->
+                    </div><!-- col-lg-4 col-md-6 -->
+                @endforelse
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="post-more-link text-center">
+                        <a href="{{ route('btr.docs') }}" class="btn btn-md btn-color-line ">{{ trans('home.view-all-docs') }}</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Collape Section End Here -->
+        </div>
+    </div>
+    <!-- Documents Section -->
 @endsection

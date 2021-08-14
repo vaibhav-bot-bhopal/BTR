@@ -1,11 +1,7 @@
 @extends('admin.layouts.admin')
 
 @push('css')
-    <style>
-        .error{
-            color:red;
-        }
-    </style>
+
 @endpush
 
 @section('content')
@@ -39,25 +35,31 @@
                     @csrf
                         <div class="form-group">
                             <label for="ten_title">Title</label>
-                            <input type="text" class="form-control" id="ten_title" name="ten_title" value="{{$data->title}}" >
+                            <input type="text" class="form-control @error('ten_title') is-invalid @enderror" id="ten_title" name="ten_title" value="{{$data->title}}" placeholder="Enter Tender Title">
                             @error('ten_title')
-                                <span class="error">{{ $message }}</span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="ten_desc">Description</label>
-                            <textarea class="ckeditor form-control" rows="5" id="ten_desc" name="ten_desc">{{$data->description}}</textarea>
+                            <textarea class="ckeditor form-control @error('ten_desc') is-invalid @enderror" rows="5" id="ten_desc" name="ten_desc">{{$data->description}}</textarea>
                             @error('ten_desc')
-                                <span class="error">{{ $message }}</span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror
                         </div>
 
                         <div class="form-group">
-                            <label for="ldata">Select Tender Last Date</label>
-                            <input type="datetime-local" class="form-control" id="ldate" name="ldate" value="{{date('Y-m-d\TH:i', strtotime($data->last_date))}}" >
+                            <label for="ldate">Select Tender Last Date</label>
+                            <input type="datetime-local" class="form-control @error('ldate') is-invalid @enderror" id="ldate" name="ldate" value="{{date('Y-m-d\TH:i', strtotime($data->last_date))}}" >
                             @error('ldate')
-                                <span class="error">{{ $message }}</span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror
                         </div>
 
@@ -124,26 +126,56 @@
                     @csrf
                         <div class="form-group">
                             <label for="ten_title">शीर्षक</label>
-                            <input type="text" class="form-control" id="ten_title" name="ten_title" value="{{$data->title}}" >
+                            <input type="text" class="form-control @error('ten_title') is-invalid @enderror" id="ten_title" name="ten_title" value="{{$data->title}}" placeholder="निविदा शीर्षक दर्ज करें">
                             @error('ten_title')
-                                <span class="error">{{ $message }}</span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="ten_desc">विवरण</label>
-                            <textarea class="ckeditor form-control" rows="5" id="ten_desc" name="ten_desc">{{$data->description}}</textarea>
+                            <textarea class="ckeditor form-control @error('ten_desc') is-invalid @enderror" rows="5" id="ten_desc" name="ten_desc">{{$data->description}}</textarea>
                             @error('ten_desc')
-                                <span class="error">{{ $message }}</span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror
                         </div>
 
                         <div class="form-group">
-                            <label for="ldata">निविदा अंतिम तिथि का चयन करें</label>
-                            <input type="datetime-local" class="form-control" id="ldate" name="ldate" value="{{date('Y-m-d\TH:i', strtotime($data->last_date))}}" >
+                            <label for="ldate">निविदा अंतिम तिथि का चयन करें</label>
+                            <input type="datetime-local" class="form-control @error('ldate') is-invalid @enderror" id="ldate" name="ldate" value="{{date('Y-m-d\TH:i', strtotime($data->last_date))}}" >
                             @error('ldate')
-                                <span class="error">{{ $message }}</span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="docs">Recent Tender Docs</label>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    @if ($data->file_extension)
+                                        @if ($data->file_extension == 'doc' || $data->file_extension == 'docx')
+                                            <img src="{{asset('public/assets/images/doc-icon/word.png')}}" width="32" height="32" class="img-responsive rounded" alt="doc-image">
+                                            <span style="font-weight: 600; position: relative; top: 4px;">{{ $data->original_filename }}</span>
+                                        @endif
+
+                                        @if ($data->file_extension == 'xls' || $data->file_extension == 'xlsx')
+                                            <img src="{{asset('public/assets/images/doc-icon/excel.png')}}" width="32" height="32" class="img-responsive rounded" alt="doc-image">
+                                            <span style="font-weight: 600; position: relative; top: 4px;">{{ $data->original_filename }}</span>
+                                        @endif
+
+                                        @if ($data->file_extension == 'pdf')
+                                            <img src="{{asset('public/assets/images/doc-icon/pdf.png')}}" width="32" height="32" class="img-responsive rounded" alt="doc-image">
+                                            <span style="font-weight: 600; position: relative; top: 4px;">{{ $data->original_filename }}</span>
+                                        @endif
+                                    @endif
+                                </div>
+                            </div>
                         </div>
 
                         <button type="submit" class="btn btn-primary mb-4">अपडेट करें</button>

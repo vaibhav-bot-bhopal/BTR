@@ -30,6 +30,10 @@
 		<link href="{{asset('public/assets/css/owl.carousel.css')}}" rel="stylesheet" type="text/css">
 		<link href="{{asset('public/assets/css/owl.transitions.css')}}" rel="stylesheet" type="text/css">
 		<link href="{{asset('public/assets/css/style.css')}}" rel="stylesheet">
+
+        <!-- Toastr -->
+        <link rel="stylesheet" href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+
         @stack('css')
 	</head>
 
@@ -79,5 +83,34 @@
         <script type="text/javascript" src="{{asset('public/assets/js/validation.js')}}"></script>
         <script src="{{asset('public/assets/js/custom.js')}}" type="text/javascript"></script>
 
+        <!-- Toastr -->
+        <script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+
+        <script>
+            toastr.options = {
+                "closeButton": true,
+                "newestOnTop": true,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "100",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+        </script>
+
+        @if(session('success'))
+            <script>toastr.success("{!! session('success') !!}")</script>
+        @endif
+
+        @if(session('error'))
+            <script>toastr.error("{!! session('error') !!}")</script>
+        @endif
 	</body>
 </html>

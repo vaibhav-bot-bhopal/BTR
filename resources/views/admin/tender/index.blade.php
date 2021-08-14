@@ -1,11 +1,7 @@
 @extends('admin.layouts.admin')
 
 @push('css')
-    <style>
-        .error{
-            color:red;
-        }
-    </style>
+
 @endpush
 
 @section('content')
@@ -39,33 +35,41 @@
                         @csrf
                             <div class="form-group">
                                 <label for="ten_title">Title</label>
-                                <input type="text" class="form-control" id="ten_title" name="ten_title" value="{{old('n_title')}}" >
+                                <input type="text" class="form-control @error('ten_title') is-invalid @enderror" id="ten_title" name="ten_title" value="{{old('n_title')}}" placeholder="Enter Tender Title">
                                 @error('ten_title')
-                                    <span class="error">{{ $message }}</span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
 
                             <div class="form-group">
                                 <label for="ten_desc">Description</label>
-                                <textarea class="ckeditor form-control" rows="5" id="ten_desc" name="ten_desc">{{old('n_desc')}}</textarea>
+                                <textarea class="ckeditor form-control @error('ten_desc') is-invalid @enderror" rows="5" id="ten_desc" name="ten_desc">{{old('n_desc')}}</textarea>
                                 @error('ten_desc')
-                                    <span class="error">{{ $message }}</span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
 
                             <div class="form-group">
                                 <label for="ldata">Select Tender Last Date</label>
-                                <input type="datetime-local" class="form-control" id="ldate" name="ldate" value="{{old('ldate')}}" >
+                                <input type="datetime-local" class="form-control @error('ldate') is-invalid @enderror" id="ldate" name="ldate" value="{{old('ldate')}}" >
                                 @error('ldate')
-                                    <span class="error">{{ $message }}</span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
 
                             <div class="form-group">
                                 <label for="ten_file">Upload File</label>
-                                <input type="file" class="form-control-file border" name="ten_file">
+                                <input type="file" class="form-control-file border @error('ten_file') is-invalid @enderror" name="ten_file">
                                 @error('ten_file')
-                                    <span class="error">{{ $message }}</span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
 
@@ -135,9 +139,7 @@
                                         </form>
                                     </td>
                                     <td class="text-center">
-                                        {{-- <a href="{{asset('public/storage/tender-documents/'.$data->filename)}}" class="btn btn-success" download="{{$data->filename}}" target="_blank">Download</a> --}}
-                                        {{-- <a href="{!! route('btr.tender.download', $data->filename) !!}" class="btn btn-success">Download</a> --}}
-                                        <a href="../public/storage/tender-documents/{{ $data->filename }}" class="btn btn-sm btn-success" download="{{$data->filename}}" target="_blank"><i class="fa fa-download" style="margin-right: 5px;"></i>Download</a>
+                                        <a href="{{ route('btr.tender.download', $data->filename) }}" class="btn btn-sm btn-success"><i class="fa fa-download" style="margin-right: 5px;"></i>Download</a>
                                     </td>
                                 </tr>
                             @php
@@ -207,33 +209,41 @@
                         @csrf
                             <div class="form-group">
                                 <label for="ten_title">शीर्षक</label>
-                                <input type="text" class="form-control" id="ten_title" name="ten_title" value="{{old('n_title')}}" >
+                                <input type="text" class="form-control @error('ten_title') is-invalid @enderror" id="ten_title" name="ten_title" value="{{old('n_title')}}" placeholder="निविदा शीर्षक दर्ज करें">
                                 @error('ten_title')
-                                    <span class="error">{{ $message }}</span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
 
                             <div class="form-group">
                                 <label for="ten_desc">विवरण</label>
-                                <textarea class="ckeditor form-control" rows="5" id="ten_desc" name="ten_desc">{{old('n_desc')}}</textarea>
+                                <textarea class="ckeditor form-control @error('ten_desc') is-invalid @enderror" rows="5" id="ten_desc" name="ten_desc">{{old('n_desc')}}</textarea>
                                 @error('ten_desc')
-                                    <span class="error">{{ $message }}</span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
 
                             <div class="form-group">
                                 <label for="ldata">निविदा अंतिम तिथि का चयन करें</label>
-                                <input type="datetime-local" class="form-control" id="ldate" name="ldate" value="{{old('ldate')}}" >
+                                <input type="datetime-local" class="form-control @error('ldate') is-invalid @enderror" id="ldate" name="ldate" value="{{old('ldate')}}" >
                                 @error('ldate')
-                                    <span class="error">{{ $message }}</span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
 
                             <div class="form-group">
                                 <label for="ten_file">फ़ाइल अपलोड करें</label>
-                                <input type="file" class="form-control-file border" name="ten_file">
+                                <input type="file" class="form-control-file border @error('ten_file') is-invalid @enderror" name="ten_file">
                                 @error('ten_file')
-                                    <span class="error">{{ $message }}</span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
 
@@ -295,19 +305,17 @@
                                         @endif
                                     </td>
                                     <td class="text-center">
-                                        <a href="{{ url('admin/tender-edit') }}/{{$data->id}}" class="btn btn-sm btn-primary">Edit</a>
+                                        <a href="{{ url('admin/tender-edit') }}/{{$data->id}}" class="btn btn-sm btn-primary"><i class="far fa-edit" style="margin-right: 4px;"></i>Edit</a>
                                     </td>
                                     <td class="text-center">
-                                        <button type="button" class="btn btn-sm btn-danger" onclick="deleteTender({{ $data->id }})">Delete</button>
+                                        <button type="button" class="btn btn-sm btn-danger" onclick="deleteTender({{ $data->id }})"><i class="fa fa-trash-alt" style="margin-right: 4px;"></i>Delete</button>
                                         <form id="delete-form-{{ $data->id }}" action="{{ route('btr.tender.delete', $data->id) }}" method="POST" style="display: none;">
                                             @csrf
                                             @method('DELETE')
                                         </form>
                                     </td>
                                     <td class="text-center">
-                                        {{-- <a href="{{asset('public/storage/tender-documents/'.$data->filename)}}" class="btn btn-success" download="{{$data->filename}}" target="_blank">Download</a> --}}
-                                        {{-- <a href="{!! route('btr.tender.download', $data->filename) !!}" class="btn btn-success">Download</a> --}}
-                                        <a href="../public/storage/tender-documents/{{ $data->filename }}" class="btn btn-sm btn-success" download="{{$data->filename}}" target="_blank"><i class="fa fa-download" style="margin-right: 5px;"></i>Download</a>
+                                        <a href="{{ route('btr.tender.download', $data->filename) }}" class="btn btn-sm btn-success"><i class="fa fa-download" style="margin-right: 4px;"></i>Download</a>
                                     </td>
                                 </tr>
                             @php

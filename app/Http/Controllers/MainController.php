@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Document;
 use App\Models\newsEnglish;
 use App\Models\newsHindi;
 use App\Models\Tender;
@@ -14,8 +15,9 @@ class MainController extends Controller
     {
         $dataen = newsEnglish::orderBy('id', 'desc')->take(3)->get();
         $datahi = newsHindi::orderBy('id', 'desc')->take(3)->get();
+        $docs = Document::orderBy('id', 'desc')->take(3)->get();
         $tenders = Tender::orderBy('id', 'desc')->take(3)->get();
 
-        return view('main.home', compact('dataen', 'datahi', 'tenders'));
+        return view('main.home', compact('dataen', 'datahi', 'tenders', 'docs'));
     }
 }

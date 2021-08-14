@@ -7,6 +7,8 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -30,15 +32,50 @@ class LoginController extends Controller
      */
     // protected $redirectTo = RouteServiceProvider::HOME;
 
+    public function validateLogin(Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $email = $request->email;
+        $password = $request->password;
+
+        if ($request->remember === null) {
+            setcookie('email', $email, 100);
+            setcookie('password', $password, 100);
+        } else {
+            setcookie('email', $email, time() + 60 * 60 * 24 * 100);
+            setcookie('password', $password, time() + 60 * 60 * 24 * 100);
+        }
+    }
+
     public function redirectTo()
     {
         //SuperAdmin Login
         if (Auth::user()->role_as == 'superadmin') {
+            if (session('locale') == 'en') {
+                Session::flash('success', 'You have been successfully logged in.');
+            }
+
+            if (session('locale') == 'hi') {
+                Session::flash('success', 'आपने सफलतापूर्वक लॉगिन कर लिया है।');
+            }
+
             return 'superadmin/dashboard';
         }
 
         //Admin Login
         if (Auth::user()->role_as == 'admin') {
+            if (session('locale') == 'en') {
+                Session::flash('success', 'You have been successfully logged in.');
+            }
+
+            if (session('locale') == 'hi') {
+                Session::flash('success', 'आपने सफलतापूर्वक लॉगिन कर लिया है।');
+            }
+
             return 'admin/dashboard';
         }
     }

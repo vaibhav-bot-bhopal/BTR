@@ -78,7 +78,7 @@ class SettingsController extends Controller
 
         $validator = Validator::make($request->all(), [
             'old_password' => 'required',
-            'password' => 'required|confirmed'
+            'password' => 'required|confirmed|min:8'
         ]);
 
         if ($validator->fails()) {

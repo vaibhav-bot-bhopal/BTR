@@ -153,6 +153,12 @@
                     </li>
                 @endguest
             @endif
+
+            {{-- <li class="nav-item">
+                <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                    <i class="fas fa-expand-arrows-alt"></i>
+                </a>
+            </li> --}}
         </ul>
     </nav>
     <!-- /.navbar -->
@@ -172,8 +178,8 @@
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
-                    <li class="nav-item has-treeview menu-open">
-                        <ul class="nav nav-treeview">
+                    {{-- <li class="nav-item"> --}}
+                        {{-- <ul class="nav nav-treeview"> --}}
                             @if (session('locale') == 'en')
                                 <li class="nav-header">MAIN SYSTEM</li>
                             @endif
@@ -310,12 +316,12 @@
 
                             @if (session('locale') == 'en')
                                 <li class="nav-header">ADMIN SYSTEM</li>
-                                <li class="nav-item">
+                                <li class="nav-item {{ ('admin/profile' == request()->path() || 'admin/changePassword' == request()->path()) ? 'menu-open' : '' }}">
                                     <a href="#" class="nav-link">
                                         <i class="nav-icon fas fa-user-cog"></i>
                                         <p>
                                             Admin Settings
-                                            <i class="right fas fa-angle-left"></i>
+                                            <i class="fas fa-angle-left right"></i>
                                         </p>
                                     </a>
                                     <ul class="nav nav-treeview">
@@ -337,7 +343,7 @@
 
                             @if (session('locale') == 'hi')
                                 <li class="nav-header">व्यवस्थापक प्रणाली</li>
-                                <li class="nav-item">
+                                <li class="nav-item {{ ('admin/profile' == request()->path() || 'admin/changePassword' == request()->path()) ? 'menu-open' : '' }}">
                                     <a href="#" class="nav-link">
                                         <i class="nav-icon fas fa-user-cog"></i>
                                         <p>
@@ -390,8 +396,8 @@
                                 </li>
                             @endif
 
-                        </ul>
-                    </li>
+                        {{-- </ul> --}}
+                    {{-- </li> --}}
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->
