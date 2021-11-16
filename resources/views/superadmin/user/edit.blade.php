@@ -8,10 +8,27 @@
     </style>
 
     <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Edit Admin</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="{{route('superadmin.dashboard')}}">Home</a></li>
+                    <li class="breadcrumb-item active">Edit Admin</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
     <div class="content-header">
-        <!-- your code start here  -->
         <div class="row">
-            <div class="col-lg-10 col-md-10 offset-lg-1 offset-md-1 col-sm-12 mt-5">
+            <div class="col-lg-10 col-md-10 offset-lg-1 offset-md-1 col-sm-12">
                 {{-- @if(session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{session('success')}}
@@ -78,6 +95,7 @@
                 </div>
             </div>
         </div>
-        <!-- your code end here  -->
     </div>
+    <!-- /.content -->
+
 @endsection

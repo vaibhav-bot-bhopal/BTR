@@ -12,6 +12,18 @@ class Tender extends Model
 
     protected $table = 'tenders';
 
+    protected $fillable = [
+        'title',
+        'slug',
+        'last_date',
+        'original_filename',
+        'filename',
+        'file_size',
+        'file_extension',
+        'description',
+        'file'
+    ];
+
     use Sluggable;
 
     /**
@@ -23,7 +35,7 @@ class Tender extends Model
     {
         return [
             'slug' => [
-                'source' => 'n_title'
+                'source' => 'title'
             ]
         ];
     }

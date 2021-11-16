@@ -12,6 +12,16 @@ class Document extends Model
 
     protected $table = 'documents';
 
+    protected $fillable = [
+        'title',
+        'slug',
+        'image',
+        'original_filename',
+        'filename',
+        'file_size',
+        'file_extension',
+    ];
+
     use Sluggable;
 
     /**
@@ -23,7 +33,7 @@ class Document extends Model
     {
         return [
             'slug' => [
-                'source' => 'docs_title'
+                'source' => 'title'
             ]
         ];
     }

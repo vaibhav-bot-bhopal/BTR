@@ -14,7 +14,7 @@
                 <nav aria-label="breadcrumb" role="navigation">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
-                            <a href="#">{{ trans('navbar.home') }}</a>
+                            <a href="{{ route('btr.index') }}">{{ trans('navbar.home') }}</a>
                         </li>
 
                         <li class="breadcrumb-item active" aria-current="page">

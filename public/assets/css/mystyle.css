@@ -1,3 +1,24 @@
+/* Custom Input File Label */
+.custom-file-label {
+    font-weight: 500;
+}
+
+/* Language Hover Color */
+/* .nav-link.bdr {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+} */
+
+.nav-link.hover:hover,
+.nav-link.hover:focus {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+/* .nav-link.hover:focus {
+    box-shadow: 0 0 0 2px rgb(52 58 64 / 15%);
+} */
+
 .slow .toggle-group {
     transition: left 0.7s;
     -webkit-transition: 0.7s;

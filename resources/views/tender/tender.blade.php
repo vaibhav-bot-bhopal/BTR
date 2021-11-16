@@ -27,7 +27,7 @@
                 <nav aria-label="breadcrumb" role="navigation">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
-                            <a href="#">{{ trans('navbar.home') }}</a>
+                            <a href="{{ route('btr.index') }}">{{ trans('navbar.home') }}</a>
                         </li>
 
                         <li class="breadcrumb-item active" aria-current="page">
@@ -83,7 +83,7 @@
                                         </p>
                                     </div>
 
-                                    <a href="{{ route('btr.tender.download', $tender->filename) }}" class="btn btn-success" style="background-color: #6cbe03; color: #ffffff; border: 2px solid #6cbe03"><i class="fa fa-download" style="margin-right: 4px;"></i>{{__('home.btn-download')}}</a>
+                                    <a href="{{ route('btr.tender.download', $tender->original_filename) }}" class="btn btn-success" style="background-color: #6cbe03; color: #ffffff; border: 2px solid #6cbe03"><i class="fa fa-download" style="margin-right: 4px;"></i>{{__('home.btn-download')}}</a>
                                 </div>
                             </div>
                         </div>

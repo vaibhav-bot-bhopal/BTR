@@ -18,7 +18,7 @@ class CreateTendersTable extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->text('description');
-            $table->timestamps('last_date');
+            $table->dateTime('last_date');
             $table->string('original_filename');
             $table->string('filename');
             $table->bigInteger('file_size');

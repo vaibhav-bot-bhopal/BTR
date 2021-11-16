@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
 use App\Models\Gallery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -15,7 +14,7 @@ class GalleryController extends Controller
     // View Gallery
     public function gallery()
     {
-        $photos = Gallery::orderBy('original_filename', 'DESC')->paginate(18);
+        $photos = Gallery::orderBy('original_filename', 'DESC')->paginate(21);
         return view('main.gallery', compact('photos'));
     }
 
@@ -29,13 +28,13 @@ class GalleryController extends Controller
 
     public function index()
     {
-        $photos = Gallery::orderBy('original_filename', 'DESC')->paginate(6);
-        return view('admin.gallery.view-gallery', compact('photos'));
+        $photos = Gallery::orderBy('original_filename', 'DESC')->get();
+        return view('admin.gallery.index', compact('photos'));
     }
 
     public function create()
     {
-        return view('admin.gallery.gallery');
+        return view('admin.gallery.create');
     }
 
     public function store(Request $request)
@@ -53,27 +52,29 @@ class GalleryController extends Controller
         for ($i = 0; $i < count($photos); $i++) {
             $photo = $photos[$i];
             $name = sha1(date('YmdHis') . Str::random(30));
+            $save_name = $name . '.' . $photo->getClientOriginalExtension();
+            // $save_name = $name;
+            $save_extension = $photo->getClientOriginalExtension();
             $fileSizeInByte = File::size($photo);
+            // $resize_name = $name . Str::random(2) . '.' . $photo->getClientOriginalExtension();
 
-            if ($request->hasFile('file')) {
-                $save_name = $name . '.' . $photo->getClientOriginalExtension();
-                $photo->storeAs('public/gallery', $save_name);
-            }
+            $photo->move($this->photos_path, $save_name);
 
             $upload = new Gallery();
-            $upload->original_filename = basename($photo->getClientOriginalName());
+            $upload->original_filename = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
             $upload->filename = $save_name;
+            $upload->file_extension = $save_extension;
             $upload->file_size = $fileSizeInByte;
+            // $upload->file_path = $path;
             $upload->save();
         }
+        return Response::json(['success' => __('message.image-success')], 200);
+    }
 
-        if (session('locale') == 'en') {
-            return Response::json(['success' => 'Image Uploaded Successfully.'], 200);
-        }
-
-        if (session('locale') == 'hi') {
-            return Response::json(['success' => 'छवि सफलतापूर्वक अपलोड की गई।'], 200);
-        }
+    public function show()
+    {
+        $photos = Gallery::orderBy('original_filename', 'DESC')->paginate(6);
+        return view('admin.gallery.show', compact('photos'));
     }
 
     public function destroy($id)
@@ -81,13 +82,7 @@ class GalleryController extends Controller
         $data = Gallery::where('id', $id)->first();
 
         if (!$data) {
-            if (session('locale') == 'en') {
-                return redirect()->back()->with('error', 'Image not found !!');
-            }
-
-            if (session('locale') == 'hi') {
-                return redirect()->back()->with('error', 'छवि नहीं मिली !!');
-            }
+            return redirect()->route('images.index')->with('error', __('message.image-error'));
         } else {
             Gallery::where('id', $id)->delete();
             $image = "/public/gallery/" . $data->filename;
@@ -95,17 +90,7 @@ class GalleryController extends Controller
                 Storage::delete($image);
             }
         }
-
-        if (session('locale') == 'en') {
-            DB::statement("SET @count := 0;");
-            DB::statement("UPDATE galleries SET galleries.id = @count:= @count + 1;");
-            DB::statement("ALTER TABLE galleries AUTO_INCREMENT = 1;");
-            return redirect()->route('images-show')->with('error', 'Image Deleted Successfully.');
-        }
-
-        if (session('locale') == 'hi') {
-            return redirect()->route('images-show')->with('error', 'छवि सफलतापूर्वक हटा दी गई है।');
-        }
+        return redirect()->route('images.index')->with('error', __('message.image-delete'));
     }
 
     public static function bytesToHuman($bytes)

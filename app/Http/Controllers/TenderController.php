@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreTenderRequest;
+use App\Http\Requests\updateTenderRequest;
 use App\Models\Tender;
-use Cviebrock\EloquentSluggable\Services\SlugService;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
+use App\Repository\Tender\TenderInterface;
+use Illuminate\Support\Facades\View;
 
 class TenderController extends Controller
 {
@@ -18,151 +16,77 @@ class TenderController extends Controller
         return view('tender.tender', compact('tenders'));
     }
 
-    public function show()
+    //Manage Tender by Admin Panel
+    protected $tender;
+
+    public function __construct(TenderInterface $tender)
     {
-        // Show Tender
-        $data = Tender::all();
-        return view('admin.tender.index')->with('data', $data);
+        $this->tender = $tender;
     }
 
-    public function create(Request $req)
+    public function index()
     {
-        // Create Tender
-        $req->validate([
-            'ten_title' => 'required|max:255',
-            'ten_desc' => 'required',
-            'ldate' => 'required',
-            'ten_file' => 'required|mimes:pdf,doc,docx,xls,xlsx|max:4096',
-        ]);
+        $tenders = $this->tender->getAllTenders();
 
-        $file = $req->file('ten_file');
-        $name = sha1(date('YmdHis') . Str::random(30));
-        $fileSizeInByte = File::size($file);
-
-        if ($req->hasFile('ten_file')) {
-            $file = $req->file('ten_file');
-            $new_file = $name . '.' . $file->getClientOriginalExtension();
-            $file->storeAs('public/tender-documents', $new_file);
+        // Show Tender
+        if (View::exists('admin.tender.index')) {
+            return view('admin.tender.index', compact('tenders'));
         }
+    }
 
-        $tender = new Tender();
-        $tender->title = $req->ten_title;
-        $tender->slug = SlugService::createSlug(Tender::class, 'slug', $req->ten_title);
-        $tender->description = $req->ten_desc;
-        $tender->last_date = $req->ldate;
-        $tender->original_filename = basename($file->getClientOriginalName());
-        $tender->filename = $new_file;
-        $tender->file_size = $fileSizeInByte;
-        $tender->file_extension = $file->getClientOriginalExtension();
-        $tender->save();
-
-        if (session('locale') == 'en') {
-            return redirect()->back()->with('success', 'Tender has been saved successfully.');
+    // Add Tender in DB
+    public function create()
+    {
+        // Add Tender
+        if (View::exists('admin.tender.create')) {
+            return view('admin.tender.create');
+        } else {
+            return view('errors.404');
         }
+    }
 
-        if (session('locale') == 'hi') {
-            return redirect()->back()->with('success', 'निविदा सफलतापूर्वक सेव कर दी गई है।');
-        }
+    public function store(StoreTenderRequest $request)
+    {
+        // Store Tender
+        $this->tender->storeTender($request->validated());
+        return redirect()->route('tender.index')->with('success', __('message.tender-success'));
     }
 
     public function edit($id)
     {
         // Tender Edit
+        $tenders = $this->tender->getTender($id);
 
-        $data = Tender::find($id);
-
-        if ($data) {
-            return view('admin.tender.edit')->with('data', $data);
+        if ($tenders) {
+            return view('admin.tender.edit', compact('tenders'));
         } else {
-            if (session('locale') == 'en') {
-                return redirect()->route('btr.tender.show')->with('error', 'Tender Not Found !!');
-            }
-
-            if (session('locale') == 'hi') {
-                return redirect()->route('btr.tender.show')->with('error', 'निविदा नहीं मिली !!');
-            }
+            return redirect()->route('tender.index')->with('error', __('message.tender-error'));
         }
     }
 
-    public function update(Request $req, $id)
+    public function update(updateTenderRequest $request, $id)
     {
         // Update Tender
-        $validator = Validator::make($req->all(), [
-            'ten_title' => 'required|max:255',
-            'ten_desc' => 'required',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->route('btr.tender.edit', $id)->withErrors($validator)->withInput();
-        } else {
-            $tender = Tender::find($id);
-
-            $tender->title = $req->ten_title;
-            $tender->slug = SlugService::createSlug(Tender::class, 'slug', $req->ten_title);
-            $tender->description = $req->ten_desc;
-            $tender->last_date = $req->ldate;
-            $tender->update();
-
-            if (session('locale') == 'en') {
-                return redirect()->route('btr.tender.show')->with('success', 'Tender has been updated successfully.');
-            }
-
-            if (session('locale') == 'hi') {
-                return redirect()->route('btr.tender.show')->with('success', 'निविदा सफलतापूर्वक अपडेट कर दी गई है।');
-            }
-        }
+        $this->tender->updateTender($request->validated(), $id);
+        return redirect()->route('tender.index')->with('success', __('message.tender-update'));
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
         // Delete Tender
-        $data = Tender::where('id', $id)->first();
-
-        if (!$data) {
-            return redirect()->back()->with('error', 'Tender not found.');
-        } else {
-            Tender::where('id', $id)->delete();
-            $file_path = "/public/tender-documents/" . $data->filename;
-            if (Storage::exists($file_path)) {
-                Storage::delete($file_path);
-            }
-
-            if (session('locale') == 'en') {
-                return redirect()->back()->with('error', 'Tender has been deleted successfully.');
-            }
-
-            if (session('locale') == 'hi') {
-                return redirect()->back()->with('error', 'निविदा सफलतापूर्वक हटा दी गई है।');
-            }
-        }
+        $this->tender->deleteTender($id);
+        return redirect()->route('tender.index')->with('error', __('message.tender-delete'));
     }
 
     public function download($filename)
     {
-        $file_path = public_path('storage/tender-documents/') . $filename;
-        if (file_exists($file_path)) {
-            // Send Download
-            return response()->download($file_path, $filename);
-        } else {
-            // Error
-            if (session('locale') == 'en') {
-                return redirect()->back()->with('error', 'Requested file does not exist on our server !!');
-            }
-
-            if (session('locale') == 'hi') {
-                return redirect()->back()->with('error', 'अनुरोधित फ़ाइल हमारे सर्वर पर मौजूद नहीं है !!');
-            }
-        }
+        // Download File
+        return $this->tender->download($filename);
     }
 
-    public static function bytesToHuman($bytes)
+    public function bytesToHuman($bytes)
     {
-        $units = ['B', 'KB', 'MB', 'GB'];
-
-        for ($i = 0; $bytes > 1024; $i++) {
-            $bytes /= 1024;
-        }
-
-        return round($bytes, 2) . ' ' . $units[$i];
+        // BytesToHuman
+        $this->tender->bytesToHuman($bytes);
     }
 }

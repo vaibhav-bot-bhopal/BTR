@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta name="keywords" content="Bandhavgarh Tiger Reserve, Bandhavgarh National Park, Bandhavgarh Tiger Official, Bandhavgarh Tiger Reserve Official Webside, Bandhavgarh National Park official"/>
-		<meta name="keywords" content="Bandhavgarh safari booking, Bandhavgarh tiger reserve online safari booking official, Bandhavgarh online safari booking official, Bandhavgarh tiger reserve online booking official">
-		<meta name="keywords" content="Bandhavgarh official, Bandhavgarh official website, Bandhavgarh official safari booking, Bandhavgarh online booking,  "/>
+		<meta name="keywords" content="Bandhavgarh Tiger Reserve, Bandhavgarh National Park, Bandhavgarh Tiger Official, Bandhavgarh Tiger Reserve Official Website, Bandhavgarh National Park official, Bandhavgarh safari booking, Bandhavgarh tiger reserve online safari booking official, Bandhavgarh online safari booking official, Bandhavgarh tiger reserve online booking official, Bandhavgarh official, Bandhavgarh official website, Bandhavgarh official safari booking, Bandhavgarh online booking"/>
+		<meta name="description" content="Bandhavgarh Tiger Reserve, Which Was Notified As National Park In 1968, Derives Its Name From The Legends Of Ramayana. It Is Believed That The Fort Inside The Park Was Built By Lord Rama And Given To His Brother Lakshman. Hence The Name Bandhavgarh (Bandhav – Brother And Garh – Fort)."/>
 		<meta name="refresh" content="60"/>
 		<meta charset="utf-8"/>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -19,20 +18,34 @@
 		<link href="{{asset('public/assets/css/simple-line-icons.css')}}" rel="stylesheet" type="text/css">
 		<link href="{{asset('public/assets/css/flaticon.css')}}" rel="stylesheet" type="text/css">
 
+        <!-- flag-icon-css -->
+        <link rel="stylesheet" href="{{asset('public/assets/plugins/flag-icon-css/css/flag-icon.min.css')}}">
+
 		<!--Main Slider-->
 		<link href="{{asset('public/assets/css/settings.css')}}" type="text/css" rel="stylesheet" media="screen">
 		<link href="{{asset('public/assets/css/layers.css')}}" type="text/css" rel="stylesheet" media="screen">
 
 		<!--Light box-->
-		<link href="{{asset('public/assets/css/jquery.fancybox.css')}}" rel="stylesheet" type="text/css">
+		<link href="{{asset('public/assets/css/jquery.fancybox.min.css')}}" rel="stylesheet" type="text/css">
 
 		<!-- carousel -->
 		<link href="{{asset('public/assets/css/owl.carousel.css')}}" rel="stylesheet" type="text/css">
 		<link href="{{asset('public/assets/css/owl.transitions.css')}}" rel="stylesheet" type="text/css">
 		<link href="{{asset('public/assets/css/style.css')}}" rel="stylesheet">
+		<link href="{{asset('public/assets/css/custom-slider.css')}}" rel="stylesheet">
 
         <!-- Toastr -->
         <link rel="stylesheet" href="https://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+
+        @if (session('locale') == 'hi')
+            <style>
+                .main-menu .navigation li a {
+                    font-size: 16px;
+                    margin-left: 18px;
+                    margin-right: 18px;
+                }
+            </style>
+        @endif
 
         @stack('css')
 	</head>
@@ -58,8 +71,12 @@
         <script type="text/javascript" src="{{asset('public/assets/js/revolution.extension.parallax.min.js')}}"></script>
         <script type="text/javascript" src="{{asset('public/assets/js/jquery.revolution.js')}}"></script>
         <!-- fancybox Js -->
-        <script src="{{asset('public/assets/js/jquery.mousewheel-3.0.6.pack.js')}}" type="text/javascript"></script>
-        <script src="{{asset('public/assets/js/jquery.fancybox.pack.js')}}" type="text/javascript"></script>
+        <script src="{{asset('public/assets/js/jquery.fancybox.js')}}"></script>
+        {{-- <script src="{{asset('public/assets/js/jquery.mousewheel-3.0.6.pack.js')}}" type="text/javascript"></script>
+        <script src="{{asset('public/assets/js/jquery.fancybox.pack.js')}}" type="text/javascript"></script> --}}
+
+        <!-- lazyload js -->
+        <script src="{{asset('public/assets/js/lazyload.js')}}"></script>
 
         <!-- masonry,isotope Effect Js -->
         <script src="{{asset('public/assets/js/imagesloaded.pkgd.min.js')}}" type="text/javascript"></script>
@@ -82,9 +99,12 @@
         <script type="text/javascript" src="{{asset('public/assets/js/map.js')}}"></script>
         <script type="text/javascript" src="{{asset('public/assets/js/validation.js')}}"></script>
         <script src="{{asset('public/assets/js/custom.js')}}" type="text/javascript"></script>
+        <script src="{{asset('public/assets/js/custom-slider.js')}}" type="text/javascript"></script>
 
         <!-- Toastr -->
         <script src="https://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+
+        @stack('js')
 
         <script>
             toastr.options = {

@@ -5,12 +5,12 @@
 @push('css')
     <style>
         .btn-color-line:hover {
-            background: #6cbe03;
+            background: #579b00;
             color: #fff;
         }
 
         .client-avtar {
-            border: 0px solid #6cbe03!important;
+            border: 0px solid #579b00!important;
         }
 
         #toast-container .toast-error {
@@ -32,7 +32,6 @@
                         <!-- MAIN IMAGE -->
                         <img src="{{asset('public/assets/images/banner/banner_img1.jpg')}}"  alt=""  class="rev-slidebg" >
                         <!-- LAYERS -->
-                        <!-- LAYER NR. 2 -->
                         <div class="tp-caption Newspaper-Title tp-resizeme "
                         id="slide-129-layer-1"
                         data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
@@ -65,7 +64,6 @@
                         <!-- MAIN IMAGE -->
                         <img src="{{asset('public/assets/images/banner/banner_img2.jpg')}}"  alt=""  class="rev-slidebg">
                         <!-- LAYERS -->
-                        <!-- LAYER NR. 2 -->
                         <div class="tp-caption Newspaper-Title   tp-resizeme "
                         id="slide-130-layer-1"
                         data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
@@ -97,7 +95,6 @@
                         <!-- MAIN IMAGE -->
                         <img src="{{asset('public/assets/images/banner/banner_img3.jpg')}}"  alt=""  class="rev-slidebg" >
                         <!-- LAYERS -->
-                        <!-- LAYER NR. 2 -->
                         <div class="tp-caption Newspaper-Title   tp-resizeme "
                         id="slide-131-layer-1"
                         data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
@@ -138,7 +135,7 @@
             <div class="row">
                 <div class="col-md-12 col-lg-5 about-left">
                     <h4 class="italic">{{ trans('home.about-the') }}</h4>
-                    <h2 style="color:#ffcc00">{{ trans('home.bandhav') }}<span>{{ trans('home.tiger') }}</span></h2>
+                    <h2 style="color:#579b00">{{ trans('home.bandhav') }}<span>{{ trans('home.tiger') }}</span></h2>
                     <p class=" text-justify">
                         {{ trans('home.about-p1') }}
                         <a href="{{ route('btr.about-introduction') }}" style="font-weight: 600;">{{ trans('home.know-more') }}</a>
@@ -146,16 +143,12 @@
                 </div>
 
                 <div class="col-md-12 col-lg-7">
-                    {{-- <div class="row"> --}}
-                        {{-- <div style="float:right"> --}}
-                        <iframe class="pull-right" width="100%" height="350" src="https://www.youtube-nocookie.com/embed/IkbsuOHDTyg?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        {{-- </div> --}}
-                    {{-- </div> --}}
+                    <iframe class="pull-right" width="100%" height="350" src="https://www.youtube-nocookie.com/embed/IkbsuOHDTyg?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Services Section End -->
+    <!-- End Services Section -->
 
     <!-- Want to learn -->
     <div class="padding ptb-xs-40 different-sec">
@@ -316,7 +309,7 @@
                         <h3>{{ trans('home.contact') }}</h3>
                         <p style="text-transform: none;">
                             {{ trans('home.contact-phone') }} 07653 –222214 , 222724 &nbsp;
-                            {{ trans('home.contact-mail') }} dirbandhavgarhNP@mpforest.org <br/>fdbnp.umr@mp.gov.in
+                            {{ trans('home.contact-mail') }} fdbnp.umr@mp.gov.in <br/>ddbnp.umr@mp.gov.in
                         </p>
                     </div>
                 </div>
@@ -325,6 +318,128 @@
         </div>
     </section>
     <!-- End Service Section -->
+
+    <!-- Gallery Section -->
+    <section id="work" class="padding ptb-xs-60">
+        <div class="container">
+            <div class="row pb-30 text-center">
+                <div class="col-sm-12 mb-20">
+                    <h2><span>{{ trans('home.our') }} </span>{{ trans('home.gallery') }}</h2>
+                    <span class="b-line"></span>
+                </div>
+            </div>
+
+            <div class="row container-masonry nf-col-4">
+
+                <div class="nf-item w2x branding coffee spacing">
+                    <div class="item-box">
+                        <a><img alt="1" src="{{asset('public/assets/images/portfolio3/btr_image12.jpg')}}" class="item-container"></a>
+                    </div>
+                </div>
+
+                <div class="nf-item grid-sizer photo spacing">
+                    <div class="item-box">
+                        <a> <img alt="2" src="{{asset('public/assets/images/portfolio3/btr_image27.jpg')}}" class="item-container"> </a>
+                    </div>
+                </div>
+
+                <div class="nf-item branding photo spacing">
+                    <div class="item-box">
+                        <a> <img alt="3" src="{{asset('public/assets/images/portfolio3/3.jpg')}}" class="item-container"> </a>
+                    </div>
+                </div>
+
+                <div class="nf-item design spacing">
+                    <div class="item-box">
+                        <a> <img alt="4" src="{{asset('public/assets/images/portfolio3/1.jpg')}}" class="item-container"> </a>
+                    </div>
+                </div>
+
+                <div class="nf-item photo spacing">
+                    <div class="item-box">
+                        <a> <img alt="5" src="{{asset('public/assets/images/portfolio3/5.jpg')}}" class="item-container"> </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="text-center" ><a class="btn-text green-bg" href="{{ route('btr.gallery') }}">{{ trans('home.see-more') }}</a></div>
+    </section>
+    <!--End Gallery Section -->
+
+    <!-- News Section -->
+    <section id="blog" class="wow fadeIn ptb-80 gray-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-xs-12 mb-xs-30 mb-sm-60">
+                    <div class="row pb-30 text-center">
+                        <div class="col-sm-12 mb-20">
+                            <h2><span>{{ trans('home.latest') }} </span>{{ trans('home.news') }}</h2>
+                            <span class="b-line"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        @forelse ($newses as $news)
+                            <div class="col-md-6 col-lg-4 mb-xs-30">
+                                <div class="image-block blog-post">
+                                    <div class="post-media">
+                                        <div class="images image-box">
+                                            <figure class="image">
+                                                @php
+                                                    $path = public_path() . "/storage/news_image/".$news->image;
+                                                @endphp
+
+                                                @if (!empty($news['image']) && file_exists($path))
+                                                    <img src="{{asset('public/storage/news_image/'.$news->image)}}" alt="">
+                                                @else
+                                                    <img src="{{asset('public/assets/images/'.$news->image)}}" class="img-responsive rounded" alt="image">
+                                                @endif
+                                            </figure>
+                                        </div>
+                                    </div>
+
+                                    <div class="post-meta">
+                                        <span style="color: #333;">by Admin</span>
+                                    </div>
+
+                                    <div class="post-header">
+                                        <h4><a href="{{ route('btr.news-details', $news->slug) }}">{!! Str::limit($news->title, 40, '...') !!}</a></h4>
+                                    </div>
+
+                                    <div class="post-entry">
+                                        <p class="text-justify">
+                                            {!! Str::limit($news->description, 150, '...') !!}
+                                        </p>
+                                    </div>
+                                    <div class="post-more-link pull-left">
+                                        <a href="{{ route('btr.news-details', $news->slug) }}" class="btn btn-md btn-color-line ">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        @empty
+                            <div class="col-lg-12 col-md-12 pb-4">
+                                    <div class="p-2 text-center">
+                                        <h2>{{__('home.news-not-found')}}</h2>
+                                    </div><!-- single-post -->
+                            </div><!-- col-lg-4 col-md-6 -->
+                        @endforelse
+                    </div>
+
+                    <div class="row mt-5">
+                        <div class="col-12">
+                            <div class="post-more-link text-center">
+                                <a href="{{ route('btr.newses') }}" class="btn btn-md btn-color-line ">{{ trans('home.view-all') }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End News Section -->
 
     <!-- Tender Section -->
     <div id="testimonial-section" class="faq padding pt-xs-40">
@@ -369,7 +484,7 @@
                                         </p>
                                     </div>
 
-                                    <a href="{{ route('btr.tender.download', $tender->filename) }}" class="btn btn-success" style="background-color: #6cbe03; color: #ffffff; border: 2px solid #6cbe03"><i class="fa fa-download" style="margin-right: 4px;"></i>{{__('home.btn-download')}}</a>
+                                    <a href="{{ route('btr.tender.download', $tender->original_filename) }}" class="btn btn-success" style="background-color: #6cbe03; color: #ffffff; border: 2px solid #6cbe03"><i class="fa fa-download" style="margin-right: 4px;"></i>{{__('home.btn-download')}}</a>
                                 </div>
                             </div>
                         </div>
@@ -394,150 +509,7 @@
             <!-- Collape Section End Here -->
         </div>
     </div>
-    <!-- Tender Section -->
-
-    <!-- Blog Section -->
-    <section id="blog" class="wow fadeIn ptb-80 gray-bg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-xs-12 mb-xs-30 mb-sm-60">
-                    <div class="row pb-30 text-center">
-                        <div class="col-sm-12 mb-20">
-                            <h2><span>{{ trans('home.latest') }} </span>{{ trans('home.news') }}</h2>
-                            <span class="b-line"></span>
-                        </div>
-                    </div>
-
-                    @if (session('locale') == 'en')
-                        <div class="row">
-                            @forelse ($dataen as $item)
-                                <div class="col-md-6 col-lg-4 mb-xs-30">
-                                    <div class="blog-post">
-                                        <div class="post-media">
-                                            <img src="{{ asset('public/storage/eng_news/'.$item->news_image) }}" alt="" height="250px"/>
-                                        </div>
-                                        <div class="post-meta">
-                                            <span>by <a href="javascript:avoid(0);">Admin</a>
-                                        </div>
-                                        <div class="post-header">
-                                            <h4><a href="#">{!! Str::limit($item->news_title, 40, '...') !!}</a></h4>
-                                        </div>
-                                        <div class="post-entry">
-                                            <p class="text-justify">
-                                                {!! Str::limit($item->news_discription, 150, '...') !!}
-                                            </p>
-                                        </div>
-                                        <div class="post-more-link pull-left">
-                                            <a href="{{ route('btr.news-details', $item->news_slug) }}" class="btn btn-md btn-color-line ">Read More</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            @empty
-                                <div class="col-lg-12 col-md-12 pb-4">
-                                        <div class="p-2 text-center">
-                                            <h2>{{__('home.news-not-found')}}</h2>
-                                        </div><!-- single-post -->
-                                </div><!-- col-lg-4 col-md-6 -->
-                            @endforelse
-                        </div>
-                    @endif
-
-                    @if (session('locale') == 'hi')
-                        <div class="row">
-                            @forelse ($datahi as $item)
-                                <div class="col-md-6 col-lg-4 mb-xs-30">
-                                    <div class="blog-post">
-                                        <div class="post-media">
-                                            <img src="{{ asset('public/storage/hin_news/'.$item->news_image) }}" alt="" height="250px"/>
-                                        </div>
-                                        <div class="post-meta">
-                                            <span>व्यवस्थापक <a href="javascript:avoid(0);">द्वारा</a>
-                                        </div>
-                                        <div class="post-header">
-                                            <h4><a href="#">{!! Str::limit($item->news_title, 40, '...') !!}</a></h4>
-                                        </div>
-                                        <div class="post-entry">
-                                            <p class="text-justify">
-                                                {!! Str::limit($item->news_discription, 150, '...') !!}
-                                            </p>
-                                        </div>
-                                        <div class="post-more-link pull-left">
-                                            <a href="{{ route('btr.news-details', $item->news_slug) }}" class="btn btn-md btn-color-line ">अधिक पढ़ें</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            @empty
-                                <div class="col-lg-12 col-md-12 pb-4">
-                                        <div class="p-2 text-center">
-                                            <h2>{{__('home.news-not-found')}}</h2>
-                                        </div><!-- single-post -->
-                                </div><!-- col-lg-4 col-md-6 -->
-                            @endforelse
-                        </div>
-                    @endif
-
-                    <div class="row mt-5">
-                        <div class="col-12">
-                            <div class="post-more-link text-center">
-                                <a href="{{ route('btr.newses') }}" class="btn btn-md btn-color-line ">{{ trans('home.view-all') }}</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- End Blog Section -->
-
-    <!-- Work Section -->
-    <section id="work" class="padding ptb-xs-60">
-        <div class="container">
-            <div class="row pb-30 text-center">
-                <div class="col-sm-12 mb-20">
-                    <h2><span>{{ trans('home.our') }} </span>{{ trans('home.gallery') }}</h2>
-                    <span class="b-line"></span>
-                </div>
-            </div>
-
-            <div class="row container-masonry nf-col-4">
-
-                <div class="nf-item w2x branding coffee spacing">
-                    <div class="item-box">
-                        <a href="Gallery.html"><img alt="1" src="{{asset('public/assets/images/portfolio3/1.jpg')}}" class="item-container"></a>
-                    </div>
-                </div>
-
-                <div class="nf-item grid-sizer photo spacing">
-                    <div class="item-box">
-                        <a> <img alt="1" src="{{asset('public/assets/images/portfolio3/2.jpg')}}" class="item-container"> </a>
-                    </div>
-                </div>
-
-                <div class="nf-item branding photo spacing">
-                    <div class="item-box">
-                        <a> <img alt="1" src="{{asset('public/assets/images/portfolio3/3.jpg')}}" class="item-container"> </a>
-                    </div>
-                </div>
-
-                <div class="nf-item design spacing">
-                    <div class="item-box">
-                        <a> <img alt="1" src="{{asset('public/assets/images/portfolio3/4.jpg')}}" class="item-container"> </a>
-                    </div>
-                </div>
-
-                <div class="nf-item photo spacing">
-                    <div class="item-box">
-                        <a> <img alt="1" src="{{asset('public/assets/images/portfolio3/5.jpg')}}" class="item-container"> </a>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="text-center" ><a class="btn-text green-bg" href="{{ route('btr.gallery') }}">{{ trans('home.see-more') }}</a></div>
-    </section>
-    <!--End Work-->
+    <!-- End Tender Section -->
 
     <!-- Documents Section -->
     <div id="blog" class="wow fadeIn ptb-80 gray-bg">
@@ -576,7 +548,7 @@
                                     </p>
                                 </div>
 
-                                <a href="{{ route('btr.docs.download', $doc->filename) }}" class="btn btn-success" style="background-color: #6cbe03; color: #ffffff; border: 2px solid #6cbe03"><i class="fa fa-download" style="margin-right: 4px;"></i>{{__('home.btn-download')}}</a>
+                                <a href="{{ route('btr.docs.download', $doc->original_filename) }}" class="btn btn-success" style="background-color: #6cbe03; color: #ffffff; border: 2px solid #6cbe03"><i class="fa fa-download" style="margin-right: 4px;"></i>{{__('home.btn-download')}}</a>
                             </div>
                         </div>
                     </div>
@@ -600,5 +572,5 @@
             <!-- Collape Section End Here -->
         </div>
     </div>
-    <!-- Documents Section -->
+    <!-- End Documents Section -->
 @endsection

@@ -48,13 +48,13 @@
             </li>
             @if (session('locale') == 'en')
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ url('/') }}" class="nav-link" target="_blank">Home</a>
+                    <a href="{{ url('/') }}" class="nav-link" target="_blank">Go To Website</a>
                 </li>
             @endif
 
             @if (session('locale') == 'hi')
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ url('/') }}" class="nav-link" target="_blank">होम</a>
+                    <a href="{{ url('/') }}" class="nav-link" target="_blank">वेबसाइट पर जाएं</a>
                 </li>
             @endif
         </ul>
@@ -63,28 +63,18 @@
         <ul class="navbar-nav ml-auto">
             <!-- Language Dropdown Menu -->
             <li class="nav-item dropdown">
-                @if (Session::has('locale'))
-                    @if(session('locale') == 'hi')
-                        <a class="nav-link" data-toggle="dropdown" href="#">
-                            <i class="flag-icon flag-icon-in" style="margin-right: 8px!important"></i>{{ 'Language/भाषा :- हिंदी' }}
-                        </a>
-                    @else
-                        <a class="nav-link" data-toggle="dropdown" href="#">
-                            <i class="flag-icon flag-icon-us" style="margin-right: 8px!important"></i>{{ 'Language/भाषा : English' }}
-                        </a>
-                    @endif
-                @else
-                    {{Config::get('app.locale')}}
-                @endif
+                <!-- New Language Switcher -->
+                <a class="nav-link dropdown-toggle hover bdr" data-toggle="dropdown" href="#">
+                    <img src="{{ asset('public/assets/images/icons/google-translate.png') }}" width="24" height="24" alt="Google-Translate" class="img-fluid"> {{ Config::get('languages')[App::getLocale()]['display'] }}
+                    <span class="caret"></span>
+                </a>
 
-                <div class="dropdown-menu dropdown-menu-right p-0">
-
-                    <a href="{{url('language/en')}}" class="dropdown-item {{session('locale') == 'en' ? 'active' : ''}}">
-                        <i class="flag-icon flag-icon-us mr-2"></i> English
-                    </a>
-                    <a href="{{url('language/hi')}}" class="dropdown-item {{session('locale') == 'hi' ? 'active' : ''}}">
-                        <i class="flag-icon flag-icon-in mr-2"></i> हिंदी
-                    </a>
+                <div class="dropdown-menu dropdown-menu-right pt-1 pb-1">
+                    @foreach (Config::get('languages') as $lang => $language)
+                        @if ($lang != App::getLocale())
+                            <a class="dropdown-item" href="{{ route('lang.switch', $lang) }}"><span class="flag-icon flag-icon-{{$language['flag-icon']}}" style="margin-right: 8px!important"></span> {{$language['display']}}</a>
+                        @endif
+                    @endforeach
                 </div>
             </li>
 
@@ -208,7 +198,7 @@
 
                             @if (session('locale') == 'en')
                                 <li class="nav-item">
-                                    <a href="{{ url('admin/news') }}" class="nav-link {{ 'admin/news' == request()->path() ? 'active' : '' }}">
+                                    <a href="{{ route('newses.index') }}" class="nav-link {{ Request::is('admin/newses*') ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-newspaper"></i>
                                         <p>News <span class="right badge rounded-pill badge-danger pt-1 pb-1 pl-2 pr-2">English</span></p>
                                     </a>
@@ -217,99 +207,63 @@
 
                             @if (session('locale') == 'hi')
                                 <li class="nav-item">
-                                    <a href="{{ url('admin/news') }}" class="nav-link {{ 'admin/news' == request()->path() ? 'active' : '' }}">
+                                    <a href="{{ route('newses.index') }}" class="nav-link {{ Request::is('admin/newses*') ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-newspaper"></i>
                                         <p>न्यूज़ <span class="right badge rounded-pill badge-danger pt-1 pb-1 pl-2 pr-2">हिंदी</span></p>
                                     </a>
                                 </li>
                             @endif
 
-                            {{-- @if (session('locale') == 'en')
-                                <li class="nav-item">
-                                    <a href="{{ url('admin/event') }}" class="nav-link {{ 'admin/event' == request()->path() ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Events <span class="right badge badge-warning">English</span></p>
-                                    </a>
-                                </li>
-                            @endif --}}
-
-                            {{-- @if (session('locale') == 'hi')
-                                <li class="nav-item">
-                                    <a href="{{ url('admin/event') }}" class="nav-link {{ 'admin/event' == request()->path() ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>इवेंट्स <span class="right badge badge-warning">Hindi</span></p>
-                                    </a>
-                                </li>
-                            @endif --}}
-
                             @if (session('locale') == 'en')
                                 <li class="nav-item">
-                                    <a href="{{ url('admin/images') }}" class="nav-link {{ 'admin/images' == request()->path() ? 'active' : '' }}">
-                                        <i class="nav-icon fas fa-upload"></i>
-                                        <p>Upload Gallery <span class="right badge rounded-pill badge-warning pt-1 pb-1 pl-2 pr-2">English</span></p>
+                                    <a href="{{ route('images.index') }}" class="nav-link {{ Request::is('admin/images*') ? 'active' : '' }}">
+                                        <i class="nav-icon fas fa-file-image"></i>
+                                        <p>Gallery <span class="right badge rounded-pill badge-warning pt-1 pb-1 pl-2 pr-2">English</span></p>
                                     </a>
                                 </li>
                             @endif
 
                             @if (session('locale') == 'hi')
                                 <li class="nav-item">
-                                    <a href="{{ url('admin/images') }}" class="nav-link {{ 'admin/images' == request()->path() ? 'active' : '' }}">
-                                        <i class="nav-icon fas fa-upload"></i>
-                                        <p>अपलोड गैलरी <span class="right badge rounded-pill badge-warning pt-1 pb-1 pl-2 pr-2">हिंदी</span></p>
+                                    <a href="{{ route('images.index') }}" class="nav-link {{ Request::is('admin/images*') ? 'active' : '' }}">
+                                        <i class="nav-icon fas fa-file-image"></i>
+                                        <p>गैलरी <span class="right badge rounded-pill badge-warning pt-1 pb-1 pl-2 pr-2">हिंदी</span></p>
                                     </a>
                                 </li>
                             @endif
 
                             @if (session('locale') == 'en')
                                 <li class="nav-item">
-                                    <a href="{{ url('admin/images-show') }}" class="nav-link {{ 'admin/images-show' == request()->path() ? 'active' : '' }}">
-                                        <i class="nav-icon fas fa-eye"></i>
-                                        <p>View Gallery <span class="right badge rounded-pill badge-light pt-1 pb-1 pl-2 pr-2">English</span></p>
-                                    </a>
-                                </li>
-                            @endif
-
-                            @if (session('locale') == 'hi')
-                                <li class="nav-item">
-                                    <a href="{{ url('admin/images-show') }}" class="nav-link {{ 'admin/images-show' == request()->path() ? 'active' : '' }}">
-                                        <i class="nav-icon fas fa-eye"></i>
-                                        <p>व्यू गैलरी <span class="right badge rounded-pill badge-light pt-1 pb-1 pl-2 pr-2">हिंदी</span></p>
-                                    </a>
-                                </li>
-                            @endif
-
-                            @if (session('locale') == 'en')
-                                <li class="nav-item">
-                                    <a href="{{url('admin/tender')}}" class="nav-link {{ 'admin/tender' == request()->path() ? 'active' : '' }}">
+                                    <a href="{{ route('tender.index') }}" class="nav-link {{ Request::is('admin/tender*') ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-file-upload"></i>
-                                        <p>Upload Tender <span class="right badge rounded-pill badge-success pt-1 pb-1 pl-2 pr-2">English</span></p>
+                                        <p>Tender <span class="right badge rounded-pill badge-success pt-1 pb-1 pl-2 pr-2">English</span></p>
                                     </a>
                                 </li>
                             @endif
 
                             @if (session('locale') == 'hi')
                                 <li class="nav-item">
-                                    <a href="{{url('admin/tender')}}" class="nav-link {{ 'admin/tender' == request()->path() ? 'active' : '' }}">
+                                    <a href="{{ route('tender.index') }}" class="nav-link {{ Request::is('admin/tender*') ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-file-upload"></i>
-                                        <p>निविदा अपलोड करें <span class="right badge rounded-pill badge-success pt-1 pb-1 pl-2 pr-2">हिंदी</span></p>
+                                        <p>निविदा <span class="right badge rounded-pill badge-success pt-1 pb-1 pl-2 pr-2">हिंदी</span></p>
                                     </a>
                                 </li>
                             @endif
 
                             @if (session('locale') == 'en')
                                 <li class="nav-item">
-                                    <a href="{{url('admin/document')}}" class="nav-link {{ 'admin/document' == request()->path() ? 'active' : '' }}">
+                                    <a href="{{ route('document.index') }}" class="nav-link {{ Request::is('admin/document*') ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-cloud-upload-alt"></i>
-                                        <p>Upload Docs <span class="right badge rounded-pill badge-secondary pt-1 pb-1 pl-2 pr-2">English</span></p>
+                                        <p>Other Docs <span class="right badge rounded-pill badge-secondary pt-1 pb-1 pl-2 pr-2">English</span></p>
                                     </a>
                                 </li>
                             @endif
 
                             @if (session('locale') == 'hi')
                                 <li class="nav-item">
-                                    <a href="{{url('admin/document')}}" class="nav-link {{ 'admin/document' == request()->path() ? 'active' : '' }}">
+                                    <a href="{{ route('document.index') }}" class="nav-link {{ Request::is('admin/document*') ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-cloud-upload-alt"></i>
-                                        <p>दस्तावेज़ अपलोड करें <span class="right badge rounded-pill badge-secondary pt-1 pb-1 pl-2 pr-2">हिंदी</span></p>
+                                        <p>अन्य दस्तावेज़ <span class="right badge rounded-pill badge-secondary pt-1 pb-1 pl-2 pr-2">हिंदी</span></p>
                                     </a>
                                 </li>
                             @endif
@@ -439,6 +393,11 @@
 <script src="{{ asset('public/assets/dist/js/adminlte.js') }}"></script>
 <!-- CKEDITOR -->
 <script src="//cdn.ckeditor.com/4.15.1/full/ckeditor.js"></script>
+<!-- Clipboard -->
+<script src="{{ asset('public/assets/js/clipboard.min.js') }}"></script>
+<!-- My Script -->
+<script src="{{ asset('public/assets/js/my-script.js') }}"></script>
+
 <script type="text/javascript">
     $(document).ready(function() {
         //Alert

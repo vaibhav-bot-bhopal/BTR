@@ -20,7 +20,7 @@
             </div><!-- /.col -->
             <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{route('superadmin.dashboard')}}">Home</a></li>
                 <li class="breadcrumb-item active">Change Password</li>
             </ol>
             </div><!-- /.col -->
@@ -35,7 +35,7 @@
             <div class="row">
                 <div class="col-lg-6 col-md-6 offset-lg-3 offset-md-3">
                     <!-- Profile Image -->
-                    <div class="card card-success card-outline">
+                    <div class="card card-primary card-outline">
                         <div class="card-body box-profile">
                             {{-- <div class="text-center">
                                 @if (Auth::user()->image)

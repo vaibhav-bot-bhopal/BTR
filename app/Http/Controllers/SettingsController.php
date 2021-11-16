@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateAdminPasswordRequest;
+use App\Http\Requests\UpdatePasswordRequest;
+use App\Http\Requests\UpdateProfileRequest;
 use App\Models\User;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 
 class SettingsController extends Controller
 {
@@ -38,90 +36,61 @@ class SettingsController extends Controller
         }
     }
 
-    public function updateProfile(Request $request)
+    public function updateProfile(UpdateProfileRequest $request)
     {
         $user = User::findOrFail(Auth::id());
-        $role = Auth::user()->role_as;
 
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required',
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email
         ]);
 
-        if ($validator->fails()) {
-            if ($role == 'admin') {
-                return redirect()->route('btr.admin.profile')->withErrors($validator)->withInput();
-            }
+        $user->update($request->validated());
 
-            if ($role == 'superadmin') {
-                return redirect()->route('suadmin.profile')->withErrors($validator)->withInput();
-            }
-        } else {
+        if (session('locale') == 'en') {
+            return redirect()->back()->with('success', 'Profile Successfully Updated.');
+        }
 
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->save();
-
-            if (session('locale') == 'en') {
-                return redirect()->back()->with('success', 'Profile Successfully Updated.');
-            }
-
-            if (session('locale') == 'hi') {
-                return redirect()->back()->with('success', 'प्रोफ़ाइल सफलतापूर्वक अपडेट की गई।');
-            }
+        if (session('locale') == 'hi') {
+            return redirect()->back()->with('success', 'प्रोफ़ाइल सफलतापूर्वक अपडेट की गई।');
         }
     }
 
-    public function updatePassword(Request $request)
+    public function updatePassword(UpdatePasswordRequest $request)
     {
-        $role = Auth::user()->role_as;
+        $hashedPassword = Auth::user()->password;
+        if (Hash::check($request->old_password, $hashedPassword)) {
+            if (!Hash::check($request->password, $hashedPassword)) {
+                $user = User::find(Auth::id());
+                $user->password = Hash::make($request->password);
+                $user->update();
+                Auth::logout();
 
-        $validator = Validator::make($request->all(), [
-            'old_password' => 'required',
-            'password' => 'required|confirmed|min:8'
-        ]);
-
-        if ($validator->fails()) {
-            if ($role == 'admin') {
-                return redirect()->route('btr.admin.changePassword')->withErrors($validator)->withInput();
-            }
-
-            if ($role == 'superadmin') {
-                return redirect()->route('suadmin.changePassword')->withErrors($validator)->withInput();
-            }
-        } else {
-            $hashedPassword = Auth::user()->password;
-            if (Hash::check($request->old_password, $hashedPassword)) {
-                if (!Hash::check($request->password, $hashedPassword)) {
-                    $user = User::find(Auth::id());
-                    $user->password = Hash::make($request->password);
-                    $user->save();
-                    if (session('locale') == 'en') {
-                        return redirect()->back()->with('success', 'Password Successfully Changed.');
-                    }
-
-                    if (session('locale') == 'hi') {
-                        return redirect()->back()->with('Success', 'पासवर्ड सफलतापूर्वक बदल दिया है।');
-                    }
-
-                    // Auth::logout();
-                } else {
-                    if (session('locale') == 'en') {
-                        return redirect()->back()->with('error', 'New password cannot be the same as old password.');
-                    }
-
-                    if (session('locale') == 'hi') {
-                        return redirect()->back()->with('error', 'नया पासवर्ड पुराने पासवर्ड जैसा नहीं हो सकता।');
-                    }
-                }
-            } else {
                 if (session('locale') == 'en') {
-                    return redirect()->back()->with('error', 'Current password do not match.');
+                    return redirect()->route('login')->with('success', 'Password Successfully Changed.');
                 }
 
                 if (session('locale') == 'hi') {
-                    return redirect()->back()->with('error', 'वर्तमान पासवर्ड मेल नहीं खाता।');
+                    return redirect()->route('login')->with('Success', 'पासवर्ड सफलतापूर्वक बदल दिया है।');
                 }
+
+                // Auth::logout();
+            } else {
+                if (session('locale') == 'en') {
+                    return redirect()->back()->with('error', 'New password cannot be the same as old password.');
+                }
+
+                if (session('locale') == 'hi') {
+                    return redirect()->back()->with('error', 'नया पासवर्ड पुराने पासवर्ड जैसा नहीं हो सकता।');
+                }
+            }
+        } else {
+            if (session('locale') == 'en') {
+                return redirect()->back()->with('error', 'Current password do not match.');
+            }
+
+            if (session('locale') == 'hi') {
+                return redirect()->back()->with('error', 'वर्तमान पासवर्ड मेल नहीं खाता।');
             }
         }
     }
@@ -132,27 +101,17 @@ class SettingsController extends Controller
 
         if ($user->role_as == 'admin') {
             return view('superadmin.user.password', compact('user'));
-        } else {
-            return redirect()->back()->with('error', 'You are not authorized to access another user profile.');
         }
+
+        return redirect()->back()->with('error', 'You are not authorized to access another user profile.');
     }
 
-    public function adminUpdatePassword(Request $request, $id)
+    public function adminUpdatePassword(UpdateAdminPasswordRequest $request, $id)
     {
         $user = User::find($id);
-
-        $validator = Validator::make($request->all(), [
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->route('suadmin.changeadminpassword', $user->id)->withErrors($validator)->withInput();
-        } else {
-            $user = User::find($id);
-            $user->password = Hash::make($request->password);
-            $user->save();
-            // Auth::logout();
-            return redirect()->back()->with('success', 'Password Successfully Changed.');
-        }
+        $user->password = Hash::make($request->password);
+        $user->update();
+        // Auth::logout();
+        return redirect()->back()->with('success', 'Password Successfully Changed.');
     }
 }

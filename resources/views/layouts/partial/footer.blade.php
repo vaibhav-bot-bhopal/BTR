@@ -54,16 +54,16 @@
                                 <a href="http://www.mpforest.gov.in" target="_blank">{{ trans('footer.mfd') }}</a>
                             </li>
 
-                            <li>
+                            {{-- <li>
                                 <a href="http://www.mptigerfoundation.org" target="_blank">{{ trans('footer.mtf') }}</a>
-                            </li>
+                            </li> --}}
 
                             <li>
                                 <a href="http://projecttiger.nic.in/" target="_blank">{{ trans('footer.ntca') }}</a>
                             </li>
 
                             <li>
-                                <a href="http://www.wii.gov.in/" target="_blank">{{ trans('footer.wii') }}</a>
+                                <a href="https://www.wii.gov.in/" target="_blank">{{ trans('footer.wii') }}</a>
                             </li>
 
                             <li>
@@ -71,7 +71,7 @@
                             </li>
 
                             <li>
-                                <a href="https://mptiger.mponline.gov.in/Portal/Services/MPTiger/GeneralDonation/DonationType.aspx" target="_blank">{{ trans('footer.donate') }}</a>
+                                <a href="https://mptiger.mponline.gov.in/" target="_blank">{{ trans('footer.donate') }}</a>
                             </li>
                         </ul>
                     </div>
@@ -89,7 +89,7 @@
                             <li>
                                 <i class="fa fa-envelope-o"></i>
                                 <p>
-                                    <a href="mailto:info@example.com">dirbandhavgarhNP@mpforest.org <p>fdbnp.umr@mp.gov.in</p></a>
+                                    <a href="mailto:info@example.com">fdbnp.umr@mp.gov.in <p>ddbnp.umr@mp.gov.in</p></a>
                                 </p>
                             </li>
 
@@ -116,11 +116,11 @@
                     {{ trans('footer.developed') }}<a href="https://blueoceantech.in/" target="_blank" class="cmp-box">{{ trans('footer.bot') }}</a>
                 </div>
 
-                <div class="text-center" style="font-weight: 500; font-size: 14px; letter-spacing: 0.8px;">
+                {{-- <div class="text-center" style="font-weight: 500; font-size: 14px; letter-spacing: 0.8px;">
                     <i class="fa fa-bar-chart"></i>
                     {{ trans('footer.visitors') }}
                     {{ $trackers->count() }}
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

@@ -1,365 +1,171 @@
 @extends('admin.layouts.admin')
 
 @push('css')
-
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{{asset('public/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{asset('public/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{asset('public/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
 @endpush
 
 @section('content')
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">{{ __('panel.tender-page-h1') }}</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{ __('panel.home') }}</a></li>
+                        <li class="breadcrumb-item active">{{ __('panel.tender-page-h1') }}</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
 
-    @if (session('locale') == 'en')
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0">Upload Tender</h1>
-                    </div><!-- /.col -->
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Upload Tender</li>
-                        </ol>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
-        <!-- /.content-header -->
-
-        <!-- Main content -->
-        <div class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-8 col-md-8 offset-lg-2 offset-md-2">
-                        <div id="myAlert"></div>
-                        <form action="{{ url('admin/tender-create') }}" method="post" enctype="multipart/form-data">
-                        @csrf
-                            <div class="form-group">
-                                <label for="ten_title">Title</label>
-                                <input type="text" class="form-control @error('ten_title') is-invalid @enderror" id="ten_title" name="ten_title" value="{{old('n_title')}}" placeholder="Enter Tender Title">
-                                @error('ten_title')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label for="ten_desc">Description</label>
-                                <textarea class="ckeditor form-control @error('ten_desc') is-invalid @enderror" rows="5" id="ten_desc" name="ten_desc">{{old('n_desc')}}</textarea>
-                                @error('ten_desc')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label for="ldata">Select Tender Last Date</label>
-                                <input type="datetime-local" class="form-control @error('ldate') is-invalid @enderror" id="ldate" name="ldate" value="{{old('ldate')}}" >
-                                @error('ldate')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label for="ten_file">Upload File</label>
-                                <input type="file" class="form-control-file border @error('ten_file') is-invalid @enderror" name="ten_file">
-                                @error('ten_file')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="row mt-4">
-                    <div class="col-lg-12 col-md-12">
-                        <div class="table-responsive">
-                        <table class="table table-striped">
-                            <tr>
-                            <th class="text-center">SNo.</th>
-                            <th class="text-center">Title</th>
-                            <th class="text-center">Description</th>
-                            <th class="text-center">Last Date</th>
-                            <th class="text-center">Document Type</th>
-                            <th class="text-center">File Size</th>
-                            <th class="text-center">Edit</th>
-                            <th class="text-center">Delete</th>
-                            <th class="text-center">Download</th>
-                            </tr>
-                            @php
-                                $id=1;
-                            @endphp
-                            @forelse($data as $data)
-                                <tr>
-                                    <td class="text-center">{{$id}}</td>
-                                    <td width="15%" class="text-center">{{$data->title}}</td>
-                                    <td class="text-justify">{!! Str::limit($data->description, 200, '...') !!}</td>
-                                    <td>{{ date('d-M-Y',strtotime($data->last_date)) }}</td>
-                                    <td class="text-center">
-                                        @if ($data->file_extension)
-                                            @if ($data->file_extension == 'doc' || $data->file_extension == 'docx')
-                                                <img src="{{asset('public/assets/images/doc-icon/word.png')}}" width="24" height="24" class="img-responsive rounded" alt="doc-image">
-                                            @endif
-
-                                            @if ($data->file_extension == 'xls' || $data->file_extension == 'xlsx')
-                                                <img src="{{asset('public/assets/images/doc-icon/excel.png')}}" width="24" height="24" class="img-responsive rounded" alt="doc-image">
-                                            @endif
-
-                                            @if ($data->file_extension == 'pdf')
-                                                <img src="{{asset('public/assets/images/doc-icon/pdf.png')}}" width="28" height="28" class="img-responsive rounded" alt="doc-image">
-                                            @endif
-                                        @endif
-                                    </td>
-                                    <td width="10%" class="text-center">
-                                        @if ($data->file_extension == 'doc' || $data->file_extension == 'docx')
-                                            <span class="badge badge-primary" style="font-size: 14px;">{{ HumanReadable::bytesToHuman($data->file_size) }}</span>
-                                        @endif
-
-                                        @if ($data->file_extension == 'xls' || $data->file_extension == 'xlsx')
-                                            <span class="badge badge-success" style="font-size: 14px;">{{ HumanReadable::bytesToHuman($data->file_size) }}</span>
-                                        @endif
-
-                                        @if ($data->file_extension == 'pdf')
-                                            <span class="badge badge-danger" style="font-size: 14px;">{{ HumanReadable::bytesToHuman($data->file_size) }}</span>
-                                        @endif
-                                    </td>
-                                    <td class="text-center"><a href="{{ url('admin/tender-edit') }}/{{$data->id}}" class="btn btn-sm btn-primary"><i class="far fa-edit" style="margin-right: 5px;"></i>Edit</a></td>
-                                    <td class="text-center">
-                                        <button type="button" class="btn btn-sm btn-danger" onclick="deleteTender({{ $data->id }})"><i class="fa fa-trash-alt" style="margin-right: 5px;"></i>Delete</button>
-                                        <form id="delete-form-{{ $data->id }}" action="{{ route('btr.tender.delete', $data->id) }}" method="POST" style="display: none;">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="{{ route('btr.tender.download', $data->filename) }}" class="btn btn-sm btn-success"><i class="fa fa-download" style="margin-right: 5px;"></i>Download</a>
-                                    </td>
-                                </tr>
-                            @php
-                                $id++;
-                            @endphp
-                            @empty
-                                <tr>
-                                    <td class="text-center p-5" colspan="9"><h5 class="font-weight-bold">Tender was not found in our records !!</h5></td>
-                                </tr>
-                            @endforelse
-                        </table>
+    <!-- Main content -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row pt-4 pb-4">
+                <div class="col-lg-12 col-md-12">
+                    <div class="card card-success card-outline">
+                        <div class="card-header d-flex">
+                            <h3 class="card-title my-auto" style="font-size: 18px; font-weight: 600;">
+                                {{ __('panel.tender-list') }}
+                                <span class="badge badge-info pt-1 pb-1 pl-2 pr-2 ml-1" data-toggle="tooltip" data-placement="top" title="Total Number of Tender's" style="font-size: 14px; font-weight: 500;">{{ $tenders->count() }}</span>
+                            </h3>
+                            <a class="btn btn-sm btn-success ml-auto" href="{{route('tender.create')}}"><i class="nav-icon fas fa-plus-circle" style="margin-right: 5px;"></i>{{ __('panel.tender-btn-add') }}</a>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /.content -->
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="tblTender" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">{{ __('panel.tender-tbl-sno') }}</th>
+                                        <th class="text-center">{{ __('panel.tender-tbl-title') }}</th>
+                                        <th class="text-center">{{ __('panel.tender-tbl-description')}}</th>
+                                        <th class="text-center">{{ __('panel.tender-tbl-date') }}</th>
+                                        <th class="text-center">{{ __('panel.tender-tbl-doc-type') }}</th>
+                                        <th class="text-center">{{ __('panel.tender-tbl-file-size') }}</th>
+                                        <th class="text-center">{{ __('panel.tender-tbl-action') }}</th>
+                                    </tr>
+                                </thead>
 
-        <!-- Modal -->
-        <div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        Are you sure, you want to delete this tender ?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No, Cancel</button>
-                        <button type="button" class="btn btn-danger" id="delTender">Yes, Delete</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endif
+                                <tbody>
+                                    @foreach($tenders as $key=>$tender)
+                                        <tr>
+                                            <td class="text-center">{{ $key + 1 }}</td>
+                                            <td width="15%" class="text-center">{{$tender->title}}</td>
+                                            <td class="text-justify">{!! Str::limit($tender->description, 200, '...') !!}</td>
+                                            <td>{{ date('d-M-Y',strtotime($tender->last_date)) }}</td>
+                                            <td class="text-center">
+                                                @if ($tender->file_extension)
+                                                    @if ($tender->file_extension == 'doc' || $tender->file_extension == 'docx')
+                                                        <img src="{{asset('public/assets/images/doc-icon/word.png')}}" width="24" height="24" class="img-responsive rounded" alt="doc-image">
+                                                    @endif
 
-    @if (session('locale') == 'hi')
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0">निविदा अपलोड करें</h1>
-                    </div><!-- /.col -->
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">होम</a></li>
-                            <li class="breadcrumb-item active">निविदा अपलोड करें</li>
-                        </ol>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
-        <!-- /.content-header -->
+                                                    @if ($tender->file_extension == 'xls' || $tender->file_extension == 'xlsx')
+                                                        <img src="{{asset('public/assets/images/doc-icon/excel.png')}}" width="24" height="24" class="img-responsive rounded" alt="doc-image">
+                                                    @endif
 
-        <!-- Main content -->
-        <div class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-8 col-md-8 offset-lg-2 offset-md-2">
-                        <div id="myAlert"></div>
-                        <form action="{{ url('admin/tender-create') }}" method="post" enctype="multipart/form-data">
-                        @csrf
-                            <div class="form-group">
-                                <label for="ten_title">शीर्षक</label>
-                                <input type="text" class="form-control @error('ten_title') is-invalid @enderror" id="ten_title" name="ten_title" value="{{old('n_title')}}" placeholder="निविदा शीर्षक दर्ज करें">
-                                @error('ten_title')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                                                    @if ($tender->file_extension == 'pdf')
+                                                        <img src="{{asset('public/assets/images/doc-icon/pdf.png')}}" width="28" height="28" class="img-responsive rounded" alt="doc-image">
+                                                    @endif
+                                                @endif
+                                            </td>
+                                            <td width="10%" class="text-center">
+                                                @if ($tender->file_extension == 'doc' || $tender->file_extension == 'docx')
+                                                    <span class="badge badge-primary" style="font-size: 14px;">{{ HumanReadable::bytesToHuman($tender->file_size) }}</span>
+                                                @endif
 
-                            <div class="form-group">
-                                <label for="ten_desc">विवरण</label>
-                                <textarea class="ckeditor form-control @error('ten_desc') is-invalid @enderror" rows="5" id="ten_desc" name="ten_desc">{{old('n_desc')}}</textarea>
-                                @error('ten_desc')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                                                @if ($tender->file_extension == 'xls' || $tender->file_extension == 'xlsx')
+                                                    <span class="badge badge-success" style="font-size: 14px;">{{ HumanReadable::bytesToHuman($tender->file_size) }}</span>
+                                                @endif
 
-                            <div class="form-group">
-                                <label for="ldata">निविदा अंतिम तिथि का चयन करें</label>
-                                <input type="datetime-local" class="form-control @error('ldate') is-invalid @enderror" id="ldate" name="ldate" value="{{old('ldate')}}" >
-                                @error('ldate')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                                                @if ($tender->file_extension == 'pdf')
+                                                    <span class="badge badge-danger" style="font-size: 14px;">{{ HumanReadable::bytesToHuman($tender->file_size) }}</span>
+                                                @endif
+                                            </td>
+                                            <td class="text-center">
+                                                <a href="{{ route('tender.edit', $tender->id) }}" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Edit" style="font-size: 14px; font-weight: 500;"><i class="far fa-edit"></i></a>
 
-                            <div class="form-group">
-                                <label for="ten_file">फ़ाइल अपलोड करें</label>
-                                <input type="file" class="form-control-file border @error('ten_file') is-invalid @enderror" name="ten_file">
-                                @error('ten_file')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                                                <button type="button" class="btn btn-sm btn-danger" onclick="deleteTender({{ $tender->id }})" data-toggle="tooltip" data-placement="top" title="Delete" style="font-size: 14px; font-weight: 500;"><i class="fa fa-trash-alt"></i></button>
+                                                <form id="delete-form-{{ $tender->id }}" action="{{ route('tender.destroy', $tender->id) }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
 
-                            <button type="submit" class="btn btn-primary">सेव</button>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="row mt-4">
-                    <div class="col-lg-12 col-md-12">
-                        <div class="table-responsive">
-                        <table class="table table-striped">
-                            <tr>
-                                <th class="text-center">क्रमांक</th>
-                                <th class="text-center">शीर्षक</th>
-                                <th class="text-center">विवरण</th>
-                                <th class="text-center">अंतिम तिथी</th>
-                                <th class="text-center">दस्तावेज़ का प्रकार</th>
-                                <th class="text-center">फाइल का आकार</th>
-                                <th class="text-center">एडिट</th>
-                                <th class="text-center">डिलीट</th>
-                                <th class="text-center">डाउनलोड</th>
-                            </tr>
-                            @php
-                                $id=1;
-                            @endphp
-                            @forelse($data as $data)
-                                <tr>
-                                    <td class="text-center">{{$id}}</td>
-                                    <td width="15%" class="text-center">{{$data->title}}</td>
-                                    <td class="text-justify">{!! Str::limit($data->description, 300, '...') !!}</td>
-                                    <td>{{ date('d-M-Y',strtotime($data->last_date)) }}</td>
-                                    <td class="text-center">
-                                        @if ($data->file_extension)
-                                            @if ($data->file_extension == 'doc' || $data->file_extension == 'docx')
-                                                <img src="{{asset('public/assets/images/doc-icon/word.png')}}" width="24" height="24" class="img-responsive rounded" alt="doc-image">
-                                            @endif
-
-                                            @if ($data->file_extension == 'xls' || $data->file_extension == 'xlsx')
-                                                <img src="{{asset('public/assets/images/doc-icon/excel.png')}}" width="24" height="24" class="img-responsive rounded" alt="doc-image">
-                                            @endif
-
-                                            @if ($data->file_extension == 'pdf')
-                                                <img src="{{asset('public/assets/images/doc-icon/pdf.png')}}" width="28" height="28" class="img-responsive rounded" alt="doc-image">
-                                            @endif
-                                        @endif
-                                    </td>
-                                    <td width="10%" class="text-center">
-                                        @if ($data->file_extension == 'doc' || $data->file_extension == 'docx')
-                                            <span class="badge badge-primary">{{ HumanReadable::bytesToHuman($data->file_size) }}</span>
-                                        @endif
-
-                                        @if ($data->file_extension == 'xls' || $data->file_extension == 'xlsx')
-                                            <span class="badge badge-success">{{ HumanReadable::bytesToHuman($data->file_size) }}</span>
-                                        @endif
-
-                                        @if ($data->file_extension == 'pdf')
-                                            <span class="badge badge-danger">{{ HumanReadable::bytesToHuman($data->file_size) }}</span>
-                                        @endif
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="{{ url('admin/tender-edit') }}/{{$data->id}}" class="btn btn-sm btn-primary"><i class="far fa-edit" style="margin-right: 4px;"></i>Edit</a>
-                                    </td>
-                                    <td class="text-center">
-                                        <button type="button" class="btn btn-sm btn-danger" onclick="deleteTender({{ $data->id }})"><i class="fa fa-trash-alt" style="margin-right: 4px;"></i>Delete</button>
-                                        <form id="delete-form-{{ $data->id }}" action="{{ route('btr.tender.delete', $data->id) }}" method="POST" style="display: none;">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="{{ route('btr.tender.download', $data->filename) }}" class="btn btn-sm btn-success"><i class="fa fa-download" style="margin-right: 4px;"></i>Download</a>
-                                    </td>
-                                </tr>
-                            @php
-                                $id++;
-                            @endphp
-                            @empty
-                                <tr>
-                                    <td class="text-center p-5" colspan="9"><h5 class="font-weight-bold">हमारे रिकॉर्ड में टेंडर नहीं मिला !!</h5></td>
-                                </tr>
-                            @endforelse
-                        </table>
+                                                <a href="{{ route('btr.tender.download', $tender->original_filename) }}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="Download" style="font-size: 14px; font-weight: 500;"><i class="fa fa-download"></i></a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
+                        <!-- /.card-body -->
                     </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{ __('panel.tender-modal-title') }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ __('panel.tender-modal-body') }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('panel.tender-modal-btn-cancel') }}</button>
+                    <button type="button" class="btn btn-danger" id="delTender">{{ __('panel.tender-modal-btn-yes') }}</button>
                 </div>
             </div>
         </div>
-        <!-- /.content -->
-
-
-        <!-- Modal -->
-        <div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">कन्फर्मेशन</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        क्या आप इस निविदा को हटाना चाहते हैं?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">नहीं, रद्द करें</button>
-                        <button type="button" class="btn btn-danger" id="delTender">हाँ, हटाएं</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endif
-
+    </div>
 @endsection
 
 @push('js')
+        <!-- DataTables  & Plugins -->
+    <script src="{{asset('public/assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('public/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('public/assets/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+    <script src="{{asset('public/assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('public/assets/plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('public/assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('public/assets/plugins/jszip/jszip.min.js')}}"></script>
+    <script src="{{asset('public/assets/plugins/pdfmake/pdfmake.min.js')}}"></script>
+    <script src="{{asset('public/assets/plugins/pdfmake/vfs_fonts.js')}}"></script>
+    <script src="{{asset('public/assets/plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('public/assets/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
+    <script src="{{asset('public/assets/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
+    <!-- Page specific script -->
+    <script>
+        $(function () {
+            $("#tblTender").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "excel", "pdf", "print", "colvis"],
+                "language": {
+                    "sEmptyTable": "<h5 class='font-weight-bold'>{{ __('panel.tender-not-found') }}</h5>"
+                }
+            }).buttons().container().appendTo('#tblTender_wrapper .col-md-6:eq(0)');
+        });
+    </script>
+
     <script>
         // Delete Function
         function deleteTender(id)
@@ -371,5 +177,8 @@
                 document.getElementById('delete-form-'+id).submit();
             });
         }
+
+        //Initialize Tooltip
+        $('[data-toggle=tooltip]').tooltip();
     </script>
 @endpush

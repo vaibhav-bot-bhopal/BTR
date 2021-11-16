@@ -32,7 +32,7 @@
             </div>
         </div>
 
-        <div class="single-sidebar-widget">
+        {{-- <div class="single-sidebar-widget">
             <div class="sec-title">
                 <h2>Download<span> brochure</span></h2>
                 <span>Here is some useful documents</span>
@@ -43,6 +43,6 @@
                     <a href="BTR.pdf" class="clearfix" target="_blank"><i class="fa fa-file-pdf-o"></i> <span>Download Brochure</span></a>
                 </li>
             </ul>
-        </div>
+        </div> --}}
     </div>
 </div>
